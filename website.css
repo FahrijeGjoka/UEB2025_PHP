@@ -478,3 +478,52 @@ footer{
     height: 150px;
   }
   
+  .contact-form input[type="submit"] {
+    background-color: #fff;
+    color: #fa0606;
+    border:black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contact-form input[type="submit"]:hover {
+    background-color: #f38181;
+  }
+  .contact-form .submit-button {
+    display: inline-block;
+    background-color: #fff;
+    color: #fa0606;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contact-form .submit-button:hover {
+    background-color: #f38181;
+  }
+
+ 
+.second-foot{
+    padding-top: 20px;
+    padding-left: 10px;
+}
+.second-foot h3{
+    
+    
+    padding-top: 20px;
+    color:rgb(138, 131, 131); 
+}
+.second-foot p a{
+    width: 80px;
+    padding-top: 20px;
+    color:rgb(138, 131, 131); 
+    text-decoration: underline;
+    font-size: 20px;
+    font-weight:500; 
+}
