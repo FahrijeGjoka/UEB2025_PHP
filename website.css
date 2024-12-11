@@ -213,3 +213,122 @@ a i:hover {
     height: 100;
 
 }
+
+.services{
+    padding-left: 25px;
+}
+.service1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 60px;
+    padding-left: 10px;
+}
+.service1 p {
+    width: 350px;
+    padding-left: 5px;
+    padding-top: 15px;
+    color: rgb(138, 131, 131);
+}
+.text {
+    width: 400px;
+    padding-top: 20px;
+    padding-left: 20px;
+    color: rgb(138, 131, 131);
+
+}
+
+.service1 h3 {
+    width: 350px;
+    padding-left: 5px;
+    color: rgb(66, 64, 64);
+}
+
+
+.service2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10px;
+}
+.title2{
+    padding-top: 25px;
+}
+.title2 h1{
+    padding-left: 20px;
+    padding-top: 5px;
+}
+
+.service2 p {
+    width: 350px;
+    padding-left: 5px;
+    padding-top: 15px;
+    color: rgb(138, 131, 131);
+}
+
+.service2 h3 {
+    width: 350px;
+    padding-left: 5px;
+    color: rgb(66, 64, 64);
+}
+
+
+.service3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.service3 p {
+    width: 350px;
+    padding-left: 5px;
+    padding-top: 15px;
+    color: rgb(138, 131, 131);
+}
+
+.service3 h3 {
+    width: 350px;
+    padding-left: 5px;
+    color: rgb(66, 64, 64);
+}
+
+
+.service4 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.service4 p {
+    width: 350px;
+    padding-left: 5px;
+    padding-top: 15px;
+    color: rgb(138, 131, 131);
+}
+
+.service4 h3 {
+    width: 350px;
+    padding-left: 5px;
+    color: rgb(66, 64, 64);
+}
+
+.class3 h1{
+    padding-bottom: 60px;
+}
+
+
+.client1{
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0px; 
+}
+
+.client1 i {
+
+    color: rgb(202, 198, 198);
+    font-size: 100px;
+}
