@@ -50,3 +50,81 @@
     border-radius: 40px;
     padding: 5px 10px;
 }
+.search-bar input {
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 10px 5px; 
+    font-size: 15px;
+    color: black;
+}
+
+.search-bar button {
+
+    border: 0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background: rgb(165, 6, 6);
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: black;
+    transition: .5s;
+}
+
+button i {
+    color: white;
+}
+
+.body {
+    padding-top: 60px;
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    font-family: Georgia, serif;
+    justify-content: space-between;
+    background-color: #fff;
+    z-index: 1000;
+    height: 80px;
+    align-items: center;
+}
+
+.body .kits {
+    float: right;
+    margin-right: 20px;
+
+}
+
+.body .kits a i {
+    display: inline-block;
+    line-height: 30px;
+    margin: 0 5px;
+    color: rgb(1, 29, 36);
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-decoration: none;
+    border-radius: 120px;
+    font-size: 25px;
+
+}
+
+a i:hover {
+    background: rgb(165, 6, 6);
+    transition: .5s;
+    border-radius: 120px;
+    transition: .5s;
+}
+
+.main-bar {
+    margin-top: 60px;
+    margin-left: 45px;
+    padding-top: 10px;
+    border-radius: 5px;
+    width: 93%;
+    height: 40px;
+    background: black;
+}
