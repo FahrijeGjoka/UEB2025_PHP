@@ -128,3 +128,88 @@ a i:hover {
     height: 40px;
     background: black;
 }
+
+.main-bar .link {
+    padding-left: 47px;
+    align-items: center;
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
+}
+
+.main-bar .link:hover {
+    color: rgb(165, 6, 6);
+    transition: .5s;
+}
+
+.images {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 1000;
+    align-items: center;
+
+}
+
+.first-pic img {
+    width: 650px;
+    height: 600px;
+    padding-top: 60px;
+    padding-left: 20px;
+
+
+}
+
+.title {
+    padding-left: 20px;
+}
+
+.huge {
+    font-size: 100px;
+    font-weight: 300;
+}
+
+.title .paragraph {
+    padding-top: 40px;
+    color: rgb(138, 131, 131);
+    font-size: 20px;
+}
+
+.read-more p {
+    padding-right: 15px;
+    padding-top: 550px;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.read-more p a {
+    color: red;
+    text-decoration: none;
+    padding-left: 5px;
+}
+
+.pic img {
+    width: 400px;
+    height: 300px;
+    padding-top: 60px;
+    padding-left: 20px;
+
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 60px;
+    background-color: rgb(222, 222, 235);
+
+}
+
+
+.services img {
+    width: 110px;
+    height: 100;
+
+}
