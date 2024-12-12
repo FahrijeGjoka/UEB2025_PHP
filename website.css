@@ -398,7 +398,7 @@ a i:hover {
 .more2  a {
     color: red;
     text-decoration: none;
-    padding-left: 250px;
+    padding:10px;
     font-weight: 300;
 }
 .more2 a:hover{
