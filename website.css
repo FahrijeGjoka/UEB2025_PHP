@@ -185,9 +185,10 @@ a i:hover {
 }
 
 .read-more p a {
-    color: red;
+    color: rgb(44, 9, 9);
     text-decoration: none;
     padding-left: 5px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .pic img {
@@ -202,7 +203,7 @@ a i:hover {
     flex-direction: row;
     align-items: center;
     padding-top: 60px;
-    background-color: rgb(222, 222, 235);
+    background-color: rgb(226, 226, 251);
 
 }
 
