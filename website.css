@@ -226,8 +226,7 @@ a i:hover {
 }
 .service1 p {
     width: 350px;
-    padding-left: 5px;
-    padding-top: 15px;
+    padding: 15px;
     color: rgb(138, 131, 131);
 }
 .text {
@@ -261,8 +260,7 @@ a i:hover {
 
 .service2 p {
     width: 350px;
-    padding-left: 5px;
-    padding-top: 15px;
+    padding: 15px;
     color: rgb(138, 131, 131);
 }
 
@@ -282,8 +280,7 @@ a i:hover {
 
 .service3 p {
     width: 350px;
-    padding-left: 5px;
-    padding-top: 15px;
+    padding:15px;
     color: rgb(138, 131, 131);
 }
 
@@ -303,8 +300,7 @@ a i:hover {
 
 .service4 p {
     width: 350px;
-    padding-left: 5px;
-    padding-top: 15px;
+    padding:15px;
     color: rgb(138, 131, 131);
 }
 
