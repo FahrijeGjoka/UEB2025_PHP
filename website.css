@@ -193,7 +193,7 @@ a i:hover {
 
 .pic img {
     width: 400px;
-    height: 300px;
+    height: 400px;
     padding-top: 60px;
     padding-left: 20px;
 
@@ -419,7 +419,6 @@ footer{
     flex-direction: row; 
    
     align-items: center; 
-    /* box-sizing: border-box; */
     z-index: 1000;
     align-items: center;
    
