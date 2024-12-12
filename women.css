@@ -64,7 +64,7 @@
     margin-left: 5px;
   }
   .hero {
-    background: #eee;
+    background:rgb(255, 240, 245);;
     padding: 100px 0;
     text-align: center;
   }
@@ -92,6 +92,9 @@
     transition: all 0.3s ease-in-out;
   }
   
+  h1{
+    font-size: 70px;
+  }
   .btn:hover {
     background: #333;
   }
@@ -125,6 +128,14 @@
     object-fit: cover;
     
   }
+  .floralscent{
+     
+    
+     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+     background-image: url('womanimg/floralscent.jpg'); center/cover no-repeat;
+    
+  }
+
   .product img:hover{
     transform: translateY(-12px);
 }
@@ -132,11 +143,17 @@
     font-size: 24px;
     font-weight: bold;
     margin: 20px;
+    
   }
   h3{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     margin-bottom: 20px;
+   
+    
+  }
+  .ntitle{
+    background-color:rgb(255, 240, 245) ;
   }
 
   
