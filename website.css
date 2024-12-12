@@ -202,12 +202,15 @@ a i:hover {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-top: 60px;
+    padding-right:30px;
+    padding-top: 5px;
     background-color: rgb(226, 226, 251);
-
 }
-
-
+.title{
+    padding-top:20px;
+    padding-bottom: 5px;
+    padding-left: 60px;
+}
 .services img {
     width: 110px;
     height: 100;
