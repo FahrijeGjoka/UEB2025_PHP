@@ -1,11 +1,48 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            
-        </title>
-    </head>
-    <body>
-        
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="signup.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="form-container">
+        <h1>Sign Up</h1>
+        <form>
+          <div class="input-container">
+            <input type="text" id="name" required>
+            <label for="name">Name</label>
+            <div class="underline"></div>
+          </div>
+          <div class="input-container">
+            <input type="email" id="email" required>
+            <label for="email">Email</label>
+            <div class="underline"></div>
+          </div>
+          <div class="input-container">
+            <input type="password" id="password" required placeholder="**********">
+            <label for="password">Password</label>
+            <div class="underline"></div>
+          </div>
+          <div class="input-container">
+            <input type="password" id="confirm-password" required placeholder="**********">
+            <label for="confirm-password">Confirm Password</label>
+            <div class="underline"></div>
+          </div>
+          <div class="input-container">
+            <input type="tel" id="phone" pattern="[0-9]{10}" required>
+            <label for="phone">Phone Number</label>
+            <div class="underline"></div>
+          </div>
+          <div class="button-container">
+            <button type="submit" class="btn">Sign Up</button>
+          </div>
+        </form>
+      </div>
+      <!-- <div class="image-container">
+        <img src="signupimg.jpg" alt="signup-image">
+      </div> -->
+    </div>
+  </body>
 </html>
