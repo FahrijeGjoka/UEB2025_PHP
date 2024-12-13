@@ -432,7 +432,7 @@ a i:hover {
 }
 
 
-footer{
+section{
     padding-top: 10px;
     display: flex;
     flex-direction: row; 
@@ -469,12 +469,13 @@ footer{
 }
 .contact-form {
     max-width: 600px; 
-    margin: 0 auto;
+    margin:15px;
   }
   
   .contact-form h2 {
     font-size: 36px;
     margin-bottom: 20px;
+    color: #990707;
   }
   
   .contact-form input[type="text"],
@@ -486,9 +487,9 @@ footer{
     margin-bottom: 20px;
     border: none;
     border-radius: 5px;
-    background-color: #f5f5f5;
+    background-color: #f4dfdf;
     font-size: 16px;
-    color: #333;
+    color: #362e2e;
   }
   
   .contact-form textarea {
@@ -511,8 +512,9 @@ footer{
   }
   .contact-form .submit-button {
     display: inline-block;
-    background-color: #fff;
+    background-color: #ecabb2;
     color: #fa0606;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -522,10 +524,9 @@ footer{
   }
   
   .contact-form .submit-button:hover {
-    background-color: #f38181;
+    background-color: #ffb6e9;
   }
 
- 
 .second-foot{
     padding-top: 20px;
     padding-left: 10px;
@@ -545,3 +546,73 @@ footer{
 .second-foot p a:hover{
     color:#4b0909;
 }
+
+.footer {
+    background-color: #f97373;
+    color: white;
+    padding: 20px 10%;
+  }
+
+  .footer-table {
+    width: 100%;
+    border-spacing: 15px;
+  }
+  
+  .footer-table td {
+    vertical-align: top;
+  }
+  
+  .footer-section {
+    padding: 10px;
+  }
+
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .footer-section {
+    flex: 1 1 250px;
+    margin: 15px;
+  }
+  
+  .footer-section h3 {
+    margin-bottom: 15px;
+  }
+  
+  .footer-section p, .footer-section ul, .footer-section a {
+    margin: 5px 0;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section img {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+  }
+  
+  .social-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+    color: rgb(4, 4, 4);
+    text-decoration: none;
+  }
+  
+  .social-icon:hover {
+    color: #3498db;
+    font-size: 25px;
+  }
+  
+  .footer-credit {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #060606;
+  }
