@@ -246,7 +246,6 @@ a i:hover {
     color: rgb(66, 64, 64);
 }
 
-
 .service2 {
     display: flex;
     flex-direction: row;
@@ -532,10 +531,7 @@ footer{
     padding-left: 10px;
 }
 .second-foot h3{
-    
-    
     padding-top: 20px;
-    color:rgb(138, 131, 131); 
 }
 .second-foot p a{
     width: 80px;
@@ -544,4 +540,8 @@ footer{
     text-decoration: underline;
     font-size: 20px;
     font-weight:500; 
+}
+
+.second-foot p a:hover{
+    color:#4b0909;
 }
