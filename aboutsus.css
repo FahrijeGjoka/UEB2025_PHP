@@ -1,0 +1,218 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Bradley Hand, cursive;
+    line-height: 1.6;
+    color: #2c2c2c;
+    background-color: #fefaf6;
+}
+
+/* Header Styles */
+header {
+    background-color: #860808;
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: 15px;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+    font-family: Bradley Hand, cursive;
+}
+
+nav ul li a:hover {
+    color: #ffd67e;
+    font-weight: bolder;
+}
+
+/* About Section */
+#about {
+    padding: 3rem;
+    text-align: center;
+    background-color:  #ffd67e;
+    color: #860808;
+    border-radius: 10px;
+    margin: 2rem auto;
+    max-width: 80%;
+    font-family: Bradley Hand, cursive;
+}
+
+#about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+#about p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+#about img {
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* Types of Perfumes Section */
+#types {
+    padding: 3rem;
+    background-color: #faf3e0;
+}
+
+#types h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+h3 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    color: #6d597a;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+table th {
+    background-color: #6d597a;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f4ef;
+}
+
+table tr:hover {
+    background-color: #ffb703;
+}
+
+/* Contact Section */
+#contact {
+    padding: 3rem;
+    text-align: center;
+    background-color: #6d597a;
+    color: #fff;
+}
+
+#contact h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+#contact p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+#contact a {
+    color: #ffb703;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+#contact a:hover {
+    color: #fff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: #6d597a;
+    color: #fff;
+}
+
+footer a {
+    color: #ffb703;
+    text-decoration: underline;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin-bottom: 10px;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+}
+
+/* Additional Styles for Warm Look */
+body {
+    background-color: #fefaf6;
+}
+
+#about p, #contact p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+#types h3 {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+table tr {
+    transition: background-color 0.3s ease;
+}
+
+button {
+    background-color: #6d597a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffb703;
+    color: #2c2c2c;
+}
