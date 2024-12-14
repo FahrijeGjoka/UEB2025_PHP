@@ -16,7 +16,7 @@
                 <p><a href="signup.html">Sign Up</a><a href="">|</a><a href="login.html">Login</a>
                 </p>
                 <div class="container">
-                    <form action="https://www.google.com/search" method="get" class="search-bar">
+                    <form action=" " method="get" class="search-bar">
                         <input type="text" name="s" id="s">
                         <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
@@ -29,11 +29,11 @@
                     <p class="byline">The best perfume seller</p>
                 </div>
                 <div class="kits">
-                    <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href=""><i class="fa-brands fa-twitter"></i></a>
-                    <a href=""><i class="fa-brands fa-pinterest"></i></a>
-                    <a href=""><i class="fa-brands fa-google-plus"></i></a>
-                    <a href=""><i class="fa-sharp fa-solid fa-wifi fa-rotate-90"></i></a>
+                    <a href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://x.com/?lang=en" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.pinterest.com/" target="_blank"><i class="fa-brands fa-pinterest"></i></a>
+                    <a href="https://www.google.co.uk/" target="_blank"><i class="fa-brands fa-google"></i></a>
+                    <a href="https://www.wifimap.io/" target="_blank"><i class="fa-sharp fa-solid fa-wifi fa-rotate-90"></i></a>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                 <a class="link 1" href="">HOMEPAGE</a>
                 <a class="link 4" href="women.html">WOMEN</a>
                 <a class="link 4" href="men.html">MEN</a>
-                <a class="link 5" href="shop.html">GALLERY</a>
+                <a class="link 5" href="gallery.html">GALLERY</a>
                 <a class="link 7" href="aboutus.html">ABOUT US</a>
                 <a class="link 8" href="contact.html">CONTACT</a>
             </div>
@@ -135,13 +135,11 @@
     
                         
                 </div>
+                <br><br>
                 <div class="more2">
-                    <a href="women.html">View All Of Our Women Perfumes ...</a>
+                    <a href="gallery.html">View All Of Our Women and Men Perfumes ...</a>
                 </div>
                 <br>
-                <div class="more2">
-                    <a href="men.html">View All Of Our Men Perfumes...</a>
-                </div>
             </div>
 
             <div class="class3">
@@ -331,7 +329,22 @@
         <p class="footer-credit">© 2024 Arom&eacute;. All Rights Reserved.</p>
    
     </div>
-      
+
+    <script>      
+    const searchForm = document.querySelector(".search-bar");
+    const searchInput = document.getElementById("s");
+    searchForm.addEventListener("submit", (e) => {
+         e.preventDefault(); 
+    const query = searchInput.value.trim(); 
+    if (query === "") {
+        alert("Ju lutem shkruani diçka për të kërkuar!"); 
+    } else {
+        console.log(`Kërkim për: ${query}`);
+        alert(`Kërkim për: ${query}`);
+    }
+    });
+    </script>
+
     </body>
 
 </html> 
