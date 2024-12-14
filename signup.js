@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (isValid) {
       alert('Form submitted successfully!');
-      form.reset(); // Reset forma në rast suksesi
+      form.reset(); 
     }
   });
 
  
   form.addEventListener('reset', function () {
-    // Pastro gabimet
+
     passwordError.textContent = '';
     confirmPasswordError.textContent = '';
 
