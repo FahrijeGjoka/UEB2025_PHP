@@ -5,8 +5,8 @@
   }
   
   body {
-    background: pink;
-    font-family: 'Montserrat', sans-serif;
+    background: url(imgsignup/356.jpg) no-repeat center center fixed;
+  background-size: cover;
   }
   
   .wrapper {
