@@ -12,8 +12,13 @@
     align-items: center;
     justify-content: space-between;
     padding-left: 5px;
+    position: relative;
 }
 
+.header p {
+    margin: 0; 
+    z-index: 10; 
+}
 
 .header p a {
     color: white;
@@ -21,12 +26,13 @@
     padding-left: 10px;
     font-size: 20px;
     font-weight: 500;
+    z-index: 10;
+    position: relative;
 }
 
 .header p a:hover {
     color: black;
     transition: .5s;
-
 }
 
 .container {
@@ -38,6 +44,8 @@
     display: flex;
     align-items: center;
     padding-right: 0px;
+    z-index: 1;
+    position: relative;
 }
 
 .search-bar {
