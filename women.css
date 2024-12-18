@@ -9,6 +9,10 @@
     line-height: 1.5;
     color: #333;
   }
+  a{
+    text-decoration: none;
+    color: plum;
+  }
   header {
     display: flex;
     align-items: center;
@@ -193,6 +197,18 @@ h3{
     color: #fff;
     text-align: center;
     padding: 20px;
+  }
+  p{
+    display: inline-block;
+    margin-left: 40px;
+    text-align: center;
+    margin-top: 30px;
+    
+  }
+
+  h2{
+    font-size: 30px;
+
   }
 
 
