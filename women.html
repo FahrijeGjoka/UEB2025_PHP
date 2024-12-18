@@ -35,7 +35,7 @@
         <section class="hero">
             <h1>Welcome to Online Shop</h1>
             <p>Shop the latest trends in perfumes.</p>
-            <a href="#" class="btn">Shop Now</a>
+          
           </section>
           <section class="products">
             <h2 style="font-size: 60px;" >Featured Products</h2>
@@ -48,7 +48,7 @@
               <h3>Valentino</h3>
               <p>Donna Born In Roma Eau de Parfum</p>
               <span class="price">$35.99</span>
-              <a href="#" class="btn">Add to Cart</a>
+              <a href="#"  class="btn">Add to Cart</a>
             </div>
         
             <div class="product">
@@ -64,14 +64,14 @@
               <h3>Ariana Grande</h3>
               <p>MOD Blush Eau de Parfum</p>
               <span class="price">$29.00</span>
-              <a href="#" class="btn">Add to Cart</a>
+              <a href="#"  class="btn">Add to Cart</a>
             </div>
             <div class="product">
                 <img src="womanimg/carolina.jpg" alt="Product Image">
                 <h3>Carolina Herrera</h3>
                 <p>Good Girl Blush Eau de Parfum</p>
                 <span class="price">$19.99</span>
-                <a href="#" class="btn">Add to Cart</a>
+                <a href="#"   class="btn">Add to Cart</a>
              </div>
         
             <div class="product">
@@ -87,7 +87,7 @@
                 <h3>JIMMY CHOO</h3>
                 <p>I want Choo Eau de Parfum</p>
                 <span class="price">$33.99</span>
-                <a href="#" class="btn">Add to Cart</a>
+                <a href="#"  class="btn">Add to Cart</a>
               </div>
         
               <div class="product">
@@ -95,7 +95,7 @@
                 <h3>Prada</h3>
                 <p>Paradoce Eau de Parfum</p>
                 <span class="price">$59.99</span>
-                <a href="#" class="btn">Add to Cart</a>
+                <a href="#" id="addToCartBtn" class="btn">Add to Cart</a>
               </div>
 
               <div class="product">
@@ -110,43 +110,42 @@
             <div class="offer-section">
               <div class="offer-text">
                   <h1>20% Sell Off</h1>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  <p>20% Sell Off to this awesome perfumes</p>
                   <a href="#" class="btn">Add to Cart</a>
               </div>
               <div class="offer-image">
                   <img src="womanimg/lostcherry.jpg" alt="Perfume 1">
                   <img src="womanimg/tomford.jpg" alt="Perfume 1">
-              
               </div>
           </div>
 
             <div>
               <h3 class="ntitle" >Warm And Spicy</h3>
              
-              <div class="product">
+                <div class="product">
                 <img src="womanimg/blackopium.jpg" alt="Product Image">
                 <h3>Yves Saint Laurent</h3>
                 <p>Black Opium Eau de Parfum</p>
                 <span class="price">$35.99</span>
-                <a href="#" class="btn">Add to Cart</a>
-              </div>
+                <a href="#"  class="btn">Add to Cart</a>
+                </div>
           
-              <div class="product">
+                <div class="product">
                 <img src="womanimg/burberry.jpg" alt="Product Image">
                 <h3>BURBERRY</h3>
                 <p>Burberry Goddess Eau de Parfum</p>
                 <span class="price">$39.99</span>
-                <a href="#" class="btn">Add to Cart</a>
-              </div>
+                <a href="#"  class="btn">Add to Cart</a>
+                </div>
           
-              <div class="product">
+                <div class="product">
                 <img src="womanimg/Ariana Grande.jpg" alt="Product Image">
                 <h3>Ariana Grande</h3>
                 <p>Cloud Eau de Parfum</p>
                 <span class="price">$24.00</span>
                 <a href="#" class="btn">Add to Cart</a>
-              </div>
-              <div class="product">
+                </div>
+                <div class="product">
                   <img src="womanimg/PHLUR.jpg" alt="Product Image">
                   <h3>PHLUR</h3>
                   <p>Vanilla Skin Body & Hair Fragrance Mist</p>
@@ -154,7 +153,7 @@
                   <a href="#" class="btn">Add to Cart</a>
                </div>
           
-              <div class="product">
+                <div class="product">
                   <img src="womanimg/Kayali.jpg" alt="Product Image">
                   <h3>Kayali</h3>
                   <p>Vanilla Candy Rock Sugar</p>
@@ -183,14 +182,36 @@
                   <h3>Viktor&Rolf</h3>
                   <p>Flowerbomb Eau de Parfum with Vanilla,Jasmine,and Rose</p>
                   <span class="price">$49.99</span>
-                  <a href="#" class="btn">Add to Cart</a>
+                  <a href="#"  class="btn">Add to Cart</a>
                 </div>
               </div>
-          
+
             </section>
+
             <footer>
                 <p>&copy; 2024 Online Shop</p>
-              </footer>
-        
+              </footer> 
+              <script>
+
+const cartItems = document.querySelector('.cart-items');
+
+let itemCount = 0;
+
+
+const addToCartButtons = document.querySelectorAll('.btn');
+
+
+addToCartButtons.forEach(button => {
+  button.addEventListener('click', () => {
+   
+    itemCount++;
+    
+   
+    cartItems.textContent = itemCount;
+  });
+});
+
+
+          </script>
     </body>
 </html>
