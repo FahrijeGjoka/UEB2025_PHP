@@ -98,3 +98,47 @@
     pointer-events: none;
     transition: all 0.3s ease-in-out;
   }
+
+  .btn {
+    padding: 10px 20px;
+    background: rgb(165, 6, 6);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn:hover {
+    background: rgb(165, 6, 6);
+  }
+  
+  input[type="submit"] {
+    background-color: rgb(165, 6, 6);
+    color: #fff;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: rgb(165, 6, 6);
+  }
+
+  input:focus,
+textarea:focus {
+  border-bottom: 1px solid rgb(165, 6, 6);
+}
+
+input:focus + label,
+textarea:focus + label,
+input:valid + label,
+textarea:valid + label {
+  top: -18px;
+  font-size: 12px;
+  color: rgb(165, 6, 6);
+}
