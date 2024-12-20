@@ -83,6 +83,15 @@
     text-decoration: none;
     transition: all 0.3s ease-in-out;
   }
+  .start{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: 15px;
+  
+  
+
+  }
   .btn:hover {
     background: #333;
   }
@@ -210,5 +219,23 @@ h3{
     font-size: 30px;
 
   }
+li{
+  margin: 0 20px;
+  font-size: 25px;
+}
 
+#menuBtn{
+  background: linear-gradient(45deg, #ff8aa9, #ff5a80);
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 15px 40px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+}
 
