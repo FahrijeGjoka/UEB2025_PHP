@@ -4,7 +4,6 @@ body {
   background-color: #f4d8d8; 
 }
 
-
 header {
   display: flex;
   align-items: center;
@@ -13,6 +12,58 @@ header {
   color: #fff;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ul{
+  background-color: #d97979;
+  color: white;
+  width: 300px;
+  height: 150px;
+  border: #b00707;
+  margin: 20px;
+  margin-left: 120px;
+  padding: 15px;
+  padding-right: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 17px;
+  text-align: center;
+}
+
+.li{
+  list-style-type: square;
+}
+
+.chkbx {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+.rdbtn {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+.question{
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+  .write {
+    text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+  .options {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+  label {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .logo {

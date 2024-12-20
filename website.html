@@ -7,10 +7,16 @@
          <title>UEB24_Gr30</title>
          <link rel="stylesheet" href="website.css">
          <script src="https://kit.fontawesome.com/5427edee06.js" crossorigin="anonymous"></script>
-
+         <!-- <script type = "text/javascript">
+            function start()
+            {
+            pText = "Faleminderit per vizite.";
+            alert( pText );
+            }
+            </script> -->
         </head>
 
-    <body>
+    <body  onload = "start()">
         <div class="main">
             <div class="header">
                 <p><a href="signup.html">Sign Up</a><a href="#">|</a><a href="login.html">Login</a></p>
@@ -63,7 +69,7 @@
                 </div>
                 <div class="title">
                     <h1 class="huge">"Unveiling Elegance, One Scent at a Time."</h1>
-                    <p class="paragraph">At Arom&eacute;, we take pride in being recognized as the best-selling perfume company,
+                    <p class="paragraph">At <u>Arom&eacute;</u>, we take pride in being recognized as the best-selling perfume company,
                         setting the standard for luxury and excellence in the fragrance industry. 
                         Our meticulously crafted perfumes are a harmonious blend of rare ingredients,
                         timeless artistry, and innovative design. Loved by customers worldwide, our
@@ -81,7 +87,7 @@
             <div class="row">
                 <div class="class1">
                     <div class="title" style="font-style: italic;color: rgb(240, 48, 48);">
-                        <h1>Arom&eacute;'s Perfume</h1>
+                        <h1><l>Arom&eacute;'s Perfume</l></h1>
                     </div>
                     <div class="pic">
                         <img src="arome_perfume.png" alt="">
@@ -149,7 +155,7 @@
                 </div>
                 <br><br>
                 <div class="more2">
-                    <a href="gallery.html">View Our Women and Men Perfumes ...</a>
+                    <a href="gallery.html">View Our Gallery ...</a>
                 </div>
                 <br>
             </div>
@@ -306,9 +312,17 @@
             <tr>
               <td class="footer-section contact-info">
                 <h3><i>Contact Us</i></h3>
-                <p>Email: <a href="mailto:info@arome.com">info@arome.com</a></p>
+                <p>Email: <a href="mailto:info@arome.com"><mark style="color: red;">info@arome.com</mark></a></p>
                 <p>Phone: <a href="tel:+38349001001">+383 49 001 001</a></p>
-                <p>Location: Rruga Adem Jashari, Prishtine, Kosove</p>
+                <ul>Main address:
+                    <li><p><address>Location: Rruga Adem Jashari, Prishtine, Kosove</address></p></li>
+                        <ul>You can find us in other cities:
+                            <li style="list-style-type: circle;">Prizren</li>
+                            <li style="list-style-type: circle;">Peje</li>
+                            <li style="list-style-type: circle;">Tirane</li>
+                        </ul>
+                </ul>
+                <p><abbr>Aromé</abbr></p>
               </td>
              
               <td class="footer-section social-media">
@@ -323,13 +337,13 @@
               
               <td class="footer-section company-staff">
                 <h3><i>Our Team</i></h3>
-                <ul>
+                <ol>
                   <li>Elsa Krasniqi - CEO</li>
                   <li>Ereza Greicevci - Marketing Director</li>
                   <li>Fahrije Gjokiqi - Product Manager</li>
                   <li>Elona Kuqi - Section1 Manager</li>
                   <li>Era Berisha - Section2 Manager</li>
-                </ul>
+                </ol>
               </td>
               <td class="footer-section company-photo">
                 <h3><i>Aromé</i></h3>
@@ -342,7 +356,7 @@
    
     </div>
 
-    <script>      
+    <!-- <script>      
     const searchForm = document.querySelector(".search-bar");
     const searchInput = document.getElementById("s");
     searchForm.addEventListener("submit", (e) => {
@@ -355,7 +369,7 @@
         alert(`Kërkim për: ${query}`);
     }
     });
-    </script>
+    </script> -->
 
     </body>
 
