@@ -68,3 +68,65 @@
     <span class="price">$79.99</span>
     <a href="#" class="btn">Add to Cart</a>
   </div>
+  <div class="product">
+    <img src="versaceEros.avif" alt="Versace Eros">
+    <h3>Versace Eros</h3>
+    <p>A passionate fragrance with mint, green apple, and vanilla.</p>
+    <span class="price">$85.99</span>
+    <a href="#" class="btn">Add to Cart</a>
+  </div>
+
+  <div class="product">
+    <img src="1Million.jpg" alt="Paco Rabanne 1 Million">
+    <h3>Paco Rabanne 1 Million</h3>
+    <p>A bold scent with notes of blood mandarin and cinnamon.</p>
+    <span class="price">$89.99</span>
+    <a href="#" class="btn">Add to Cart</a>
+  </div>
+
+  <div class="product">
+    <img src="HOMMEysl.avif" alt="YSL L'Homme">
+    <h3>YSL L'Homme</h3>
+    <p>A balanced and charismatic fragrance with ginger and vetiver.</p>
+    <span class="price">$94.99</span>
+    <a href="#" class="btn">Add to Cart</a>
+  </div>
+
+</section>
+<footer>
+  <p>&copy; 2024 Online Shop</p>
+</footer>
+<script>
+
+  const cartItems = document.querySelector('.cart-items');
+  
+  let itemCount = 0;
+  
+  
+  const addToCartButtons = document.querySelectorAll('.btn');
+  
+  
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+     
+      itemCount++;
+      
+     
+      cartItems.textContent = itemCount;
+    });
+  });
+  
+  $(function(){
+  
+    $("#menu").hide();
+        
+        $("#menuBtn").on("mouseenter",function(){
+          $("#menu").slideDown(500);
+        });
+        
+      })
+  
+  
+            </script>
+</body>
+</html>
