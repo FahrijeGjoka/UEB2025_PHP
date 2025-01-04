@@ -356,6 +356,30 @@
             event.preventDefault();
             alert('Button clicked!');
         });
+
+        document.getElementById('searchButton').addEventListener('click', function(event) {
+        event.preventDefault();       
+	const searchQuery = document.getElementById('s').value.trim();
+        const parfume = searchForPerfume(searchQuery); 
+
+        try {
+            if (!parfume) throw "Gabim: Parfumi nuk ekziston!";
+            console.log(parfume);
+            alert("Parfumi është gjetur!");
+        } catch (error) {
+            console.error(error);
+            alert(error); 
+        }
+    });
+
+    function searchForPerfume(query) {
+               if (query === "") {
+            return null;
+        }
+        const parfumeList = ["Dior", "Chanel", "Gucci", "Tom Ford", "Prada", "YSL", "Good Girl", "Versace", "Armani", "Valentino"];
+        return parfumeList.includes(query) ? query : null;
+    }
+
     </script>
 
     </body>
