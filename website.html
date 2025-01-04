@@ -7,10 +7,10 @@
          <title>UEB24_Gr30</title>
          <link rel="stylesheet" href="website.css">
          <script src="https://kit.fontawesome.com/5427edee06.js" crossorigin="anonymous"></script>
-
+    
         </head>
 
-    <body>
+    <body  onload = "start()">
         <div class="main">
             <div class="header">
                 <p><a href="signup.html">Sign Up</a><a href="#">|</a><a href="login.html">Login</a></p>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="title">
                     <h1 class="huge">"Unveiling Elegance, One Scent at a Time."</h1>
-                    <p class="paragraph">At Arom&eacute;, we take pride in being recognized as the best-selling perfume company,
+                    <p class="paragraph">At <u>Arom&eacute;</u>, we take pride in being recognized as the best-selling perfume company,
                         setting the standard for luxury and excellence in the fragrance industry. 
                         Our meticulously crafted perfumes are a harmonious blend of rare ingredients,
                         timeless artistry, and innovative design. Loved by customers worldwide, our
@@ -81,7 +81,7 @@
             <div class="row">
                 <div class="class1">
                     <div class="title" style="font-style: italic;color: rgb(240, 48, 48);">
-                        <h1>Arom&eacute;'s Perfume</h1>
+                        <h1><l>Arom&eacute;'s Perfume</l></h1>
                     </div>
                     <div class="pic">
                         <img src="arome_perfume.png" alt="">
@@ -149,7 +149,7 @@
                 </div>
                 <br><br>
                 <div class="more2">
-                    <a href="gallery.html">View Our Women and Men Perfumes ...</a>
+                    <a href="gallery.html">View Our Gallery ...</a>
                 </div>
                 <br>
             </div>
@@ -264,7 +264,7 @@
                             🌸 Immerse yourself in a garden of elegance with our latest arrivals, 
                             crafted to capture the essence of blooming beauty.
                             From the romantic allure of roses to the fresh sweetness of jasmine and the exotic touch of orchids, 
-                            each scent is a celebration of nature’s finest blossoms.
+                            each scent is a celebration of nature's finest blossoms.
                             Perfect for adding a touch of sophistication to your everyday or elevating those special moments,
                             these fragrances are designed to leave a lasting impression. 
                             Discover your signature floral scent today and let your presence bloom wherever you go. 🌼✨...
@@ -282,14 +282,14 @@
                             meticulously crafted for those who appreciate the finer things in life.
                             Featuring a harmonious blend of rare ingredients—like oud, ambergris,
                             and exotic florals—each scent tells a story of opulence and refinement.
-                            Designed to make every moment extraordinary, these fragrances are more than a scent—they’re an experience.
+                            Designed to make every moment extraordinary, these fragrances are more than a scent—they're an experience.
                             Elevate your essence with a touch of luxury and discover the aroma that defines you. 🌟...
                         </p>
                     </div>
                 </div>
 
                 <div class="contact-form" style="padding-top: 30px;">
-                    <h2>Email Us</h2>
+                    <h2>Suggestions</h2>
                     <input type="text" class="field" placeholder="Name">
                     <input type="email" class="field" placeholder="Email">
                     <input type="text" class="field" placeholder="Subject">
@@ -306,9 +306,17 @@
             <tr>
               <td class="footer-section contact-info">
                 <h3><i>Contact Us</i></h3>
-                <p>Email: <a href="mailto:info@arome.com">info@arome.com</a></p>
+                <p>Email: <a href="mailto:info@arome.com"><mark style="color: red;">info@arome.com</mark></a></p>
                 <p>Phone: <a href="tel:+38349001001">+383 49 001 001</a></p>
-                <p>Location: Rruga Adem Jashari, Prishtine, Kosove</p>
+                <ul>Main address:
+                    <li><p><address>Location: Rruga Adem Jashari, Prishtine, Kosove</address></p></li>
+                        <ul>You can find us in other cities:
+                            <li style="list-style-type: circle;">Prizren</li>
+                            <li style="list-style-type: circle;">Peje</li>
+                            <li style="list-style-type: circle;">Tirane</li>
+                        </ul>
+                </ul>
+                <p><abbr>Aromé</abbr></p>
               </td>
              
               <td class="footer-section social-media">
@@ -323,13 +331,13 @@
               
               <td class="footer-section company-staff">
                 <h3><i>Our Team</i></h3>
-                <ul>
+                <ol>
                   <li>Elsa Krasniqi - CEO</li>
                   <li>Ereza Greicevci - Marketing Director</li>
                   <li>Fahrije Gjokiqi - Product Manager</li>
                   <li>Elona Kuqi - Section1 Manager</li>
                   <li>Era Berisha - Section2 Manager</li>
-                </ul>
+                </ol>
               </td>
               <td class="footer-section company-photo">
                 <h3><i>Aromé</i></h3>
@@ -341,21 +349,6 @@
         <p class="footer-credit">© 2024 Arom&eacute;. All Rights Reserved.</p>
    
     </div>
-
-    <script>      
-    const searchForm = document.querySelector(".search-bar");
-    const searchInput = document.getElementById("s");
-    searchForm.addEventListener("submit", (e) => {
-         e.preventDefault(); 
-    const query = searchInput.value.trim(); 
-    if (query === "") {
-        alert("Ju lutem shkruani diçka për të kërkuar!"); 
-    } else {
-        console.log(`Kërkim për: ${query}`);
-        alert(`Kërkim për: ${query}`);
-    }
-    });
-    </script>
 
     </body>
 

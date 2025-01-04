@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
@@ -14,6 +15,7 @@
         <header>
             <div class="logo">Online Shop</div>
             <nav>
+              
               <ul>
                 <li><a href="Website.html">Homepage</a></li>
                 <li><a href="#">Women</a></li>
@@ -23,7 +25,7 @@
                 <li><a href="contactus.html">Contact</a></li>
               </ul>
             </nav>
-        
+          
             <div class="cart">
               <a href="#">Cart</a>
               <span class="cart-items">0</span>
@@ -34,17 +36,23 @@
 
         <section class="hero">
             <h1>Welcome to Online Shop</h1>
-            <p>Shop the latest trends in perfumes.</p>
-          
-          </section>
+            <h2>Shop the latest trends in perfumes.</h2>
+
+            <button id="menuBtn"  >SCENTES</button>
+          <ul id="menu"  class="start" >
+          <li><a href="#floralscent">Floral Scent</a></li>
+          <li ><a href="#warmandspicy">Warm and Spicy</a></li>
+          <li ><a href="#fruitscent">Fruit Scent</a></li>
+        </ul>
+        </section>
           <section class="products">
             <h2 style="font-size: 60px;" >Featured Products</h2>
 
-            <div class="floralscent" >
+            <div id="floralscent" >
             <h3 class="ntitle" >Floral Scent</h3>
            
             <div class="product">
-              <img src="womanimg/valentioni.jpg" alt="Product Image">
+              <img src="womanimg/valentino2.jpg.png" alt="Product Image">
               <h3>Valentino</h3>
               <p>Donna Born In Roma Eau de Parfum</p>
               <span class="price">$35.99</span>
@@ -119,7 +127,7 @@
               </div>
           </div>
 
-            <div>
+            <div id="warmandspicy" >
               <h3 class="ntitle" >Warm And Spicy</h3>
              
                 <div class="product">
@@ -186,6 +194,41 @@
                 </div>
               </div>
 
+              <div id="fruitscent" >
+                <h3 class="ntitle" >Fruit Scent</h3>
+               
+                  <div class="product">
+                  <img src="womanimg/tomfordpeach.jpg" alt="Product Image">
+                  <h3>Tom Ford Bitter Peach</h3>
+                  <p>Bitter Peach Eau De Parfum Fragrance</p>
+                  <span class="price">$350.99</span>
+                  <a href="#"  class="btn">Add to Cart</a>
+                  </div>
+            
+                  <div class="product">
+                  <img src="womanimg/cherry.jpg" alt="Product Image">
+                  <h3>Tom Ford</h3>
+                  <p>Fucking Fabulous Eau de Parfum Fragrance</p>
+                  <span class="price">$399.99</span>
+                  <a href="#"  class="btn">Add to Cart</a>
+                  </div>
+            
+                  <div class="product">
+                  <img src="womanimg/vanile.jpg" alt="Product Image">
+                  <h3>Tom Ford Lost Cherry</h3>
+                  <p>Lost Cherry Eau de Parfum Fragrance</p>
+                  <span class="price">$240.00</span>
+                  <a href="#" class="btn">Add to Cart</a>
+                  </div>
+                  <div class="product">
+                    <img src="womanimg/tom.png" alt="Product Image">
+                    <h3>Neroli Portofino Parfum</h3>
+                    <p>An ampilified citruc floral cent</p>
+                    <span class="price">$239.99</span>
+                    <a href="#" class="btn">Add to Cart</a>
+                 </div>
+              </div>
+
             </section>
 
             <footer>
@@ -210,6 +253,16 @@ addToCartButtons.forEach(button => {
     cartItems.textContent = itemCount;
   });
 });
+
+$(function(){
+
+  $("#menu").hide();
+      
+      $("#menuBtn").on("mouseenter",function(){
+        $("#menu").slideDown(500);
+      });
+      
+    })
 
 
           </script>
