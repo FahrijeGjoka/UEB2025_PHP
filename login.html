@@ -20,9 +20,28 @@
               <label>Password</label>
             </div>
             <button type="submit" class="btn">Login</button>
+            <button type="reset" class="btn">Reset</button>
+            <div id="error-message" style="color: red;display:none;">Both fields are required.</div>
           </form>
         </div>
       </div>
     </div>
+
+    <script>
+      $(document).ready(function() {
+        $("#loginForm").submit(function(e) {
+          e.preventDefault();
+          var username = $("#username").val();
+          var password = $("#password").val();
+
+          if(username === "" || password === "") {
+            $("#error-message").show();
+          } else {
+            $("#error-message").hide();
+            alert("Form Submitted!");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
