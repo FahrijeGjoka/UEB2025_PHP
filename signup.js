@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (isValid) {
       alert('Form submitted successfully!');
-      $(form).trigger('reset'); // Pjesë me jQuery për 'reset'
+      $(form).trigger('reset'); 
     }
   });
 
