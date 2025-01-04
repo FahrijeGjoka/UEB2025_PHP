@@ -108,7 +108,7 @@ label {
   cursor: pointer;
   outline: none;
   transition: all 0.3s ease-in-out;
-  margin-bottom: 10px; /* Hapësirë mes butonave */
+  margin-bottom: 10px; 
 }
 
 .btn:hover {
@@ -117,24 +117,24 @@ label {
 
 
 input[type="reset"] {
-  background-color: #ccc; /* Ngjyra e butonit reset */
+  background-color: #ccc; 
   color: #000;
   padding: 10px;
-  margin-top: 10px; /* Hapësirë më shumë midis butonave */
+  margin-top: 10px; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
   outline: none;
-  width: 100%; /* Butoni të shtrihet në gjerësi të plotë */
+  width: 100%; 
 }
 
 input[type="reset"]:hover {
-  background-color: #aaa; /* Ngjyra ndryshon kur kalon mbi butonin */
+  background-color: #aaa; 
 }
 
-/* Të gjithë butonat brenda formularit që janë të tipit "submit" ose "reset" */
+
 button[type="submit"], input[type="reset"] {
-  width: 100%; /* Butonat të mbushin gjerësinë e plotë të formularit */
+  width: 100%; 
 }
 
 input:focus,
