@@ -120,46 +120,7 @@
     height: 300px; 
     object-fit: cover; 
   }
-  .offer-section {
-    display: flex;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 800px;
-    background-color: #eacaca;
-}
-.offer-text {
-    margin-right: 20px;
-}
-.offer-text h1 {
-    font-size: 2em;
-    margin: 0;
-    color: #333;
-}
-.offer-text p {
-    color: #666;
-    margin: 10px 0;
-}
-.offer-text button {
-  padding: 10px 20px;
-  background-color: #333;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.offer-image {
-  display: flex;
-}
-.offer-image img {
-  width: 100px;
-  height: auto;
-  border-radius: 5px;
-}
+ 
   .product img:hover{
     transform: translateY(-12px);
 }
