@@ -14,7 +14,7 @@ body {
 
 /* Header Styles */
 header {
-    background-color: #860808;
+    background-color: #ffb2d6;
     color: #fff;
     padding: 2rem 0;
     text-align: center;
@@ -55,7 +55,7 @@ nav ul li a:hover {
     padding: 3rem;
     text-align: center;
     background-color:antiquewhite;
-    color: #860808;
+    color: #d70768;
     border-radius: 10px;
     margin: 2rem auto;
     max-width: 80%;
@@ -101,7 +101,7 @@ nav ul li a:hover {
 h4 {
     font-size: 2rem;
     margin-top: 2rem;
-    color: #860808;
+    color: #ffb2d6;
     
 }
 
@@ -125,7 +125,7 @@ table th, table td, table tr{
 }
 
 table th {
-    background-color: #860808;
+    background-color: #ffb2d6;
     color: #fff;
 }
 
@@ -141,7 +141,7 @@ table tr:hover {
 #contact {
     padding: 3rem;
     text-align: center;
-    background-color: #860808;
+    background-color: #ffb2d6;
     color: #fff;
 }
 
@@ -170,7 +170,7 @@ table tr:hover {
 footer {
     text-align: center;
     padding: 1.5rem 0;
-    background-color: #860808;
+    background-color: #ffb2d6;
     color: #fff;
 }
 
@@ -220,11 +220,11 @@ footer {
     text-align: center;
     padding: 1.5rem 0;
     background-color:antiquewhite;
-    color:#860808;
+    color:#d70768;
 }
 
 footer a {
-    color:#860808;
+    color: #d70768;
     text-decoration: underline;
 }
 
@@ -239,13 +239,13 @@ footer a:hover {
 .footer-icons a {
     display: inline-block;
     margin: 0 10px;
-    color:#860808;
+    color: #d70768;
     font-size: 1.5rem;
     transition: color 0.3s ease;
 }
 
 .footer-icons a:hover {
-    color:plum;
+    color:#d70768;
 }
 
 
@@ -263,3 +263,30 @@ footer a:hover {
     border: none;
     border-radius: 10px;
 }
+
+#backToTopButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #d70768;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+
+#aboutCanvas {
+    margin-top: 10px;
+    border: 1px solid #d70768; 
+    border-radius: 10px; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
