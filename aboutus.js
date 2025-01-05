@@ -1,31 +1,73 @@
+$(document).ready(function () {
+    const $backToTopButton = $('#backToTopButton');
 
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+   
+    $backToTopButton.text('⬆️ Back to Top'); 
+    console.log($backToTopButton.text()); 
 
+    
+    $(window).on('scroll', function () {
+        if ($(this).scrollTop() > 200) {
+            
+            $backToTopButton.fadeIn();
+        } else {
+            $backToTopButton.fadeOut();
+        }
+    });
 
-const backToTopButton = document.createElement('button');
-backToTopButton.textContent = '⬆️ Back to Top';
-backToTopButton.style.position = 'fixed';
-backToTopButton.style.bottom = '20px';
-backToTopButton.style.right = '20px';
-backToTopButton.style.padding = '10px 20px';
-backToTopButton.style.fontSize = '16px';
-backToTopButton.style.backgroundColor = '#860808';
-backToTopButton.style.color = 'white';
-backToTopButton.style.border = 'none';
-backToTopButton.style.borderRadius = '5px';
-backToTopButton.style.cursor = 'pointer';
-backToTopButton.style.display = 'none';
-document.body.appendChild(backToTopButton);
+    
+    $backToTopButton.on('click', function () {
+        $('html, body').animate({ scrollTop: 0 }, 800, function () {
+            alert('U kthyet në fillim të faqes!'); 
+        });
+    });
 
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-        backToTopButton.style.display = 'block';
-    } else {
-        backToTopButton.style.display = 'none';
-    }
+   
+    $backToTopButton.hover(
+        function () {
+            $(this).css('background-color', 'pink'); 
+        },
+        function () {
+            $(this).css('background-color', '#d70768'); 
+        }
+    );
 });
 
-backToTopButton.addEventListener('click', scrollToTop);
+$(document).ready(function () {
+    const canvas = document.getElementById('aboutCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let x = 0; 
+    const y = canvas.height / 2; 
+
+    
+    function animateText() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); 
+
+      
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+        gradient.addColorStop(0, '#ffb2d6'); 
+        gradient.addColorStop(1, '#d70768'); 
+
+    
+        ctx.font = '30px Georgia, Cursive';
+        ctx.fillStyle = gradient; 
+        ctx.textAlign = 'center';
+        ctx.shadowColor = '#d70768'; 
+        ctx.shadowBlur = 10;
+
+        
+        ctx.fillText('Aromé', x, y);
+
+        x += 1.5; 
+       
+        if (x > canvas.width + 50) {
+            x = -50; 
+        }
+
+        requestAnimationFrame(animateText); 
+    }
+
+    animateText(); 
+});
+
