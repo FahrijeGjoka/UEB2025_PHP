@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>Contact Page</title>
     <link rel="stylesheet" href="contactus.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   </head>
   <body>
     <header>
-        <div class="logo">Contact</div>
+        <div class="logo">Contact Us</div>
         <nav>
           <ul>
             <li><a href="website.html">Homepage</a></li>
@@ -19,6 +21,12 @@
           </ul>
         </nav>
         </header>
+
+        <section class="hero">
+          <h1>Contact Us</h1>
+          <p>We are here to help you find the perfect fragrance</p>
+        </section>
+
         <main>
           <form>
             <label for="name">Name:</label>
@@ -29,48 +37,49 @@
         
             <label for="message">Message:</label>
             <textarea id="message" name="message" required></textarea>
-        
-            <input type="submit" value="Send">
+
+            <div class="chkbx">
+              <div class="question">
+                  Are you interested in women or men perfumes?<br><br>
+              </div>
+              <div class="options">
+                  <label>
+                      <input type="checkbox" name="perfume" value="women"> Women
+                  </label>
+                  <label>
+                      <input type="checkbox" name="perfume" value="men"> Men
+                  </label>
+              </div>
+          </div>  
+
+            <div class="rdbtn">
+              <div class="write">
+                  How was your experience?<br><br>
+              </div>
+              <div class="options">
+                  <label>
+                      <input type="radio" name="perfumes" value="excellent"> Excellent
+                  </label>
+                  <label>
+                      <input type="radio" name="perfumes" value="Verygood"> Very good
+                  </label>
+                  <label>
+                    <input type="radio" name="perfumes" value="Good"> Good
+                </label>
+              </div>
+          </div> 
+
+    <input type="submit" value="Send">
           </form>
+
           <div class="ul">
-          <ul>For more informations, visit our site in:<br>
-            <li class="li"><a style="color: beige;" href="facebook.com">Facebook</a></li>
-            <li class="li"><a style="color: beige;" href="instagram.com">Instagram</a></li>
-            <li class="li"><a style="color: beige;" href="tiktok.com">TikTok</a></li>
-          </ul>
-        </div>
-
-        <div class="chkbx">
-          <div class="question">
-              Are you interested in women or men perfumes?<br><br>
+            <ul>For more informations, visit our site in:<br>
+              <li class="li"><a href="https://facebook.com"><i class="fab fa-facebook"></i> Facebook</a></li>
+              <li class="li"><a href="https://instagram.com"><i class="fab fa-instagram"></i> Instagram</a></li>
+              <li class="li"><a href="https://tiktok.com"><i class="fab fa-tiktok"></i> TikTok</a></li>
+            </ul>
           </div>
-          <div class="options">
-              <label>
-                  <input type="checkbox" name="perfume" value="women"> Women
-              </label>
-              <label>
-                  <input type="checkbox" name="perfume" value="men"> Men
-              </label>
-          </div>
-      </div>  
-
-      <div class="rdbtn">
-        <div class="write">
-            How was your experience?<br><br>
-        </div>
-        <div class="options">
-            <label>
-                <input type="radio" name="perfumes" value="excellent"> Excellent
-            </label>
-            <label>
-                <input type="radio" name="perfumes" value="Verygood"> Very good
-            </label>
-            <label>
-              <input type="radio" name="perfumes" value="Good"> Good
-          </label>
-        </div>
-    </div>  
-
+  
         </main>
         <footer>
         <p>Rruga Adem Jashari, Prishtine Kosove</p>
