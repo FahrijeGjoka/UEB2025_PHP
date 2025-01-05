@@ -7,13 +7,7 @@
          <title>UEB24_Gr30</title>
          <link rel="stylesheet" href="website.css">
          <script src="https://kit.fontawesome.com/5427edee06.js" crossorigin="anonymous"></script>
-         <!-- <script type = "text/javascript">
-            function start()
-            {
-            pText = "Faleminderit per vizite.";
-            alert( pText );
-            }
-            </script> -->
+    
         </head>
 
     <body  onload = "start()">
@@ -356,20 +350,37 @@
    
     </div>
 
-    <!-- <script>      
-    const searchForm = document.querySelector(".search-bar");
-    const searchInput = document.getElementById("s");
-    searchForm.addEventListener("submit", (e) => {
-         e.preventDefault(); 
-    const query = searchInput.value.trim(); 
-    if (query === "") {
-        alert("Ju lutem shkruani diçka për të kërkuar!"); 
-    } else {
-        console.log(`Kërkim për: ${query}`);
-        alert(`Kërkim për: ${query}`);
-    }
+    <script>
+        const submitButton = document.querySelector('.submit-button');
+        submitButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('Button clicked!');
+        });
+
+        document.getElementById('searchButton').addEventListener('click', function(event) {
+        event.preventDefault();       
+	const searchQuery = document.getElementById('s').value.trim();
+        const parfume = searchForPerfume(searchQuery); 
+
+        try {
+            if (!parfume) throw "Gabim: Parfumi nuk ekziston!";
+            console.log(parfume);
+            alert("Parfumi është gjetur!");
+        } catch (error) {
+            console.error(error);
+            alert(error); 
+        }
     });
-    </script> -->
+
+    function searchForPerfume(query) {
+               if (query === "") {
+            return null;
+        }
+        const parfumeList = ["Dior", "Chanel", "Gucci", "Tom Ford", "Prada", "YSL", "Good Girl", "Versace", "Armani", "Valentino"];
+        return parfumeList.includes(query) ? query : null;
+    }
+
+    </script>
 
     </body>
 

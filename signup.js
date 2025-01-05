@@ -41,18 +41,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (isValid) {
       alert('Form submitted successfully!');
-      form.reset(); 
+      $(form).trigger('reset'); 
     }
   });
 
- 
-  form.addEventListener('reset', function () {
-
-    passwordError.textContent = '';
-    confirmPasswordError.textContent = '';
-
   
-    const inputs = form.querySelectorAll('input');
-    inputs.forEach(input => input.classList.remove('error'));
+  $(form).on('reset', function () {
+    $(passwordError).text(''); 
+    $(confirmPasswordError).text('');
+    $(form).find('input').removeClass('error'); 
   });
 });
