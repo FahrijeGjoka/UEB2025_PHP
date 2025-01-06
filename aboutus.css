@@ -14,11 +14,11 @@ body {
 
 /* Header Styles */
 header {
-    background-color: #ffb2d6;
-    color: #fff;
+    background-color: #eacaca;
+    color: #2c3e50;
     padding: 2rem 0;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px #2c3e50;
 }
 
 header h1 {
@@ -38,7 +38,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #2c3e50;
     text-decoration: none;
     font-size: 1.2rem;
     transition: color 0.3s ease;
@@ -46,7 +46,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: plum;
+    color: #fff;
     font-weight: bolder;
 }
 
@@ -54,8 +54,8 @@ nav ul li a:hover {
 #about {
     padding: 3rem;
     text-align: center;
-    background-color:antiquewhite;
-    color: #d70768;
+    background-color:#2c3e50;
+    color: #eacaca;
     border-radius: 10px;
     margin: 2rem auto;
     max-width: 80%;
@@ -80,7 +80,7 @@ nav ul li a:hover {
 
 #types {
     padding: 3rem;
-    background-color: #faf3e0;
+    background-color: #fff;
 }
 
 .filter-buttons {
@@ -101,7 +101,7 @@ nav ul li a:hover {
 h4 {
     font-size: 2rem;
     margin-top: 2rem;
-    color: #ffb2d6;
+    color: #2c3e50;
     
 }
 
@@ -125,7 +125,7 @@ table th, table td, table tr{
 }
 
 table th {
-    background-color: #ffb2d6;
+    background-color: #2c3e50;
     color: #fff;
 }
 
@@ -134,14 +134,14 @@ table tr:nth-child(even) {
 }
 
 table tr:hover {
-    background-color:plum ;
+    background-color:#eacaca ;
 }
 
 /* Contact Section */
 #contact {
     padding: 3rem;
     text-align: center;
-    background-color: #ffb2d6;
+    background-color: #eacaca;
     color: #fff;
 }
 
@@ -156,7 +156,7 @@ table tr:hover {
 }
 
 #contact a {
-    color:black;
+    color:#2c3e50;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
@@ -181,7 +181,7 @@ footer a {
 }
 
 footer a:hover {
-    color:plum;
+    color:#2c3e50;
 }
 
 /* Responsive Design */
@@ -219,12 +219,12 @@ table tr {
 footer {
     text-align: center;
     padding: 1.5rem 0;
-    background-color:antiquewhite;
-    color:#d70768;
+    background-color:#eacaca;
+    color:#2c3e50;
 }
 
 footer a {
-    color: #d70768;
+    color: #2c3e50;
     text-decoration: underline;
 }
 
@@ -239,13 +239,13 @@ footer a:hover {
 .footer-icons a {
     display: inline-block;
     margin: 0 10px;
-    color: #d70768;
+    color: #2c3e50;
     font-size: 1.5rem;
     transition: color 0.3s ease;
 }
 
 .footer-icons a:hover {
-    color:#d70768;
+    color:#2c3e50;
 }
 
 
@@ -270,7 +270,7 @@ footer a:hover {
     right: 20px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #d70768;
+    background-color:#2c3e50;
     color: white;
     border: none;
     border-radius: 5px;
@@ -281,7 +281,7 @@ footer a:hover {
 
 #aboutCanvas {
     margin-top: 10px;
-    border: 1px solid #d70768; 
+    border: 1px solid #eacaca; 
     border-radius: 10px; 
     display: block;
     margin-left: auto;
