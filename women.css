@@ -11,7 +11,7 @@ body {
 }
 a{
   text-decoration: none;
-  color: plum;
+  color: #2c3e50;
 }
 header {
   display: flex;
@@ -33,12 +33,12 @@ nav li {
   margin-right: 20px;
 }
 nav a {
-  color: #333;
+  color: #2c3e50;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
 nav a:hover {
-  color: rgb(165, 6, 6);
+  color: #fff;
 }
 .cart {
   display: flex;
@@ -50,8 +50,8 @@ nav a:hover {
 }
 .cart-items {
   display: inline-block;
-  background: rgb(165, 6, 6);
-  color: #fff;
+  background: #2c3e50;
+  color: #eacaca;
   font-size: 12px;
   font-weight: bold;
   padding: 5px 8px;
@@ -74,7 +74,7 @@ nav a:hover {
 }
 .btn {
   display: inline-block;
-  background: rgb(165, 6, 6);
+  background: #2c3e50;
   color: #fff;
   font-size: 16px;
   font-weight: bold;
@@ -149,8 +149,8 @@ h3{
 }
 .product a {
   display: inline-block;
-  background: rgb(165, 6, 6);
-  color: #fff;
+  background: #2c3e50;
+  color: #eacaca;
   font-size: 16px;
   font-weight: bold;
   padding: 10px 20px;
@@ -163,8 +163,8 @@ h3{
   background: #333;
 }
 footer {
-  background: #7e1515;
-  color: #fff;
+  background: #eacaca;
+  color: #2c3e50;
   text-align: center;
   padding: 20px;
 }
