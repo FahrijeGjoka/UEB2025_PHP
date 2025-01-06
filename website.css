@@ -5,7 +5,7 @@
 }
 
 .header {
-    background-color: rgb(165, 6, 6);
+    background-color: #eacaca;
     width: 100%;
     height: 80px;
     display: flex;
@@ -31,7 +31,7 @@
 }
 
 .header p a:hover {
-    color: black;
+    color: #2c3e50;
     transition: .5s;
 }
 
@@ -65,7 +65,7 @@
     outline: none;
     padding: 10px 5px; 
     font-size: 15px;
-    color: black;
+    color: #2c3e50;
 }
 
 .search-bar button {
@@ -74,12 +74,12 @@
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    background: rgb(165, 6, 6);
+    background: #eacaca;
     cursor: pointer;
 }
 
 .search-bar button:hover {
-    background-color: black;
+    background-color: #2c3e50;
     transition: .5s;
 }
 
@@ -134,7 +134,7 @@ button i {
     display: inline-block;
     line-height: 30px;
     margin: 0 5px;
-    color: rgb(1, 29, 36);
+    color: #2c3e50;
     font-size: 17px;
     padding: 7px 13px;
     border-radius: 3px;
@@ -145,7 +145,7 @@ button i {
 }
 
 a i:hover {
-    background: rgb(165, 6, 6);
+    background: #eacaca;
     transition: .5s;
     border-radius: 120px;
     transition: .5s;
@@ -158,7 +158,7 @@ a i:hover {
     border-radius: 5px;
     width: 93%;
     height: 40px;
-    background: black;
+    background:#eacaca;
 }
 
 .main-bar .link {
@@ -170,7 +170,7 @@ a i:hover {
 }
 
 .main-bar .link:hover {
-    color: rgb(165, 6, 6);
+    color: #2c3e50;
     transition: .5s;
 }
 
@@ -196,14 +196,14 @@ a i:hover {
 .huge {
     font-size: 90px;
     font-weight: 300;
-    color: #4b0909;
+    color: #2c3e50;
     font-family:'Times New Roman', Times, serif;
     font-style: italic;
 }
 
 .title .paragraph {
     padding-top: 40px;
-    color: rgb(45, 5, 5);
+    color: #2c3e50;
     font-size: 20px;
 }
 
@@ -217,7 +217,7 @@ a i:hover {
 }
 
 .read-more p a {
-    color: rgb(44, 9, 9);
+    color:#eacaca;
     text-decoration: none;
     padding-left: 5px;
     font-family: 'Times New Roman', Times, serif;
@@ -225,8 +225,8 @@ a i:hover {
 
 .pic img {
     width: 400px;
-    height: 400px;
-    padding-top: 20px;
+    height: 500px;
+    padding-top: 10px;
     padding-left: 20px;
 
 }
@@ -236,7 +236,7 @@ a i:hover {
     align-items: center;
     padding-right:30px;
     padding-top: 5px;
-    background-color: rgb(226, 226, 251);
+    background-color: #2c3e50;
 }
 .title{
     padding-top:20px;
@@ -262,20 +262,20 @@ a i:hover {
 .service1 p {
     width: 350px;
     padding: 15px;
-    color: rgb(138, 131, 131);
+    color: #eacaca;
 }
 .text {
     width: 400px;
     padding-top: 20px;
     padding-left: 20px;
-    color: rgb(138, 131, 131);
+    color: #eacaca;
 
 }
 
 .service1 h3 {
     width: 350px;
     padding-left: 5px;
-    color: rgb(66, 64, 64);
+    color: #eacaca;
 }
 
 .service2 {
@@ -295,13 +295,13 @@ a i:hover {
 .service2 p {
     width: 350px;
     padding: 15px;
-    color: rgb(138, 131, 131);
+    color: #eacaca;
 }
 
 .service2 h3 {
     width: 350px;
     padding-left: 5px;
-    color: rgb(66, 64, 64);
+    color: #eacaca;
 }
 
 
@@ -315,13 +315,13 @@ a i:hover {
 .service3 p {
     width: 350px;
     padding:15px;
-    color: rgb(138, 131, 131);
+    color: #eacaca;
 }
 
 .service3 h3 {
     width: 350px;
     padding-left: 5px;
-    color: rgb(66, 64, 64);
+    color: #eacaca;
 }
 
 
@@ -335,13 +335,13 @@ a i:hover {
 .service4 p {
     width: 350px;
     padding:15px;
-    color: rgb(138, 131, 131);
+    color: #eacaca;
 }
 
 .service4 h3 {
     width: 350px;
     padding-left: 5px;
-    color: rgb(66, 64, 64);
+    color: #eacaca;
 }
 
 .class3{
@@ -362,7 +362,7 @@ a i:hover {
 
 .client1 i {
 
-    color: rgb(202, 198, 198);
+    color: #eacaca;
     font-size: 100px;
 }
 .client2{
@@ -374,7 +374,7 @@ a i:hover {
 
 .client2 i {
     
-    color: rgb(202, 198, 198);
+    color: #eacaca;
     font-size: 100px;
 }
 
@@ -386,53 +386,53 @@ a i:hover {
 
 .client3 i {
 
-    color: rgb(202, 198, 198);
+    color: #eacaca;
     font-size: 100px;
 }
 
 .client1 h3{
-    color: rgb(100, 99, 99); 
+    color: #eacaca; 
     padding-left: 10px;
 }
 
 .client2 h3{
-    color: rgb(119, 116, 116); 
+    color: #eacaca; 
     padding-left: 10px;
 }
 .client3 h3{
-    color: rgb(119, 116, 116); 
+    color: #eacaca; 
     padding-left: 10px;
 }
 .clients p{
     padding-left: 20px;
     padding-right: 20px;
-    color: rgb(124, 116, 116); 
+    color: #eacaca; 
 }
 .more{
     padding-top: 85px;
    padding-left: 40px;
 }
 .more  a {
-    color: red;
+    color: #eacaca;
     text-decoration: none;
     padding-left: 150px;
     font-weight: 300;
 }
 .more a:hover{
-   color: rgb(160, 9, 9);
+   color: #fff;
 }
 .more2{
     padding-top: 20px;
    padding-left: 40px;
 }
 .more2  a {
-    color: red;
+    color: #eacaca;
     text-decoration: none;
     padding:10px;
     font-weight: 300;
 }
 .more2 a:hover{
-   color: rgb(160, 9, 9);
+   color: #fff;
 }
 
 
@@ -441,26 +441,26 @@ a i:hover {
    padding-left: 40px;
 }
 .more3  a {
-    color: red;
+    color: #eacaca;
     text-decoration: none;
     padding-left: 200px;
     font-weight: 300;
 }
 .more3 a:hover{
-   color: rgb(160, 9, 9);
+   color: #fff;
 }
 .more4{
     padding-top: 50px;
    padding-left: 40px;
 }
 .more4  a {
-    color: red;
+    color: #eacaca;
     text-decoration: none;
     padding-left: 200px;
     font-weight: 300;
 }
 .more4 a:hover{
-   color: rgb(160, 9, 9);
+   color: #fff;
 }
 
 
@@ -491,13 +491,13 @@ section{
    
     padding-left: 20px;
     
-    color:rgb(138, 131, 131);
+    color:#eacaca;
 }
 .first-foot p{
    
     padding-left: 20px;
     padding-top: 20px;
-    color:rgb(138, 131, 131); 
+    color:#eacaca; 
 }
 .contact-form {
     max-width: 600px; 
@@ -507,7 +507,7 @@ section{
   .contact-form h2 {
     font-size: 36px;
     margin-bottom: 20px;
-    color: #990707;
+    color:#eacaca;
   }
   
   .contact-form input[type="text"],
@@ -519,9 +519,9 @@ section{
     margin-bottom: 20px;
     border: none;
     border-radius: 5px;
-    background-color: #f4dfdf;
+    background-color: #eacaca;
     font-size: 16px;
-    color: #362e2e;
+    color: #2c3e50;
   }
   
   .contact-form textarea {
@@ -530,8 +530,8 @@ section{
   
   .contact-form input[type="submit"] {
     background-color: #fff;
-    color: #fa0606;
-    border:black;
+    color: #eacaca;
+    border:#2c3e50;
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 16px;
@@ -540,12 +540,12 @@ section{
   }
   
   .contact-form input[type="submit"]:hover {
-    background-color: #f38181;
+    background-color: #2c3e50;
   }
   .contact-form .submit-button {
     display: inline-block;
-    background-color: #ecabb2;
-    color: #fa0606;
+    background-color: #eacaca;
+    color: #fff;
     font-weight: bold;
     border: none;
     border-radius: 5px;
@@ -556,7 +556,7 @@ section{
   }
   
   .contact-form .submit-button:hover {
-    background-color: #ffb6e9;
+    background-color: #2c3e50;
   }
 
 .second-foot{
@@ -569,18 +569,18 @@ section{
 .second-foot p a{
     width: 80px;
     padding-top: 20px;
-    color:rgb(138, 131, 131); 
+    color:#eacaca; 
     text-decoration: underline;
     font-size: 20px;
     font-weight:500; 
 }
 
 .second-foot p a:hover{
-    color:#4b0909;
+    color:#2c3e50;
 }
 
 .footer {
-    background-color: #f97373;
+    background-color: #eacaca;
     color: white;
     padding: 20px 10%;
   }
@@ -638,7 +638,7 @@ section{
   }
   
   .social-icon:hover {
-    color: #3498db;
+    color: #2c3e50;
     font-size: 25px;
   }
   
@@ -646,5 +646,5 @@ section{
     text-align: center;
     margin-top: 20px;
     font-size: 0.9em;
-    color: #060606;
+    color: #2c3e50;
   }
