@@ -28,7 +28,7 @@
         </section>
 
         <main>
-          <form>
+          <form id="contactForm">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
         
@@ -37,6 +37,17 @@
         
             <label for="message">Message:</label>
             <textarea id="message" name="message" required></textarea>
+
+            <input type="submit" value="Send">
+          </form>
+
+          <div class="ul">
+            <ul>For more informations, visit our site in:<br>
+              <li class="li"><a href="https://facebook.com"><i class="fab fa-facebook"></i> Facebook</a></li>
+              <li class="li"><a href="https://instagram.com"><i class="fab fa-instagram"></i> Instagram</a></li>
+              <li class="li"><a href="https://tiktok.com"><i class="fab fa-tiktok"></i> TikTok</a></li>
+            </ul>
+          </div>
 
             <div class="chkbx">
               <div class="question">
@@ -68,22 +79,27 @@
                 </label>
               </div>
           </div> 
-
-    <input type="submit" value="Send">
-          </form>
-
-          <div class="ul">
-            <ul>For more informations, visit our site in:<br>
-              <li class="li"><a href="https://facebook.com"><i class="fab fa-facebook"></i> Facebook</a></li>
-              <li class="li"><a href="https://instagram.com"><i class="fab fa-instagram"></i> Instagram</a></li>
-              <li class="li"><a href="https://tiktok.com"><i class="fab fa-tiktok"></i> TikTok</a></li>
-            </ul>
-          </div>
   
         </main>
         <footer>
         <p>Rruga Adem Jashari, Prishtine Kosove</p>
         <p>Phone: +383 49 001 001</p>
       </footer>
+
+      <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const message = document.getElementById("message").value.trim();
+  
+          if (!name || !email || !message) {
+            alert("Please fill in all required fields.");
+            event.preventDefault();
+          } else {
+            alert("Thank you! Your form has been submitted successfully.");
+          }
+        });
+      </script>
+
       </body>
       </html>
