@@ -8,10 +8,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color:  rgb(225, 27, 27);
-  color: #fff;
+  background-color:  #2c3e50;
+  color: #eacaca;
   padding: 20px;
-  box-shadow: 0 2px 10px #fff;
+  box-shadow: 0 2px 10px #eacaca;
 }
 
 .logo {
@@ -38,14 +38,14 @@ nav a {
 }
 
 nav a:hover {
-  background-color:rgb(244, 99, 99);
+  background-color:#eacaca;
 }
 
 .hero {
   text-align: center;
-  background-color: rgb(245, 184, 184);
+  background-color: #eacaca;
   padding: 50px 20px;
-  border-bottom: 2px solid rgb(225, 27, 27);;
+  border-bottom: 2px solid #eacaca;
 }
 
 .hero h1 {
@@ -91,8 +91,8 @@ textarea {
 }
 
 input[type="submit"] {
-  background-color: rgb(225, 27, 27);;
-  color: white;
+  background-color: #eacaca;
+  color: #fff;
   border: none;
   padding: 12px 0;
   font-size: 18px;
@@ -102,14 +102,14 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: rgb(225, 27, 27);;
+  background-color:#2c3e50;
 }
 
 .ul {
   margin-top: 30px;
   padding: 10px;
   background-color: #fff1f1;
-  border: 1px solid rgb(225, 27, 27);;
+  border: 1px solid #2c3e50;
 }
 
 .li {
@@ -118,7 +118,7 @@ input[type="submit"]:hover {
 
 .li a {
   text-decoration: none;
-  color:rgb(225, 27, 27);
+  color:#2c3e50;
   font-size: 16px;
   padding: 5px;
   border-radius: 5px;
@@ -135,7 +135,7 @@ input[type="submit"]:hover {
 }
 
 footer {
-  background-color: rgb(225, 27, 27);;
+  background-color: #eacaca;
   color: white;
   text-align: center;
   padding: 20px;
