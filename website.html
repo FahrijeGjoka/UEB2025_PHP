@@ -21,7 +21,7 @@
                         <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
-            </div>
+        </div>
             
         <div class="body">
             <div class="two">
@@ -359,7 +359,7 @@
 
         document.getElementById('searchButton').addEventListener('click', function(event) {
         event.preventDefault();       
-	const searchQuery = document.getElementById('s').value.trim();
+	    const searchQuery = document.getElementById('s').value.trim();
         const parfume = searchForPerfume(searchQuery); 
 
         try {
