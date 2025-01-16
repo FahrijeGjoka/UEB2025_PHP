@@ -433,35 +433,6 @@ a i:hover {
    color: #fff;
 }
 
-
-.more3{
-    padding-top: 20px;
-   padding-left: 40px;
-}
-.more3  a {
-    color: #eacaca;
-    text-decoration: none;
-    padding-left: 200px;
-    font-weight: 300;
-}
-.more3 a:hover{
-   color: #fff;
-}
-.more4{
-    padding-top: 50px;
-   padding-left: 40px;
-}
-.more4  a {
-    color: #eacaca;
-    text-decoration: none;
-    padding-left: 200px;
-    font-weight: 300;
-}
-.more4 a:hover{
-   color: #fff;
-}
-
-
 section{
     padding-top: 10px;
     display: flex;
