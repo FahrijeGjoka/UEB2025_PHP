@@ -228,6 +228,13 @@ a i:hover {
     padding-left: 20px;
 
 }
+.text {
+    width: 400px;
+    padding-top: 20px;
+    padding-left: 20px;
+    color: #eacaca;
+
+}
 .row{
     display: flex;
     flex-direction: row;
@@ -261,13 +268,6 @@ a i:hover {
     width: 350px;
     padding: 15px;
     color: #eacaca;
-}
-.text {
-    width: 400px;
-    padding-top: 20px;
-    padding-left: 20px;
-    color: #eacaca;
-
 }
 
 .service1 h3 {
