@@ -1,3 +1,4 @@
 <?php
-echo "<h1>Jam Elsa</h1>";
+ $variabla="Elsa";
+ echo $variabla;
 ?>
