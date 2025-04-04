@@ -25,6 +25,7 @@
             <div id="error-message" style="color: #eacaca;display:none;">Both fields are required.</div>
           </form>
 
+          //Kam shtuar një formular të thjeshtë login-i me verifikimin e emrit të përdoruesit dhe fjalëkalimit.
           <?php
           $loginMessage="";
           $messageClass="";
