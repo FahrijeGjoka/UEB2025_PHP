@@ -63,7 +63,6 @@
                 </div>
                 <div class="title">
                     <h1 class="huge">"Unveiling Elegance, One Scent at a Time."</h1>
-                    <span><?php echo date("Y-m-d"); ?></span>
 
                     <p class="paragraph">At <u>Arom&eacute;</u>, we take pride in being recognized as the best-selling perfume company,
                         setting the standard for luxury and excellence in the fragrance industry. 
@@ -352,7 +351,7 @@
             </tr>
           </table>
         </div>
-        <p class="footer-credit">© 2024 Arom&eacute;. All Rights Reserved.</p>
+        <p class="footer-credit">© <span><?php echo date("Y-m-d"); ?></span> Arom&eacute;. All Rights Reserved.</p>
    
     </div>
 
