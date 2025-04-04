@@ -3,7 +3,6 @@
   <head>
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="login.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -11,19 +10,20 @@
         <div class="overlay"></div>
         <div class="content">
           <h1>Login</h1>
-          <form id="loginForm" methos="POST">
+          <form id="loginForm" method="POST">
             <div class="input-field">
-              <input type="text" id="username" required>
+              <input type="text" name="username" required>
               <label>Username</label>
             </div>
             <div class="input-field">
-              <input type="password" id="password" required>
+              <input type="password" name="password" required>
               <label>Password</label>
             </div>
             <button type="submit" class="btn">Login</button>
             <button type="reset" class="btn">Reset</button>
-</form>
-<?php
+          </form>
+          
+          <?php
           $loginMessage="";
           $messageClass="";
 
