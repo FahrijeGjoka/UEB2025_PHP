@@ -63,7 +63,7 @@
                 </div>
                 <div class="title">
                     <h1 class="huge">"Unveiling Elegance, One Scent at a Time."</h1>
-                    <?php include 'elsa.php'; ?>
+                    <span><?php echo date("Y-m-d"); ?></span>
 
                     <p class="paragraph">At <u>Arom&eacute;</u>, we take pride in being recognized as the best-selling perfume company,
                         setting the standard for luxury and excellence in the fragrance industry. 
