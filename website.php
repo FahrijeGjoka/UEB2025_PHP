@@ -80,28 +80,65 @@
             </div>
 
             <div class="row">
-                <div class="class1">
-                    <div class="title" style="font-style: italic;color: #eacaca;">
-                        <h1><l>Arom&eacute;'s Perfume</l></h1>
-                    </div>
+            <div class="class1">
+    <div class="title" style="font-style: italic;color: #eacaca;">
+        <h1><l>Arom&eacute;'s Perfumes</l></h1>
+    </div>
+
+    
+    <div class="text" style="color: #eacaca;">
+        <h2 style="color: #ffcaca;">Top 5 Most Used Perfumes</h2>
+        <ul>
+            <?php
             
-                
-                    
-                    <div class="text" style="color: #eacaca;">Our company provides with the best perfumes 
-                        scents, by all types of perfumes. We provide perfumes for 
-                        women and men. In collaboration with the biggest companies of 
-                        perfumes in the world, we offer them with the best prices.
-                        <br><br>
-                       Some of the companies that we work with are: Tom Ford,
-                       Gucci, Prada, Chanel, YSL, Cologne and Dior.
-                       Each fragrance tells a unique story, blending rare essences like
-                        exotic flowers, precious woods, 
-                        and rare spices in meticulously balanced compositions.
-                    </div>
-                    <div class="more">
-                        <a href="aboutus.html">Read More About Us</a>
-                    </div>
-                </div>
+            $topPerfumes = [
+                "Dior Sauvage" => 1500,
+                "Chanel No. 5" => 1350,
+                "Tom Ford Black Orchid" => 1200,
+                "Prada Luna Rossa" => 980,
+                "YSL La Nuit de l'Homme" => 860
+            ];
+
+            arsort($topPerfumes); 
+
+            $rank = 1;
+            foreach ($topPerfumes as $name => $uses) {
+                echo "<li><strong>Top $rank:</strong> $name - <em>$uses uses</em></li>";
+                $rank++;
+            }
+            ?>
+        </ul>
+
+        <hr style="border-color: #ffcaca; margin: 30px 0;">
+
+        <h2 style="color: #ffcaca;">Top 5 Least Used Perfumes</h2>
+        <ul>
+            <?php
+            $leastUsedPerfumes = [
+                "Calvin Klein CK One" => 200,
+                "Nautica Voyage" => 250,
+                "Davidoff Cool Water" => 300,
+                "Azzaro Chrome" => 350,
+                "Jaguar Classic Black" => 400
+            ];
+
+            asort($leastUsedPerfumes); 
+
+            $rank = 1;
+            foreach ($leastUsedPerfumes as $name => $uses) {
+                echo "<li><strong>Top $rank:</strong> $name - <em>$uses uses</em></li>";
+                $rank++;
+            }
+            ?>
+        </ul>
+    </div>
+
+    <div class="more">
+        <a href="aboutus.html">Read More About Us</a>
+    </div>
+</div>
+
+
                 <div class="class2">
     <div class="title2" style="font-style: italic;color: #eacaca;">
         <h1>Some Of Our Fragrances</h1>
