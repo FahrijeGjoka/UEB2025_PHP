@@ -150,3 +150,12 @@ textarea:valid + label {
   font-size: 12px;
   color: #2c3e50;
 }
+
+.success-message {
+  color: green; 
+  font-weight: bold;
+}
+.error-message {
+  color: red; 
+  font-weight: bold;
+}
