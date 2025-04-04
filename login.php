@@ -22,8 +22,7 @@
             </div>
             <button type="submit" class="btn">Login</button>
             <button type="reset" class="btn">Reset</button>
-            <div id="error-message" style="color: #eacaca;display:none;">Both fields are required.</div>
-          </form>
+</form>
 
           //Kam shtuar një formular të thjeshtë login-i me verifikimin e emrit të përdoruesit dhe fjalëkalimit.
           <?php
