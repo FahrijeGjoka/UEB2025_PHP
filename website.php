@@ -63,7 +63,7 @@
                 </div>
                 <div class="title">
                     <h1 class="huge">"Unveiling Elegance, One Scent at a Time."</h1>
-                    <?php include 'elsa.php'; ?>
+                    <span><?php echo date("Y-m-d"); ?></span>
 
                     <p class="paragraph">At <u>Arom&eacute;</u>, we take pride in being recognized as the best-selling perfume company,
                         setting the standard for luxury and excellence in the fragrance industry. 
@@ -103,52 +103,56 @@
                         <a href="aboutus.html">Read More About Us</a>
                     </div>
                 </div>
-    
                 <div class="class2">
-                    <div class="title2" style="font-style: italic;color: #eacaca;">
-                        <h1>Some Of Our Fragrances</h1>
-                    </div>
-                    <div class="services">
-    
-    
-                        <div class="service1">
-                            <div class="pic1"><img src="floral.webp"  style="border-radius: 20%;" alt="Floral"></div>
-                            <div class="ser-name">
-                                <h3 style="color: #eacaca;font-style: italic;">Floral for Women</h3>
-                                <p style="color: #eacaca; font-style: inherit;";> Soft and romantic, featuring notes like rose, jasmine, or lily.
-                                </p>
-                            </div>
-                        </div>
-    
-                        <div class="service2">
-                            <div class="pic2"><img src="oriental.webp" style="border-radius: 20%;" alt="Oriental"></div>
-                            <div class="ser-name2">
-                                <h3 style="color: #eacaca;font-style: italic;">Oriental for Women</h3>
-                                <p style="color: #eacaca; font-style: inherit;";>Warm and sensual with hints of amber, vanilla, and exotic spices.   
-                                </p>
-                            </div>
-                        </div>
+    <div class="title2" style="font-style: italic;color: #eacaca;">
+        <h1>Some Of Our Fragrances</h1>
+    </div>
 
-                        <div class="service3">
-                            <div class="pic3"><img src="woody.jpg"  style="border-radius: 20%;" alt="Woody"></div>
-                            <div class="ser-name3">
-                                <h3 style="color: #eacaca;font-style: italic;">Woody for Men</h3>
-                                <p style="color: #eacaca; font-style: inherit;";>Warm, earthy, and grounding scents like sandalwood, cedar, and vetiver.
-                                </p>
-                            </div>
-                        </div>
-    
-                        <div class="service4">
-                            <div class="pic4"><img src="fougere.jpg"  style="border-radius: 20%;" alt="Fougere"></div>
-                            <div class="ser-name4">
-                                <h3 style="color: #eacaca;font-style: italic;">Fougere for Men</h3>
-                                <p style="color: #eacaca; font-style: inherit;";>Aromatic with notes of lavender, oakmoss, and coumarin.
-                                </p>
-                            </div>
-                        </div>
-    
-                        
+    <div class="services">
+        <?php
+        function perfumeDiscount($price) {
+            $discount = 0.1; // 10% zbritje
+            $newPrice = $price - ($price * $discount);
+            return number_format($newPrice, 2);
+        }
+
+        $perfumes = [
+            [
+                "name" => "Gucci Flora",
+                "desc" => "Soft and romantic, featuring notes like rose, jasmine, or lily.",
+                "image" => "floral.webp",
+                "price" => 89.99
+            ],
+            [
+                "name" => "Chanel Allure Home",
+                "desc" => "Warm and sensual with hints of amber, vanilla, and exotic spices.",
+                "image" => "ALLURE.avif",
+                "price" => 120.00
+            ],
+            [
+                "name" => "Tom Ford Noir De Noir ",
+                "desc" => "Warm, earthy, and grounding scents like sandalwood, cedar, and vetiver.",
+                "image" => "noir tomford.avif",
+                "price" => 200.50
+            ]
+        ];
+
+        foreach ($perfumes as $index => $perfume) {
+            echo '
+            <div class="service' . ($index + 1) . '">
+                <div class="pic' . ($index + 1) . '">
+                    <img src="' . $perfume["image"] . '" style="border-radius: 20%;" alt="' . $perfume["name"] . '">
                 </div>
+                <div class="ser-name' . ($index + 1) . '">
+                    <h3 style="color: #eacaca; font-style: italic;">' . $perfume["name"] . '</h3>
+                    <p style="color: #eacaca; font-style: inherit;">' . $perfume["desc"] . '</p>
+                    <p style="color: #ffcaca; font-weight: bold;">On Sale: ' . perfumeDiscount($perfume["price"]) . ' EUR</p>
+                </div>
+            </div>';
+        }
+        ?>
+    </div>
+
                 <br><br>
                 <div class="more2">
                     <a href="gallery.html">View Our Gallery ...</a>
