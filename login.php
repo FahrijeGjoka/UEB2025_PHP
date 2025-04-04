@@ -24,6 +24,29 @@
             <button type="reset" class="btn">Reset</button>
             <div id="error-message" style="color: #eacaca;display:none;">Both fields are required.</div>
           </form>
+
+          <?php
+          $loginMessage="";
+          $messageClass="";
+
+          if(isset($_POST['username'])&&isset($POST['password'])){
+            $username=$_POST['username'];
+            $password=$_POST['password'];
+
+            if($username==="admin"&&$password==="12345"){
+              $loginMessage = "Welcome Admin!";
+                $messageClass = "success-message";
+              } else {
+                $loginMessage = "Invalid username or password.";
+                $messageClass = "error-message";
+              }
+          }
+
+          if($loginMessage !=""){
+            echo "<p class='$messageClass'>$loginMessage</p>";
+          }
+        ?>
+        
         </div>
       </div>
     </div>
