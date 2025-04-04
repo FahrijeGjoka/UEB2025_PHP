@@ -11,7 +11,7 @@
         <div class="overlay"></div>
         <div class="content">
           <h1>Login</h1>
-          <form id="loginForm">
+          <form id="loginForm" methos="POST">
             <div class="input-field">
               <input type="text" id="username" required>
               <label>Username</label>
@@ -30,7 +30,7 @@
           $loginMessage="";
           $messageClass="";
 
-          if(isset($_POST['username'])&&isset($POST['password'])){
+          if(isset($_POST['username'])&&isset($_POST['password'])){
             $username=$_POST['username'];
             $password=$_POST['password'];
 
