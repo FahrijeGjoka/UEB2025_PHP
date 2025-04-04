@@ -11,7 +11,7 @@
         <div class="overlay"></div>
         <div class="content">
           <h1>Login</h1>
-          <form id="loginForm">
+          <form id="loginForm" methos="POST">
             <div class="input-field">
               <input type="text" id="username" required>
               <label>Username</label>
@@ -24,6 +24,30 @@
             <button type="reset" class="btn">Reset</button>
             <div id="error-message" style="color: #eacaca;display:none;">Both fields are required.</div>
           </form>
+
+          //Kam shtuar një formular të thjeshtë login-i me verifikimin e emrit të përdoruesit dhe fjalëkalimit.
+          <?php
+          $loginMessage="";
+          $messageClass="";
+
+          if(isset($_POST['username'])&&isset($_POST['password'])){
+            $username=$_POST['username'];
+            $password=$_POST['password'];
+
+            if($username==="admin"&&$password==="12345"){
+              $loginMessage = "Welcome Admin!";
+                $messageClass = "success-message";
+              } else {
+                $loginMessage = "Invalid username or password.";
+                $messageClass = "error-message";
+              }
+          }
+
+          if($loginMessage !=""){
+            echo "<p class='$messageClass'>$loginMessage</p>";
+          }
+        ?>
+        
         </div>
       </div>
     </div>
