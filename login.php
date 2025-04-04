@@ -23,9 +23,7 @@
             <button type="submit" class="btn">Login</button>
             <button type="reset" class="btn">Reset</button>
 </form>
-
-          //Kam shtuar një formular të thjeshtë login-i me verifikimin e emrit të përdoruesit dhe fjalëkalimit.
-          <?php
+<?php
           $loginMessage="";
           $messageClass="";
 
