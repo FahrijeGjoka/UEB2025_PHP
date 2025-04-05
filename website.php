@@ -63,7 +63,6 @@
                 </div>
                 <div class="title">
                     <h1 class="huge">"Unveiling Elegance, One Scent at a Time."</h1>
-                    <span><?php echo date("Y-m-d"); ?></span>
 
                     <p class="paragraph">At <u>Arom&eacute;</u>, we take pride in being recognized as the best-selling perfume company,
                         setting the standard for luxury and excellence in the fragrance industry. 
@@ -81,76 +80,124 @@
             </div>
 
             <div class="row">
-                <div class="class1">
-                    <div class="title" style="font-style: italic;color: #eacaca;">
-                        <h1><l>Arom&eacute;'s Perfume</l></h1>
-                    </div>
+            <div class="class1">
+    <div class="title" style="font-style: italic;color: #eacaca;">
+        <h1><l>Arom&eacute;'s Perfumes</l></h1>
+    </div>
+
+    
+    <div class="text" style="color: #eacaca;">
+        <h2 style="color: #ffcaca;">Top 5 Most Used Perfumes</h2>
+        <ul>
+            <?php
             
-                
-                    
-                    <div class="text" style="color: #eacaca;">Our company provides with the best perfumes 
-                        scents, by all types of perfumes. We provide perfumes for 
-                        women and men. In collaboration with the biggest companies of 
-                        perfumes in the world, we offer them with the best prices.
-                        <br><br>
-                       Some of the companies that we work with are: Tom Ford,
-                       Gucci, Prada, Chanel, YSL, Cologne and Dior.
-                       Each fragrance tells a unique story, blending rare essences like
-                        exotic flowers, precious woods, 
-                        and rare spices in meticulously balanced compositions.
-                    </div>
-                    <div class="more">
-                        <a href="aboutus.html">Read More About Us</a>
-                    </div>
-                </div>
+            $topPerfumes = [
+                "Dior Sauvage" => 1500,
+                "Chanel No. 5" => 1350,
+                "Tom Ford Black Orchid" => 1200,
+                "Prada Luna Rossa" => 980,
+                "YSL La Nuit de l'Homme" => 860
+            ];
+
+            arsort($topPerfumes); 
+
+            $rank = 1;
+            foreach ($topPerfumes as $name => $uses) {
+                echo "<li><strong>Top $rank:</strong> $name - <em>$uses uses</em></li>";
+                $rank++;
+            }
+            ?>
+        </ul>
+
+        <hr style="border-color: #ffcaca; margin: 30px 0;">
+
+        <h2 style="color: #ffcaca;">Top 5 Least Used Perfumes</h2>
+        <ul>
+            <?php
+            $leastUsedPerfumes = [
+                "Calvin Klein CK One" => 200,
+                "Nautica Voyage" => 250,
+                "Davidoff Cool Water" => 300,
+                "Azzaro Chrome" => 350,
+                "Jaguar Classic Black" => 400
+            ];
+
+            asort($leastUsedPerfumes); 
+
+            $rank = 1;
+            foreach ($leastUsedPerfumes as $name => $uses) {
+                echo "<li><strong>Top $rank:</strong> $name - <em>$uses uses</em></li>";
+                $rank++;
+            }
+            ?>
+        </ul>
+    </div>
+
+    <div class="more">
+        <a href="aboutus.html">Read More About Us</a>
+    </div>
+</div>
+
+
                 <div class="class2">
     <div class="title2" style="font-style: italic;color: #eacaca;">
         <h1>Some Of Our Fragrances</h1>
     </div>
 
     <div class="services">
-        <?php
-        function perfumeDiscount($price) {
-            $discount = 0.1; // 10% zbritje
-            $newPrice = $price - ($price * $discount);
-            return number_format($newPrice, 2);
+    <div class="services">
+    <?php
+    function perfumeDiscount($price) {
+        $discount = 0.1; 
+        $newPrice = $price - ($price * $discount);
+        
+        
+        $regex = '/^\d+(\.\d{1,2})?$/'; 
+        
+        if (preg_match($regex, $newPrice)) {
+            return number_format($newPrice, 2); 
+        } else {
+            return "Invalid Price"; 
         }
+    }
 
-        $perfumes = [
-            [
-                "name" => "Gucci Flora",
-                "desc" => "Soft and romantic, featuring notes like rose, jasmine, or lily.",
-                "image" => "floral.webp",
-                "price" => 89.99
-            ],
-            [
-                "name" => "Chanel Allure Home",
-                "desc" => "Warm and sensual with hints of amber, vanilla, and exotic spices.",
-                "image" => "ALLURE.avif",
-                "price" => 120.00
-            ],
-            [
-                "name" => "Tom Ford Noir De Noir ",
-                "desc" => "Warm, earthy, and grounding scents like sandalwood, cedar, and vetiver.",
-                "image" => "noir tomford.avif",
-                "price" => 200.50
-            ]
-        ];
+    $perfumes = [
+        [
+            "name" => "Gucci Flora",
+            "desc" => "Soft and romantic, featuring notes like rose, jasmine, or lily.",
+            "image" => "floral.webp",
+            "price" => 89.99
+        ],
+        [
+            "name" => "Chanel Allure Home",
+            "desc" => "Warm and sensual with hints of amber, vanilla, and exotic spices.",
+            "image" => "ALLURE.avif",
+            "price" => 120.00
+        ],
+        [
+            "name" => "Tom Ford Noir De Noir ",
+            "desc" => "Warm, earthy, and grounding scents like sandalwood, cedar, and vetiver.",
+            "image" => "noir tomford.avif",
+            "price" => 180.50
+        ]
+    ];
 
-        foreach ($perfumes as $index => $perfume) {
-            echo '
-            <div class="service' . ($index + 1) . '">
-                <div class="pic' . ($index + 1) . '">
-                    <img src="' . $perfume["image"] . '" style="border-radius: 20%;" alt="' . $perfume["name"] . '">
-                </div>
-                <div class="ser-name' . ($index + 1) . '">
-                    <h3 style="color: #eacaca; font-style: italic;">' . $perfume["name"] . '</h3>
-                    <p style="color: #eacaca; font-style: inherit;">' . $perfume["desc"] . '</p>
-                    <p style="color: #ffcaca; font-weight: bold;">On Sale: ' . perfumeDiscount($perfume["price"]) . ' EUR</p>
-                </div>
-            </div>';
-        }
-        ?>
+    foreach ($perfumes as $index => $perfume) {
+        echo '
+        <div class="service' . ($index + 1) . '">
+            <div class="pic' . ($index + 1) . '">
+                <img src="' . $perfume["image"] . '" style="border-radius: 20%;" alt="' . $perfume["name"] . '">
+            </div>
+            <div class="ser-name' . ($index + 1) . '">
+                <h3 style="color: #eacaca; font-style: italic;">' . $perfume["name"] . '</h3>
+                <p style="color: #eacaca; font-style: inherit;">' . $perfume["desc"] . '</p>
+                <p style="color: #ffcaca; font-weight: bold;">On Sale: ' . perfumeDiscount($perfume["price"]) . ' EUR</p>
+            </div>
+        </div>';
+    }
+    ?>
+</div>
+
     </div>
 
                 <br><br>
@@ -352,7 +399,7 @@
             </tr>
           </table>
         </div>
-        <p class="footer-credit">© 2024 Arom&eacute;. All Rights Reserved.</p>
+        <p class="footer-credit">© <span><?php echo date("Y-m-d"); ?></span> Arom&eacute;. All Rights Reserved.</p>
    
     </div>
 
