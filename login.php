@@ -1,24 +1,3 @@
-<?php
-          $loginMessage="";
-          $messageClass="";
-
-          if(isset($_POST['username'])&&isset($_POST['password'])){
-            $username=$_POST['username'];
-            $password=$_POST['password'];
-
-            if($username==="admin"&&$password==="12345"){
-              $loginMessage = "Welcome Admin!";
-                $messageClass = "success-message";
-              } else {
-                $loginMessage = "Invalid username or password!";
-                $messageClass = "error-message";
-              }
-          }
-
-          if($loginMessage !=""){
-            echo "<p class='$messageClass'>$loginMessage</p>";
-          }
-        ?>
 <!DOCTYPE html>
 <html>
   <head>
