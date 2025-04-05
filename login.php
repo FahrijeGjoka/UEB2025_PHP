@@ -35,7 +35,7 @@
               $loginMessage = "Welcome Admin!";
                 $messageClass = "success-message";
               } else {
-                $loginMessage = "Invalid username or password.";
+                $loginMessage = "Invalid username or password!";
                 $messageClass = "error-message";
               }
           }
