@@ -6,6 +6,14 @@ function format_price($price) {
   return $GLOBALS['currency'] . number_format($price, 2);
 }
 
+
+$slogans = [
+  "Smell like never before!",
+  "Find your signature scent.",
+  "Elegance in every drop.",
+  "Style. Fragrance. You."
+];
+$random_slogan = $slogans[array_rand($slogans)];
 ?>
 
 
@@ -50,6 +58,10 @@ function format_price($price) {
             <h1>Welcome to Online Shop</h1>
             <h2>Shop the latest trends in perfumes.</h2>
 
+            <section class="hero">
+    <h1><?php echo $random_slogan; ?></h1> 
+    <h2>Shop the latest trends in perfumes.</h2>
+
             <button id="menuBtn"  >SCENTES</button>
           <ul id="menu"  class="start" >
           <li><a href="#floralscent">Florall Scent</a></li>
@@ -63,6 +75,7 @@ function format_price($price) {
 
             <div id="floralscent" >
             <h3 class="ntitle" >Floral Scent</h3>
+
            
             <div class="product">
               <img src="womanimg/valentino2.jpg.png" alt="Product Image">
