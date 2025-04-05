@@ -3,6 +3,7 @@
   <head>
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="login.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -10,6 +11,43 @@
         <div class="overlay"></div>
         <div class="content">
           <h1>Login</h1>
+
+          <?php
+           $loginMessage="";
+           $messageClass="";
+           $jsrespone="";
+
+           class User{
+            private $username;
+            private $password;
+
+            public function __construct($username, $password){
+              $this->username=$username;
+              $this->password=$password;
+            }
+
+            public function isValid($inputUsername, $inputPasswordd){
+              return $this->username===$inputUsername && $this->password===$inputPasswordd;
+            }
+           }
+
+           if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $inputUsername = $_POST['username'];
+            $inputPassword = $_POST['password'];
+            $admin = new User("admin", "12345");
+
+            if ($admin->isValid($inputUsername, $inputPassword)) {
+                $loginMessage = "Welcome Admin!";
+                $messageClass = "success-message";
+                $jsResponse = "submitted";
+            } else {
+                $loginMessage = "Invalid username or password!";
+                $messageClass = "error-message";
+                $jsResponse = "not-submitted";
+            }
+        }
+          ?>
+
           <form id="loginForm" method="POST">
             <div class="input-field">
               <input type="text" name="username" id="username" required>
@@ -21,48 +59,26 @@
             </div>
             <button type="submit" class="btn">Login</button>
             <button type="reset" class="btn">Reset</button>
+
+            <?php if (!empty($loginMessage)): ?>
+              <p class="<?php echo $messageClass; ?>"><?php echo $loginMessage; ?></p>
+            <?php endif; ?>
+
+            <p id="js-message" style="color:blue;"></p>
           </form>
-          
-          <?php
-          $loginMessage="";
-          $messageClass="";
-
-          if(isset($_POST['username'])&&isset($_POST['password'])){
-            $username=$_POST['username'];
-            $password=$_POST['password'];
-
-            if($username==="admin"&&$password==="12345"){
-              $loginMessage = "Welcome Admin!";
-                $messageClass = "success-message";
-              } else {
-                $loginMessage = "Invalid username or password!";
-                $messageClass = "error-message";
-              }
-          }
-
-          if($loginMessage !=""){
-            echo "<p class='$messageClass'>$loginMessage</p>";
-          }
-        ?>
-        
         </div>
       </div>
     </div>
 
     <script>
-      $(document).ready(function() {
-        $("#loginForm").submit(function(e) {
-          e.preventDefault();
-          var username = $("#username").val();
-          var password = $("#password").val();
+      $(document).ready(function () {
+        const jsResponse = "<?php echo $jsResponse; ?>";
 
-          if(username === "" || password === "") {
-            $("#error-message").show();
-          } else {
-            $("#error-message").hide();
-            alert("Form Submitted!");
-          }
-        });
+        if (jsResponse === "submitted") {
+          $("#js-message").text("Form Submitted!");
+        } else if (jsResponse === "not-submitted") {
+          $("#js-message").text("Form Not Submitted!");
+        }
       });
     </script>
   </body>
