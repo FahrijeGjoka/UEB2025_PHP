@@ -59,7 +59,7 @@ $random_slogan = $slogans[array_rand($slogans)];
         
 
         <section class="hero">
-        <h1><?php echo $random_slogan; ?></h1>
+        <h1 id="slogan"><?php echo $random_slogan; ?></h1>
             <h1>Welcome to Online Shop</h1>
             <h2>Shop the latest trends in perfumes.</h2>
 
