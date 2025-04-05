@@ -12,11 +12,11 @@
           <h1>Login</h1>
           <form id="loginForm" method="POST">
             <div class="input-field">
-              <input type="text" name="username" required>
+              <input type="text" name="username" id="username" required>
               <label>Username</label>
             </div>
             <div class="input-field">
-              <input type="password" name="password" required>
+              <input type="password" name="password" id="password" required>
               <label>Password</label>
             </div>
             <button type="submit" class="btn">Login</button>
@@ -35,7 +35,7 @@
               $loginMessage = "Welcome Admin!";
                 $messageClass = "success-message";
               } else {
-                $loginMessage = "Invalid username or password.";
+                $loginMessage = "Invalid username or password!";
                 $messageClass = "error-message";
               }
           }
