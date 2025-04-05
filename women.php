@@ -1,10 +1,29 @@
+<?php
+$GLOBALS['site_name'] = "Online Shop";
+$GLOBALS['current_year'] = date('Y');
+$GLOBALS['currency'] = "$";
+function format_price($price) {
+  return $GLOBALS['currency'] . number_format($price, 2);
+}
+
+
+$slogans = [
+  "Smell like never before!",
+  "Find your signature scent.",
+  "Elegance in every drop.",
+  "Style. Fragrance. You."
+];
+$random_slogan = $slogans[array_rand($slogans)];
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
+        <title><?php echo $GLOBALS['site_name']; ?> 
             Women
         </title>
         <link rel="stylesheet" href="women.css">
@@ -14,7 +33,7 @@
     <body>
 
         <header>
-            <div class="logo">Online Shop</div>
+            <div class="logo"><?php echo $GLOBALS['site_name']; ?></div>
             <nav>
               
               <ul>
@@ -39,6 +58,10 @@
             <h1>Welcome to Online Shop</h1>
             <h2>Shop the latest trends in perfumes.</h2>
 
+            <section class="hero">
+    <h1><?php echo $random_slogan; ?></h1> 
+    <h2>Shop the latest trends in perfumes.</h2>
+
             <button id="menuBtn"  >SCENTES</button>
           <ul id="menu"  class="start" >
           <li><a href="#floralscent">Florall Scent</a></li>
@@ -52,12 +75,13 @@
 
             <div id="floralscent" >
             <h3 class="ntitle" >Floral Scent</h3>
+
            
             <div class="product">
               <img src="womanimg/valentino2.jpg.png" alt="Product Image">
               <h3>Valentino</h3>
               <p>Born In Roma Eau de Parfum</p>
-              <span class="price">$35.99</span>
+              <span class="price"><?php echo format_price(35.9889); ?></span>
               <a href="#"  class="btn">Add to Cart</a>
             </div>
         
@@ -65,7 +89,7 @@
               <img src="womanimg/burberry.jpg" alt="Product Image">
               <h3>BURBERYY</h3>
               <p>Her Eau de Parfum</p>
-              <span class="price">$39.99</span>
+              <span class="price"><?php echo format_price(39.989); ?></span>
               <a href="#" class="btn">Add to Cart</a>
             </div>
         
@@ -73,14 +97,14 @@
               <img src="womanimg/ariana.jpg" alt="Product Image">
               <h3>Ariana Grande</h3>
               <p>MOD Blush Eau de Parfum</p>
-              <span class="price">$29.00</span>
+              <span class="price"><?php echo format_price(29.989); ?></span>
               <a href="#"  class="btn">Add to Cart</a>
             </div>
             <div class="product">
                 <img src="womanimg/carolina.jpg" alt="Product Image">
                 <h3>Carolina Herrera</h3>
                 <p>Good Girl Blush Eau de Parfum</p>
-                <span class="price">$19.99</span>
+                <span class="price"><?php echo format_price(19.989); ?></span>
                 <a href="#"   class="btn">Add to Cart</a>
              </div>
         
@@ -88,7 +112,7 @@
                 <img src="womanimg/Yves Saint Laurent.jpg" alt="Product Image">
                 <h3>Yves Saint Laurent</h3>
                 <p>Libre Eau De Parfum</p>
-                <span class="price">$69.99</span>
+                <span class="price"><?php echo format_price(69.989); ?></span>
                 <a href="#" class="btn">Add to Cart</a>
               </div>
         
@@ -96,7 +120,7 @@
                 <img src="womanimg/JIMMY CHOO.jpg" alt="Product Image">
                 <h3>JIMMY CHOO</h3>
                 <p>I want Choo Eau de Parfum</p>
-                <span class="price">$33.99</span>
+                <span class="price"><?php echo format_price(33.989); ?></span>
                 <a href="#"  class="btn">Add to Cart</a>
               </div>
         
@@ -104,7 +128,7 @@
                 <img src="womanimg/Prada.jpg" alt="Product Image">
                 <h3>Prada</h3>
                 <p>Paradoce Eau de Parfum</p>
-                <span class="price">$59.99</span>
+                <span class="price"><?php echo format_price(59.989); ?></span>
                 <a href="#" id="addToCartBtn" class="btn">Add to Cart</a>
               </div>
 
@@ -112,7 +136,7 @@
                 <img src="womanimg/Gucci.jpg" alt="Product Image">
                 <h3>Gucci</h3>
                 <p>Gardenia Eau de Parfum</p>
-                <span class="price">$49.99</span>
+                <span class="price"><?php echo format_price(49.989); ?></span>
                 <a href="#" class="btn">Add to Cart</a>
               </div>
             </div>
@@ -126,7 +150,7 @@
                 <img src="womanimg/blackopium.jpg" alt="Product Image">
                 <h3>Yves Saint Laurent</h3>
                 <p>Black Opium Eau de Parfum</p>
-                <span class="price">$35.99</span>
+                <span class="price"><?php echo format_price(35.989); ?></span>
                 <a href="#"  class="btn">Add to Cart</a>
                 </div>
           
@@ -134,7 +158,7 @@
                 <img src="womanimg/burberry.jpg" alt="Product Image">
                 <h3>BURBERRY</h3>
                 <p>Burberry Goddess Eau de Parfum</p>
-                <span class="price">$39.99</span>
+                <span class="price"><?php echo format_price(39.989); ?></span>
                 <a href="#"  class="btn">Add to Cart</a>
                 </div>
           
@@ -142,14 +166,14 @@
                 <img src="womanimg/Ariana Grande.jpg" alt="Product Image">
                 <h3>Ariana Grande</h3>
                 <p>Cloud Eau de Parfum</p>
-                <span class="price">$24.00</span>
+                <span class="price"><?php echo format_price(24.989); ?></span>
                 <a href="#" class="btn">Add to Cart</a>
                 </div>
                 <div class="product">
                   <img src="womanimg/PHLUR.jpg" alt="Product Image">
                   <h3>PHLUR</h3>
                   <p>Body & Hair Fragrance Mist</p>
-                  <span class="price">$39.99</span>
+                  <span class="price"><?php echo format_price(39.989); ?></span>
                   <a href="#" class="btn">Add to Cart</a>
                </div>
           
@@ -157,7 +181,7 @@
                   <img src="womanimg/Kayali.jpg" alt="Product Image">
                   <h3>Kayali</h3>
                   <p>Vanilla Candy Rock Sugar</p>
-                  <span class="price">$29.99</span>
+                  <span class="price"><?php echo format_price(29.989); ?></span>
                   <a href="#" class="btn">Add to Cart</a>
                 </div>
           
@@ -165,7 +189,7 @@
                   <img src="womanimg/opiumred.jpg" alt="Product Image">
                   <h3>Yves Saint Laurent</h3>
                   <p>Black Opium Eau de Parfum</p>
-                  <span class="price">$63.99</span>
+                  <span class="price"><?php echo format_price(39.989); ?></span>
                   <a href="#" class="btn">Add to Cart</a>
                 </div>
           
@@ -173,7 +197,7 @@
                   <img src="womanimg/mod.jpg" alt="Product Image">
                   <h3>Ariana Grande</h3>
                   <p>MOD Vanilla Eau de Parfum</p>
-                  <span class="price">$52.99</span>
+                  <span class="price"><?php echo format_price(52.989); ?></span>
                   <a href="#" class="btn">Add to Cart</a>
                 </div>
   
@@ -181,7 +205,7 @@
                   <img src="womanimg/download.jpg" alt="Product Image">
                   <h3>Viktor&Rolf</h3>
                   <p>Flowerbomb Eau de Parfum</p>
-                  <span class="price">$49.99</span>
+                  <span class="price"><?php echo format_price(49.989); ?></span>
                   <a href="#"  class="btn">Add to Cart</a>
                 </div>
               </div>
@@ -201,7 +225,7 @@
                   <img src="womanimg/cherry.jpg" alt="Product Image">
                   <h3>Tom Ford</h3>
                   <p>Fucking Fabulous Eau de Parfum Fragrance</p>
-                  <span class="price">$399.99</span>
+                  <span class="price"><?php echo format_price(399.989); ?></span>
                   <a href="#"  class="btn">Add to Cart</a>
                   </div>
             
@@ -209,14 +233,14 @@
                   <img src="womanimg/vanile.jpg" alt="Product Image">
                   <h3>Tom Ford Lost Cherry</h3>
                   <p>Lost Cherry Eau de Parfum Fragrance</p>
-                  <span class="price">$240.00</span>
+                  <span class="price"><?php echo format_price(240.989); ?></span>
                   <a href="#" class="btn">Add to Cart</a>
                   </div>
                   <div class="product">
                     <img src="womanimg/tom.png" alt="Product Image">
                     <h3>Neroli Portofino Perfume</h3>
                     <p>Citruc floral cent</p>
-                    <span class="price">$239.99</span>
+                    <span class="price"><?php echo format_price(239.989); ?></span>
                     <a href="#" class="btn">Add to Cart</a>
                  </div>
               </div>
@@ -224,7 +248,7 @@
             </section>
 
             <footer>
-                <p>&copy; 2024 Online Shop</p>
+                <p>&copy; <?php echo $GLOBALS['current_year'] . ' ' . $GLOBALS['site_name']; ?></p>
               </footer> 
               <script>
 
