@@ -361,8 +361,11 @@
                 <h3><i>Contact Us</i></h3>
                 <p>Email: <a href="mailto:info@arome.com"><mark style="color: #eacaca;">info@arome.com</mark></a></p>
                 <p>Phone: <a href="tel:+38349001001">+383 49 001 001</a></p>
-                <ul>Main address:
-                    <li><p><address>Location: Rruga Adem Jashari, Prishtine, Kosove</address></p></li>
+                    <ul><?php
+                        $main_address = "<span>Main address:</span>";
+                        var_dump($main_address);
+                        ?>
+                        <li><p><address>Location: Rruga Adem Jashari, Prishtine, Kosove</address></p></li>
                         <ul>You can find us in other cities:
                             <li style="list-style-type: circle;">Prizren</li>
                             <li style="list-style-type: circle;">Peje</li>
