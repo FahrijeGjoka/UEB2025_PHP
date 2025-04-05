@@ -37,12 +37,12 @@ $random_slogan = $slogans[array_rand($slogans)];
             <nav>
               
               <ul>
-                <li><a href="Website.html">Homepage</a></li>
+                <li><a href="Website.php">Homepage</a></li>
                 <li><a href="#">Women</a></li>
-                <li><a href="men.html">Men</a></li>
+                <li><a href="men.php">Men</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contactus.html">Contact Us</a></li>
+                <li><a href="aboutus.php">About Us</a></li>
+                <li><a href="contactus.php">Contact Us</a></li>
               </ul>
             </nav>
           
