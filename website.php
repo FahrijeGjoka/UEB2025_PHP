@@ -381,17 +381,23 @@
               </td>
             </tr>
             <tr>
-              
-              <td class="footer-section company-staff">
+            <?php
+            $ekipi = [
+                ["emri" => "Elsa Krasniqi", "pozita" => "CEO"],
+                ["emri" => "Ereza Greicevci", "pozita" => "Marketing Director"],
+                ["emri" => "Fahrije Gjokiqi", "pozita" => "Product Manager"],
+                ["emri" => "Elona Kuqi", "pozita" => "Section1 Manager"],
+                ["emri" => "Era Berisha", "pozita" => "Section2 Manager"]
+            ];
+            ?>
+            <td class="footer-section company-staff">
                 <h3><i>Our Team</i></h3>
                 <ol>
-                  <li>Elsa Krasniqi - CEO</li>
-                  <li>Ereza Greicevci - Marketing Director</li>
-                  <li>Fahrije Gjokiqi - Product Manager</li>
-                  <li>Elona Kuqi - Section1 Manager</li>
-                  <li>Era Berisha - Section2 Manager</li>
+                    <?php foreach ($ekipi as $anetar): ?>
+                    <li><?php echo $anetar["emri"] . " - " . $anetar["pozita"]; ?></li>
+                    <?php endforeach; ?>
                 </ol>
-              </td>
+            </td>
               <td class="footer-section company-photo">
                 <h3><i>Aromé</i></h3>
                 <img src="company.avif" alt="Company Building" />
