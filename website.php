@@ -13,7 +13,7 @@
     <body  onload = "start()">
         <div class="main">
             <div class="header">
-                <p><a href="signup.html">Sign Up</a><a href="#">|</a><a href="login.html">Login</a></p>
+                <p><a href="signup.php">Sign Up</a><a href="#">|</a><a href="login.php">Login</a></p>
 
                 <div class="container">
                     <form action="" method="get" class="search-bar">
@@ -50,11 +50,11 @@
 
             <div class="main-bar">
                 <a class="link 1" href="#">HOMEPAGE</a>
-                <a class="link 4" href="women.html">WOMEN</a>
-                <a class="link 4" href="men.html">MEN</a>
+                <a class="link 4" href="women.php">WOMEN</a>
+                <a class="link 4" href="men.php">MEN</a>
                 <a class="link 5" href="gallery.html">GALLERY</a>
-                <a class="link 7" href="aboutus.html">ABOUT US</a>
-                <a class="link 8" href="contactus.html">CONTACT</a>
+                <a class="link 7" href="aboutus.php">ABOUT US</a>
+                <a class="link 8" href="contactus.php">CONTACT</a>
             </div>
             
             <div class="images">

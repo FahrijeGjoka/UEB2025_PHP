@@ -12,11 +12,11 @@
         <div class="logo">Contact Us</div>
         <nav>
           <ul>
-            <li><a href="website.html">Homepage</a></li>
-            <li><a href="women.html">Women</a></li>
-            <li><a href="men.html">Men</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="website.php">Homepage</a></li>
+            <li><a href="women.php">Women</a></li>
+            <li><a href="men.php">Men</a></li>
+            <li><a href="gallery.php">Gallery</a></li>
+            <li><a href="aboutus.php">About Us</a></li>
             <li><a href="#">Contact</a></li>
           </ul>
         </nav>

@@ -91,9 +91,7 @@ function formatCategory($cat) {
         
           </header>
 
-          <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid orange;">
-    <h3><?php echo $message; ?></h3>
-  </div>
+          
         
 
         <section class="hero">

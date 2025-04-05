@@ -20,7 +20,7 @@
         <h1> Aromé</h1>
         <nav>
             <ul>
-                <li><a href="website.html">Homepage</a></li>
+                <li><a href="website.php">Homepage</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#types">Types of Perfumes</a></li>
                 <li><a href="#contact">Contact Us</a></li>
