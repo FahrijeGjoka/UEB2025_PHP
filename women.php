@@ -14,6 +14,40 @@ $slogans = [
   "Style. Fragrance. You."
 ];
 $random_slogan = $slogans[array_rand($slogans)];
+
+$day = date("l");
+
+switch ($day) {
+    case "Monday":
+        $message = "Happy Monday! Fresh week, fresh scents!";
+        break;
+    case "Tuesday":
+        $message = "Tuesday Treat! Free shipping on all orders!";
+        break;
+    case "Wednesday":
+        $message = "Midweek Special! Buy 2, get 1 free!";
+        break;
+    case "Thursday":
+        $message = "Thursday Thrill! 15% off all men's fragrances!";
+        break;
+    case "Friday":
+        $message = "Friday Deal! Get 10% off!";
+        break;
+    case "Saturday":
+        $message = "Weekend Vibes! 20% off select perfumes!";
+        break;
+    case "Sunday":
+        $message = "Sunday Relax! Enjoy free samples with your order!";
+        break;
+    default:
+        $message = "Welcome to " . Arome;
+        break;
+}
+
+function formatCategory($cat) {
+    return strtoupper($cat);
+}
+?>
 ?>
 
 
@@ -56,10 +90,14 @@ $random_slogan = $slogans[array_rand($slogans)];
             </div>
         
           </header>
+
+          <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid orange;">
+    <h3><?php echo $message; ?></h3>
+  </div>
         
 
         <section class="hero">
-        <h1 id="slogan"><?php echo $random_slogan; ?></h1>
+        <h1><?php echo $random_slogan; ?></h1>
             <h1>Welcome to Online Shop</h1>
             <h2>Shop the latest trends in perfumes.</h2>
 
