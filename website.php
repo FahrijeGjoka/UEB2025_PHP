@@ -405,7 +405,10 @@
             </tr>
           </table>
         </div>
-        <p class="footer-credit">© <span><?php echo date("Y-m-d"); ?></span> Arom&eacute;. All Rights Reserved.</p>
+        <?php
+        $kompania = "Aromé";
+        ?>
+        <p class="footer-credit">© <span><?php echo date("Y-m-d"); ?></span> <?php echo $kompania; ?>. All Rights Reserved.</p>
    
     </div>
 
