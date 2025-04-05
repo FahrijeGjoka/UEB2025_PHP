@@ -1,3 +1,41 @@
+<?php
+$message = "Welcome to our store!";
+define("Arome", "Online Shop");
+
+$day = date("l");
+//Zbritjet 
+switch ($day) {
+    case "Monday":
+        $message = "Happy Monday! Fresh week, fresh scents!";
+        break;
+    case "Tuesday":
+        $message = "Tuesday Treat! Free shipping on all orders!";
+        break;
+    case "Wednesday":
+        $message = "Midweek Special! Buy 2, get 1 free!";
+        break;
+    case "Thursday":
+        $message = "Thursday Thrill! 15% off all men's fragrances!";
+        break;
+    case "Friday":
+        $message = "Friday Deal! Get 10% off!";
+        break;
+    case "Saturday":
+        $message = "Weekend Vibes! 20% off select perfumes!";
+        break;
+    case "Sunday":
+        $message = "Sunday Relax! Enjoy free samples with your order!";
+        break;
+    default:
+        $message = "Welcome to " . Arome;
+        break;
+}
+
+function formatCategory($cat) {
+    return strtoupper($cat);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +64,9 @@
     </div>
 
   </header>
+  <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid orange;">
+    <h3><?php echo $message; ?></h3>
+  </div>
   <section class="hero">
     <h1>Welcome to Online Shop</h1>
     <p>Shop the latest trends in perfumes.</p>
