@@ -17,16 +17,20 @@ $random_slogan = $slogans[array_rand($slogans)];
 ?>
 
 
+
+
 <!DOCTYPE html>
 <html>
     <head>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?php echo $GLOBALS['site_name']; ?> 
+        <title>
             Women
         </title>
         <link rel="stylesheet" href="women.css">
+
+
 
     </head>
 
@@ -42,7 +46,7 @@ $random_slogan = $slogans[array_rand($slogans)];
                 <li><a href="men.html">Men</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contactus.html">Contact Us</a></li>
+                <li><a href="contactus.html">Contact</a></li>
               </ul>
             </nav>
           
@@ -55,12 +59,9 @@ $random_slogan = $slogans[array_rand($slogans)];
         
 
         <section class="hero">
+        <h1><?php echo $random_slogan; ?></h1>
             <h1>Welcome to Online Shop</h1>
             <h2>Shop the latest trends in perfumes.</h2>
-
-            <section class="hero">
-            <h1>Welcome to Online Shop</h1>
-    <h2>Shop the latest trends in perfumes.</h2>
 
             <button id="menuBtn"  >SCENTES</button>
           <ul id="menu"  class="start" >
@@ -286,4 +287,4 @@ $(function(){
         
           
     </body>
-</html>
+</html>         
