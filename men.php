@@ -24,7 +24,7 @@ switch ($day) {
         $message = "Weekend Vibes! 20% off select perfumes!";
         break;
     case "Sunday":
-        $message = "Sunday Relax! Enjoy free samples with your order!";
+        $message = "Sunday Relax! Enjoy our free samples with your order!";
         break;
     default:
         $message = "Welcome to " . Arome;
