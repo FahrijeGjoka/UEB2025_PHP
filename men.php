@@ -41,6 +41,14 @@ function checkFreeShippingForProduct($price) {
       return "Shipping Cost: $3.99"; 
   }
 }
+$slogans = [
+  "Smell like never before!",
+  "Find your signature scent.",
+  "Elegance in every drop.",
+  "Style. Fragrance. You."
+];
+$random_slogan = $slogans[array_rand($slogans)];
+
 ?>
 
 <!DOCTYPE html>
@@ -268,7 +276,7 @@ function checkFreeShippingForProduct($price) {
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="cart-details">
-  <h3>Your Cart</h3>
+<h1 ><?php echo $random_slogan; ?></h1>
   <ul id="cart-list"></ul>
 </div>
 
