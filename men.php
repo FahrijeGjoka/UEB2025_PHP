@@ -134,6 +134,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Burberry Touch</h3>
     <p>A soft and refined fragrance with notes of musk and white pepper.</p>
     <span class="price">$74.99</span>
+    <p><?php echo checkFreeShippingForProduct(74.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   <div class="product">
@@ -141,6 +142,7 @@ function checkFreeShippingForProduct($price) {
     <h3>YSL L'Homme</h3>
     <p>A balanced and charismatic fragrance with ginger and vetiver.</p>
     <span class="price">$94.99</span>
+    <p><?php echo checkFreeShippingForProduct(94.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   <div class="product">
@@ -148,6 +150,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Acqua di Gio</h3>
     <p>A fresh and aquatic fragrance with notes of citrus, jasmine, and rosemary.</p>
     <span class="price">$79.99</span>
+    <p><?php echo checkFreeShippingForProduct(79.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   
@@ -156,6 +159,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Burberry Mr. Burberry</h3>
     <p>A sophisticated and modern scent with grapefruit, cedarwood, and vetiver.</p>
     <span class="price">$94.99</span>
+    <p><?php echo checkFreeShippingForProduct(94.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   
@@ -164,6 +168,7 @@ function checkFreeShippingForProduct($price) {
     <h3>YSL L'Homme Intense</h3>
     <p>A warm and woody fragrance with iris, amber, and cedarwood.</p>
     <span class="price">$109.99</span>
+    <p><?php echo checkFreeShippingForProduct(109.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   <div class="product">
@@ -171,6 +176,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Prada Luna Rossa</h3>
     <p>A fresh and invigorating scent with notes of lavender and mint.</p>
     <span class="price">$84.99</span>
+    <p><?php echo checkFreeShippingForProduct(84.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -178,6 +184,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Bvlgari Man in Black</h3>
     <p>An intense and magnetic fragrance with notes of rum and leather.</p>
     <span class="price">$99.99</span>
+    <p><?php echo checkFreeShippingForProduct(99.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -185,6 +192,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Dolce & Gabbana The One</h3>
     <p>A sophisticated scent with notes of tobacco, amber, and ginger.</p>
     <span class="price">$94.99</span>
+    <p><?php echo checkFreeShippingForProduct(94.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -192,6 +200,7 @@ function checkFreeShippingForProduct($price) {
   <h3>Calvin Klein Eternity</h3>
   <p>A timeless fragrance with a fresh and aromatic blend of notes.</p>
   <span class="price">$79.99</span>
+  <p><?php echo checkFreeShippingForProduct(79.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -199,6 +208,7 @@ function checkFreeShippingForProduct($price) {
   <h3>Joop! Homme</h3>
   <p>A bold and spicy fragrance with cinnamon, orange blossom, and vanilla.</p>
   <span class="price">$69.99</span>
+  <p><?php echo checkFreeShippingForProduct(69.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
