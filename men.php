@@ -34,6 +34,7 @@ switch ($day) {
 function formatCategory($cat) {
     return strtoupper($cat);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -72,8 +73,8 @@ function formatCategory($cat) {
     <p>Shop the latest trends in perfumes.</p>
 </section>
 <section class="products">
-  <h2>Featured Products</h2>
-
+    <h2>Featured Products</h2>
+    
   <div class="product">
     <img src="dior-008555di_01.webp"alt="Dior Sauvage">
     <h3>Dior Sauvage</h3>
