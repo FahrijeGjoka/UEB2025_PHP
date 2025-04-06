@@ -34,7 +34,13 @@ switch ($day) {
 function formatCategory($cat) {
     return strtoupper($cat);
 }
-
+function checkFreeShippingForProduct($price) {
+  if ($price > 100) {
+      return "Free Shipping!";
+  } else {
+      return "Shipping Cost: $3.99"; 
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +86,7 @@ function formatCategory($cat) {
     <h3>Dior Sauvage</h3>
     <p>An intense and fresh fragrance with notes of bergamot and pepper.</p>
     <span class="price">$89.99</span>
+    <p><?php echo checkFreeShippingForProduct(89.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   <div class="product">
