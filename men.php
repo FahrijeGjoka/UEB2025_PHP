@@ -94,6 +94,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Bleu de Chanel</h3>
     <p>An elegant fragrance with citrus and woody notes.</p>
     <span class="price">$99.99</span>
+    <p><?php echo checkFreeShippingForProduct(99.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   <div class="product">
@@ -101,6 +102,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Tom Ford Noir</h3>
     <p>A mysterious and refined scent with notes of vanilla and amber.</p>
     <span class="price">$119.99</span>
+    <p><?php echo checkFreeShippingForProduct(119.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   <div class="product">
@@ -108,6 +110,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Armani Code</h3>
     <p>A magnetic fragrance with lemon, olive blossom, and tonka bean.</p>
     <span class="price">$89.99</span>
+    <p><?php echo checkFreeShippingForProduct(89.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   <div class="product">
@@ -115,6 +118,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Gucci Guilty</h3>
     <p>A provocative and contemporary scent with citrus and lavender.</p>
     <span class="price">$79.99</span>
+    <p><?php echo checkFreeShippingForProduct(79.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   <div class="product">
@@ -122,6 +126,7 @@ function checkFreeShippingForProduct($price) {
     <h3>Versace Eros</h3>
     <p>A passionate fragrance with mint, green apple, and vanilla.</p>
     <span class="price">$85.99</span>
+    <p><?php echo checkFreeShippingForProduct(85.99); ?></p>
     <a href="#" class="btn">Add to Cart</a>
   </div>
   <div class="product">
