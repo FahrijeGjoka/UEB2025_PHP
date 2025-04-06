@@ -275,8 +275,10 @@ $random_slogan = $slogans[array_rand($slogans)];
   <p><?php echo checkFreeShippingForProduct(139.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
-<div class="cart-details">
-<h1 ><?php echo $random_slogan; ?></h1>
+<div class="cart-details" style="width: 100%; display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+  <h1 style="color: #ffc0cb; font-size: 1.8em; text-align: center;">
+    <?php echo $random_slogan; ?>
+  </h1>
   <ul id="cart-list"></ul>
 </div>
 
