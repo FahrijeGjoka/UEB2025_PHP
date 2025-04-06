@@ -216,6 +216,7 @@ function checkFreeShippingForProduct($price) {
   <h3>Creed Aventus</h3>
   <p>A luxurious fragrance with pineapple, birch, and musk.</p>
   <span class="price">$305.99</span>
+  <p><?php echo checkFreeShippingForProduct(305.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -223,6 +224,7 @@ function checkFreeShippingForProduct($price) {
   <h3>Azzaro Wanted</h3>
   <p>A bold and fresh scent with lemon, ginger, and tonka bean.</p>
   <span class="price">$79.99</span>
+  <p><?php echo checkFreeShippingForProduct(79.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -230,6 +232,7 @@ function checkFreeShippingForProduct($price) {
   <h3>Montblanc Legend</h3>
   <p>An elegant and masculine scent with lavender, pineapple, and oakmoss.</p>
   <span class="price">$84.99</span>
+  <p><?php echo checkFreeShippingForProduct(84.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -237,6 +240,7 @@ function checkFreeShippingForProduct($price) {
   <h3>Dior Homme</h3>
   <p>A modern and sophisticated fragrance with iris and leather notes.</p>
   <span class="price">$89.99</span>
+  <p><?php echo checkFreeShippingForProduct(89.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -244,6 +248,7 @@ function checkFreeShippingForProduct($price) {
   <h3>Armani Stronger With You</h3>
   <p>A warm and spicy fragrance with notes of chestnut, vanilla, and amberwood.</p>
   <span class="price">$114.99</span>
+  <p><?php echo checkFreeShippingForProduct(114.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -251,6 +256,7 @@ function checkFreeShippingForProduct($price) {
   <h3>Chanel Allure Homme</h3>
   <p>A refined fragrance with notes of mandarin, cedarwood, and tonka bean.</p>
   <span class="price">$119.99</span>
+  <p><?php echo checkFreeShippingForProduct(119.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="product">
@@ -258,6 +264,7 @@ function checkFreeShippingForProduct($price) {
   <h3>Tom Ford Black Orchid</h3>
   <p>A luxurious fragrance with notes of black orchid, patchouli, and vanilla.</p>
   <span class="price">$139.99</span>
+  <p><?php echo checkFreeShippingForProduct(139.99); ?></p>
   <a href="#" class="btn">Add to Cart</a>
 </div>
 <div class="cart-details">
