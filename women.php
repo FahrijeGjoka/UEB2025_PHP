@@ -5,6 +5,13 @@ $GLOBALS['currency'] = "$";
 function format_price($price) {
   return $GLOBALS['currency'] . number_format($price, 2);
 }
+function checkFreeShippingForProduct($price) {
+  if ($price >50 ) {
+      return "Free Shipping!";
+  } else {
+      return "Shipping Cost: $3.99"; 
+  }
+}
 
 
 $slogans = [
@@ -119,6 +126,7 @@ switch ($day) {
               <h3>Valentino</h3>
               <p>Born In Roma Eau de Parfum</p>
               <span class="price"><?php echo format_price(35.9889); ?></span>
+              <p><?php echo checkFreeShippingForProduct(35.98); ?></p>
               <a href="#"  class="btn">Add to Cart</a>
             </div>
         
@@ -127,6 +135,7 @@ switch ($day) {
               <h3>BURBERYY</h3>
               <p>Her Eau de Parfum</p>
               <span class="price"><?php echo format_price(39.989); ?></span>
+              <p><?php echo checkFreeShippingForProduct(39.98); ?></p>
               <a href="#" class="btn">Add to Cart</a>
             </div>
         
@@ -135,6 +144,7 @@ switch ($day) {
               <h3>Ariana Grande</h3>
               <p>MOD Blush Eau de Parfum</p>
               <span class="price"><?php echo format_price(29.989); ?></span>
+              <p><?php echo checkFreeShippingForProduct(29.98); ?></p>
               <a href="#"  class="btn">Add to Cart</a>
             </div>
             <div class="product">
@@ -142,6 +152,7 @@ switch ($day) {
                 <h3>Carolina Herrera</h3>
                 <p>Good Girl Blush Eau de Parfum</p>
                 <span class="price"><?php echo format_price(19.989); ?></span>
+                <p><?php echo checkFreeShippingForProduct(19.98); ?></p>
                 <a href="#"   class="btn">Add to Cart</a>
              </div>
         
@@ -150,6 +161,7 @@ switch ($day) {
                 <h3>Yves Saint Laurent</h3>
                 <p>Libre Eau De Parfum</p>
                 <span class="price"><?php echo format_price(69.989); ?></span>
+                <p><?php echo checkFreeShippingForProduct(69.98); ?></p>
                 <a href="#" class="btn">Add to Cart</a>
               </div>
         
@@ -158,6 +170,7 @@ switch ($day) {
                 <h3>JIMMY CHOO</h3>
                 <p>I want Choo Eau de Parfum</p>
                 <span class="price"><?php echo format_price(33.989); ?></span>
+                <p><?php echo checkFreeShippingForProduct(33.98); ?></p>
                 <a href="#"  class="btn">Add to Cart</a>
               </div>
         
@@ -166,6 +179,7 @@ switch ($day) {
                 <h3>Prada</h3>
                 <p>Paradoce Eau de Parfum</p>
                 <span class="price"><?php echo format_price(59.989); ?></span>
+                <p><?php echo checkFreeShippingForProduct(59.98); ?></p>
                 <a href="#" id="addToCartBtn" class="btn">Add to Cart</a>
               </div>
 
@@ -174,6 +188,7 @@ switch ($day) {
                 <h3>Gucci</h3>
                 <p>Gardenia Eau de Parfum</p>
                 <span class="price"><?php echo format_price(49.989); ?></span>
+                <p><?php echo checkFreeShippingForProduct(49.98); ?></p>
                 <a href="#" class="btn">Add to Cart</a>
               </div>
             </div>
@@ -188,6 +203,7 @@ switch ($day) {
                 <h3>Yves Saint Laurent</h3>
                 <p>Black Opium Eau de Parfum</p>
                 <span class="price"><?php echo format_price(35.989); ?></span>
+                <p><?php echo checkFreeShippingForProduct(35.98); ?></p>
                 <a href="#"  class="btn">Add to Cart</a>
                 </div>
           
@@ -196,6 +212,7 @@ switch ($day) {
                 <h3>BURBERRY</h3>
                 <p>Burberry Goddess Eau de Parfum</p>
                 <span class="price"><?php echo format_price(39.989); ?></span>
+                <p><?php echo checkFreeShippingForProduct(39.98); ?></p>
                 <a href="#"  class="btn">Add to Cart</a>
                 </div>
           
@@ -204,6 +221,7 @@ switch ($day) {
                 <h3>Ariana Grande</h3>
                 <p>Cloud Eau de Parfum</p>
                 <span class="price"><?php echo format_price(24.989); ?></span>
+                <p><?php echo checkFreeShippingForProduct(24.98); ?></p>
                 <a href="#" class="btn">Add to Cart</a>
                 </div>
                 <div class="product">
@@ -211,6 +229,7 @@ switch ($day) {
                   <h3>PHLUR</h3>
                   <p>Body & Hair Fragrance Mist</p>
                   <span class="price"><?php echo format_price(39.989); ?></span>
+                  <p><?php echo checkFreeShippingForProduct(39.98); ?></p>
                   <a href="#" class="btn">Add to Cart</a>
                </div>
           
@@ -219,6 +238,7 @@ switch ($day) {
                   <h3>Kayali</h3>
                   <p>Vanilla Candy Rock Sugar</p>
                   <span class="price"><?php echo format_price(29.989); ?></span>
+                  <p><?php echo checkFreeShippingForProduct(29.98); ?></p>
                   <a href="#" class="btn">Add to Cart</a>
                 </div>
           
@@ -227,6 +247,7 @@ switch ($day) {
                   <h3>Yves Saint Laurent</h3>
                   <p>Black Opium Eau de Parfum</p>
                   <span class="price"><?php echo format_price(39.989); ?></span>
+                  <p><?php echo checkFreeShippingForProduct(39.98); ?></p>
                   <a href="#" class="btn">Add to Cart</a>
                 </div>
           
@@ -235,6 +256,7 @@ switch ($day) {
                   <h3>Ariana Grande</h3>
                   <p>MOD Vanilla Eau de Parfum</p>
                   <span class="price"><?php echo format_price(52.989); ?></span>
+                  <p><?php echo checkFreeShippingForProduct(52.98); ?></p>
                   <a href="#" class="btn">Add to Cart</a>
                 </div>
   
@@ -243,6 +265,7 @@ switch ($day) {
                   <h3>Viktor&Rolf</h3>
                   <p>Flowerbomb Eau de Parfum</p>
                   <span class="price"><?php echo format_price(49.989); ?></span>
+                  <p><?php echo checkFreeShippingForProduct(35.98); ?></p>
                   <a href="#"  class="btn">Add to Cart</a>
                 </div>
               </div>
@@ -255,6 +278,7 @@ switch ($day) {
                   <h3>Tom Ford Bitter Peach</h3>
                   <p>Bitter Peach Eau De Parfum Fragrance</p>
                   <span class="price">$350.99</span>
+                  <p><?php echo checkFreeShippingForProduct(350.98); ?></p>
                   <a href="#"  class="btn">Add to Cart</a>
                   </div>
             
@@ -263,6 +287,7 @@ switch ($day) {
                   <h3>Tom Ford</h3>
                   <p>Fucking Fabulous Eau de Parfum Fragrance</p>
                   <span class="price"><?php echo format_price(399.989); ?></span>
+                  <p><?php echo checkFreeShippingForProduct(399.98); ?></p>
                   <a href="#"  class="btn">Add to Cart</a>
                   </div>
             
@@ -271,6 +296,7 @@ switch ($day) {
                   <h3>Tom Ford Lost Cherry</h3>
                   <p>Lost Cherry Eau de Parfum Fragrance</p>
                   <span class="price"><?php echo format_price(240.989); ?></span>
+                  <p><?php echo checkFreeShippingForProduct(240.98); ?></p>
                   <a href="#" class="btn">Add to Cart</a>
                   </div>
                   <div class="product">
@@ -278,6 +304,7 @@ switch ($day) {
                     <h3>Neroli Portofino Perfume</h3>
                     <p>Citruc floral cent</p>
                     <span class="price"><?php echo format_price(239.989); ?></span>
+                    <p><?php echo checkFreeShippingForProduct(239.98); ?></p>
                     <a href="#" class="btn">Add to Cart</a>
                  </div>
                  <h1 ><?php echo $random_slogan; ?></h1>
