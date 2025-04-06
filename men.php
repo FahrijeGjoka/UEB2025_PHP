@@ -279,9 +279,9 @@ $random_slogan = $slogans[array_rand($slogans)];
   <h1 style="color: #ffc0cb; font-size: 1.8em; text-align: center;">
     <?php echo $random_slogan; ?>
   </h1>
+</div>
   <ul id="cart-list"></ul>
 </div>
-
 </section>
 <footer>
   <p>&copy; 2024 Online Shop</p>
