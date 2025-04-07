@@ -49,6 +49,64 @@ $slogans = [
 ];
 $random_slogan = $slogans[array_rand($slogans)];
 
+//OOP
+class Product {
+  public $name;
+  public $price;
+
+  public function __construct($name, $price) {
+      $this->name = $name;
+      $this->price = $price;
+  }
+
+  public function getLabel() {
+      return "{$this->name} - \${$this->price}";
+  }
+}
+
+class Perfume extends Product {
+  public $brand;
+
+  public function __construct($name, $price, $brand) {
+      parent::__construct($name, $price);
+      $this->brand = $brand;
+  }
+
+  public function getFullDescription() {
+      return "{$this->brand} {$this->name} costs \${$this->price}";
+  }
+}
+
+$parfumeList = [
+new Perfume("Dior Sauvage", 89.99, "Dior"),
+new Perfume("Bleu de Chanel", 99.99, "Chanel"),
+new Perfume("Tom Ford Noir", 119.99, "Tom Ford"),
+new Perfume("Armani Code", 89.99, "Armani"),
+new Perfume("Gucci Guilty", 79.99, "Gucci"),
+new Perfume("Versace Eros", 85.99, "Versace"),
+new Perfume("Burberry Touch", 74.99, "Burberry"),
+new Perfume("YSL L'Homme", 94.99, "YSL"),
+new Perfume("Acqua Di Gio", 79.99, "Giorgio Armani"),
+new Perfume("Mr. Burberry", 94.99, "Burberry"),
+new Perfume("YSL L'Homme Intense", 109.99, "YSL"),
+new Perfume("Prada Luna Rossa", 84.99, "Prada"),
+new Perfume("Bvlgari Man in Black", 99.99, "Bvlgari"),
+new Perfume("Dolce & Gabbana The One", 94.99, "Dolce & Gabbana"),
+new Perfume("Calvin Klein Eternity", 79.99, "Calvin Klein"),
+new Perfume("Joop! Homme", 69.99, "Joop!"),
+new Perfume("Creed Aventus", 305.99, "Creed"),
+new Perfume("Azzaro Wanted", 79.99, "Azzaro"),
+new Perfume("Montblanc Legend", 84.99, "Montblanc"),
+new Perfume("Dior Homme", 89.99, "Dior"),
+new Perfume("Armani Stronger With You", 114.99, "Armani"),
+new Perfume("Chanel Allure Homme", 119.99, "Chanel"),
+new Perfume("Tom Ford Black Orchid", 139.99, "Tom Ford")
+];
+
+$dayIndex = date("w"); // 0-6 (e Diel - e Shtune)
+$perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
+
+
 ?>
 
 <!DOCTYPE html>
