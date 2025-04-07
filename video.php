@@ -1,10 +1,64 @@
+<?php
+
+class PerfumeMedia {
+    protected $title;
+    protected $filePath;
+
+    public function __construct($title, $filePath) {
+        $this->title = $title;
+        $this->filePath = $filePath;
+    }
+
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+
+    public function getFilePath() {
+        return $this->filePath;
+    }
+
+    public function setFilePath($filePath) {
+        $this->filePath = $filePath;
+    }
+
+    public function displayMedia() {
+        return "<video controls><source src='" . $this->filePath . "' type='video/mp4'>Your browser does not support the video tag.</video>";
+    }
+}
+class WomensPerfume extends PerfumeMedia {
+    public function displayMedia() {
+        return "<video controls poster='women's thumbnail.png'><source src='" . $this->filePath . "' type='video/mp4'>Your browser does not support the video tag.</video>";
+    }
+}
+class MensPerfume extends PerfumeMedia {
+    public function displayMedia() {
+        return "<video controls poster='men's thumbnail.png'><source src='" . $this->filePath . "' type='video/mp4'>Your browser does not support the video tag.</video>";
+    }
+}
+class AudioMedia extends PerfumeMedia {
+    public function displayMedia() {
+        return "<audio controls><source src='" . $this->filePath . "' type='audio/mpeg'>Your browser does not support the audio tag.</audio>";
+    }
+}
+
+$womenPerfume = new WomensPerfume("Women's Perfume", "women perfumes.mp4");
+$menPerfume = new MensPerfume("Men's Perfume", "men perfumes.mp4");
+$arome = new AudioMedia("Arom&eacute;", "arome.mp3");
+$blackFriday = new AudioMedia("Black Friday", "discount.mp3");
+
+?>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Video</title>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>Video</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body{
             font-family: Arial, Helvetica, sans-serif;
@@ -30,7 +84,7 @@
             margin: 20px;
         }
         main{
-            padding: 2 rem;
+            padding: 2rem;
         }
         table{
             width: 70%;
@@ -42,10 +96,9 @@
             margin-left: 200px;
             margin-top: 100px;
             margin-bottom: 100px;
-            background-color:  #eacaca;
+            background-color: #eacaca;
             box-shadow: 0 4px 6px #2c3e50;
         }
-
         td,th{
             border:1px solid #2c3e50;
             padding: 1rem;
@@ -61,70 +114,41 @@
             max-height: 500px;
         }
     </style>
-    
-    </head>
-
-    <body>
-        <header>
-            <h1>Arom&eacute;'s Perfume Media collection</h1>
-        </header>
-
-        <main>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Media Type</th>
-                        <th>Content</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Women's Perfume</td>
-                        <td>
-                            <video controls poster="women's thumbnail.png">
-                            <source src="women perfumes.mp4" type="video/mp4">
-                            Your browser do not support the video tag
-                        </video>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Men's Perfume</td>
-                        <td>
-                            <video controls poster="men's thumbnail.png">
-                                <source src="men perfumes.mp4" type="video/mp4">
-                                Zour browser do not support the video tag
-                            </video>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Arom&eacute;</td>
-                    <td>
-                        <audio controls>
-                            <source src="arome.mp3" type="audio/mpeg">
-                            Your browser do not support the audio tag
-                        </audio>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>Black Friday</td>
-                        <td>
-                        <audio controls>
-                        <source src="discount.mp3" type="audio/mpeg">
-                        Your browser do not support the audio tag
-                        </audio>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot style="background-color:#2c3e50;">
-                    <td colspan="2"></td>
-                </tfoot>
-            </table>
-        </main>
-
-        <footer>
-            <p>&copy; 2024 Arom&eacute;'s Perfume Media. All Right Reserved.</p>
-        </footer>
-
-    </body>
-
+</head>
+<body>
+    <header>
+        <h1>Arom&eacute;'s Perfume Media Collection</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Media Type</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?php echo $womenPerfume->getTitle(); ?></td>
+                    <td><?php echo $womenPerfume->displayMedia(); ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $menPerfume->getTitle(); ?></td>
+                    <td><?php echo $menPerfume->displayMedia(); ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $arome->getTitle(); ?></td>
+                    <td><?php echo $arome->displayMedia(); ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $blackFriday->getTitle(); ?></td>
+                    <td><?php echo $blackFriday->displayMedia(); ?></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p>&copy; 2025 Arom&eacute;'s Perfume Media. All Right Reserved.</p>
+    </footer>
+</body>
 </html>
