@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="read-more">
-                    <p style="font-size: 20px; font-weight: bold;"><a style="color: #eacaca;" href="video.html">SEE</a> <a style="color: #eacaca;" href="video.html">VIDEOS</a> <a style="color: #eacaca;" href="video.html">... </a></p>
+                    <p style="font-size: 20px; font-weight: bold;"><a style="color: #eacaca;" href="video.php">SEE</a> <a style="color: #eacaca;" href="video.html">VIDEOS</a> <a style="color: #eacaca;" href="video.html">... </a></p>
                 </div>
             </div>
 
