@@ -12,7 +12,33 @@ function checkFreeShippingForProduct($price) {
       return "Shipping Cost: $3.99"; 
   }
 }
+function sortProductsAscending($products) {
+  $prices = array_column($products, 'price');
+  sort($prices);
+  $sortedProducts = [];
+  foreach ($prices as $price) {
+    foreach ($products as $product) {
+      if ($product['price'] == $price) {
+        $sortedProducts[] = $product;
+        break; // 
+      }
+    }
+  }
 
+  return $sortedProducts;
+}
+
+$floral = [
+  ["name" => "Valentino", "desc" => "Born In Roma Eau de Parfum", "price" => 35.98, "img" => "womanimg/valentino2.jpg.png"],
+  ["name" => "BURBERYY", "desc" => "Her Eau de Parfum", "price" => 39.98, "img" => "womanimg/burberry.jpg"],
+  ["name" => "Ariana Grande", "desc" => "MOD Blush Eau de Parfum", "price" => 29.98, "img" => "womanimg/ariana.jpg"],
+  ["name" => "Carolina Herrera", "desc" => "Good Girl Blush Eau de Parfum", "price" => 19.98, "img" => "womanimg/carolina.jpg"],
+  ["name" => "Yves Saint Laurent", "desc" => "Libre Eau De Parfum", "price" => 69.98, "img" => "womanimg/Yves Saint Laurent.jpg"],
+  ["name" => "JIMMY CHOO", "desc" => "I want Choo Eau de Parfum", "price" => 33.98, "img" => "womanimg/JIMMY CHOO.jpg"],
+  ["name" => "Prada", "desc" => "Paradoce Eau de Parfum", "price" => 59.98, "img" => "womanimg/Prada.jpg"],
+  ["name" => "Gucci", "desc" => "Gardenia Eau de Parfum", "price" => 49.98, "img" => "womanimg/Gucci.jpg"]
+];
+$floral = sortProductsAscending($floral);
 
 $slogans = [
   "Smell like never before!",
@@ -119,78 +145,18 @@ switch ($day) {
 
             <div id="floralscent" >
             <h3 class="ntitle" >Floral Scent</h3>
-
+            <?php foreach ($floral as $product): ?>
+      <div class="product">
+        <img src="<?php echo $product['img']; ?>" alt="Product Image">
+        <h3><?php echo $product['name']; ?></h3>
+        <p><?php echo $product['desc']; ?></p>
+        <span class="price"><?php echo format_price($product['price']); ?></span>
+        <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+    <?php endforeach; ?>
            
-            <div class="product">
-              <img src="womanimg/valentino2.jpg.png" alt="Product Image">
-              <h3>Valentino</h3>
-              <p>Born In Roma Eau de Parfum</p>
-              <span class="price"><?php echo format_price(35.9889); ?></span>
-              <p><?php echo checkFreeShippingForProduct(35.98); ?></p>
-              <a href="#"  class="btn">Add to Cart</a>
-            </div>
-        
-            <div class="product">
-              <img src="womanimg/burberry.jpg" alt="Product Image">
-              <h3>BURBERYY</h3>
-              <p>Her Eau de Parfum</p>
-              <span class="price"><?php echo format_price(39.989); ?></span>
-              <p><?php echo checkFreeShippingForProduct(39.98); ?></p>
-              <a href="#" class="btn">Add to Cart</a>
-            </div>
-        
-            <div class="product">
-              <img src="womanimg/ariana.jpg" alt="Product Image">
-              <h3>Ariana Grande</h3>
-              <p>MOD Blush Eau de Parfum</p>
-              <span class="price"><?php echo format_price(29.989); ?></span>
-              <p><?php echo checkFreeShippingForProduct(29.98); ?></p>
-              <a href="#"  class="btn">Add to Cart</a>
-            </div>
-            <div class="product">
-                <img src="womanimg/carolina.jpg" alt="Product Image">
-                <h3>Carolina Herrera</h3>
-                <p>Good Girl Blush Eau de Parfum</p>
-                <span class="price"><?php echo format_price(19.989); ?></span>
-                <p><?php echo checkFreeShippingForProduct(19.98); ?></p>
-                <a href="#"   class="btn">Add to Cart</a>
-             </div>
-        
-            <div class="product">
-                <img src="womanimg/Yves Saint Laurent.jpg" alt="Product Image">
-                <h3>Yves Saint Laurent</h3>
-                <p>Libre Eau De Parfum</p>
-                <span class="price"><?php echo format_price(69.989); ?></span>
-                <p><?php echo checkFreeShippingForProduct(69.98); ?></p>
-                <a href="#" class="btn">Add to Cart</a>
-              </div>
-        
-              <div class="product">
-                <img src="womanimg/JIMMY CHOO.jpg" alt="Product Image">
-                <h3>JIMMY CHOO</h3>
-                <p>I want Choo Eau de Parfum</p>
-                <span class="price"><?php echo format_price(33.989); ?></span>
-                <p><?php echo checkFreeShippingForProduct(33.98); ?></p>
-                <a href="#"  class="btn">Add to Cart</a>
-              </div>
-        
-              <div class="product">
-                <img src="womanimg/Prada.jpg" alt="Product Image">
-                <h3>Prada</h3>
-                <p>Paradoce Eau de Parfum</p>
-                <span class="price"><?php echo format_price(59.989); ?></span>
-                <p><?php echo checkFreeShippingForProduct(59.98); ?></p>
-                <a href="#" id="addToCartBtn" class="btn">Add to Cart</a>
-              </div>
-
-              <div class="product">
-                <img src="womanimg/Gucci.jpg" alt="Product Image">
-                <h3>Gucci</h3>
-                <p>Gardenia Eau de Parfum</p>
-                <span class="price"><?php echo format_price(49.989); ?></span>
-                <p><?php echo checkFreeShippingForProduct(49.98); ?></p>
-                <a href="#" class="btn">Add to Cart</a>
-              </div>
+           
             </div>
 
       
