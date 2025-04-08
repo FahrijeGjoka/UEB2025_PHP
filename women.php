@@ -108,7 +108,7 @@ switch ($day) {
 
             <button id="menuBtn"  >SCENTES</button>
           <ul id="menu"  class="start" >
-          <li><a href="#floralscent">Florall Scent</a></li>
+          <li><a href="#floralscent">Floral Scent</a></li>
           <li ><a href="#warmandspicy">Warm and Spicy</a></li>
           <li ><a href="#fruitscent">Fruit Scent</a></li>
         </ul>
