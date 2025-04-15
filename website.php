@@ -134,25 +134,23 @@
     </div>
 
     <div class="more">
-        <a href="aboutus.html">Read More About Us</a>
+        <a href="aboutus.php">Read More About Us</a>
     </div>
 </div>
 
 
-                <div class="class2">
+<div class="class2">
     <div class="title2" style="font-style: italic;color: #eacaca;">
         <h1>Some Of Our Fragrances</h1>
     </div>
 
     <div class="services">
-    <div class="services">
     <?php
     function perfumeDiscount($price) {
         $discount = 0.1; 
         $newPrice = $price - ($price * $discount);
-        
-        
-        $regex = '/^\d+(\.\d{1,2})?$/'; 
+                
+        $regex = '/^[0-9]+(\.[0-9]{1,2})?$/';
         
         if (preg_match($regex, $newPrice)) {
             return number_format($newPrice, 2); 
