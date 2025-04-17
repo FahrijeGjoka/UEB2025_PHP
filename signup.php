@@ -6,6 +6,8 @@ define("MIN_PASS_LEN", 8);
 
 
 $name = $dob = $email = $password = $confirmPassword = $phone = '';
+
+
 $errors = [];
 
 
