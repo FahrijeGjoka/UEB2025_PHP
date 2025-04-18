@@ -28,6 +28,11 @@ class PerfumeMedia {
     public function displayMedia() {
         return "<video controls><source src='" . $this->filePath . "' type='video/mp4'>Your browser does not support the video tag.</video>";
     }
+
+    public function __destruct() {
+        echo "<p>Object for '{$this->title}' is being destroyed.</p>";
+    }
+    
 }
 class WomensPerfume extends PerfumeMedia {
     public function displayMedia() {

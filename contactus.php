@@ -1,3 +1,15 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST['email']);
+
+    if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/", $email)) {
+        echo "Invalid email format.<br>";
+        exit;
+    }else{
+      echo "Thank you! Your email is valid!<br>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -28,7 +40,7 @@
         </section>
 
         <main>
-          <form id="contactForm">
+          <form id="contactForm" action="contactus.php" method="POST">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
         
@@ -38,17 +50,7 @@
             <label for="message">Message:</label>
             <textarea id="message" name="message" required></textarea>
 
-            <input type="submit" value="Send">
-          </form>
-
-          <div class="ul">
-            <ul>For more informations, visit our site in:<br>
-              <li class="li"><a href="https://facebook.com"><i class="fab fa-facebook"></i> Facebook</a></li>
-              <li class="li"><a href="https://instagram.com"><i class="fab fa-instagram"></i> Instagram</a></li>
-              <li class="li"><a href="https://tiktok.com"><i class="fab fa-tiktok"></i> TikTok</a></li>
-            </ul>
-          </div>
-
+            
             <div class="chkbx">
               <div class="question">
                   Are you interested in women or men perfumes?<br><br>
@@ -79,6 +81,17 @@
                 </label>
               </div>
           </div> 
+
+            <input type="submit" value="Send">
+          </form>
+
+          <div class="ul">
+            <ul>For more informations, visit our site in:<br>
+              <li class="li"><a href="https://facebook.com"><i class="fab fa-facebook"></i> Facebook</a></li>
+              <li class="li"><a href="https://instagram.com"><i class="fab fa-instagram"></i> Instagram</a></li>
+              <li class="li"><a href="https://tiktok.com"><i class="fab fa-tiktok"></i> TikTok</a></li>
+            </ul>
+          </div>
   
         </main>
         <footer>
