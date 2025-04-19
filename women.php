@@ -96,12 +96,12 @@ $floral = sortProductsAscending($floral);
 
 
 $warmAndSpicy = [
-  ["name" => "Black Opium", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "womanimg/blackopium.jpg"],
+  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "womanimg/blackopium.jpg"],
   ["name" => "BURBERRY", "desc" => "Burberry Goddess Eau de Parfum", "price" => 39.94, "img" => "womanimg/burberry.jpg"],
   ["name" => "Ariana Grande", "desc" => "Cloud Eau de Parfum", "price" => 24.98, "img" => "womanimg/Ariana Grande.jpg"],
   ["name" => "PHLUR", "desc" => "Body & Hair Fragrance Mist", "price" => 39.92, "img" => "womanimg/PHLUR.jpg"],
   ["name" => "Kayali", "desc" => "Vanilla Candy Rock Sugar", "price" => 29.98, "img" => "womanimg/Kayali.jpg"],
-  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 39.90, "img" => "womanimg/opiumred.jpg"],
+  ["name" => "Opium Red", "desc" => "Black Opium Eau de Parfum", "price" => 39.90, "img" => "womanimg/opiumred.jpg"],
   ["name" => "Ariana Grande", "desc" => "MOD Vanilla Eau de Parfum", "price" => 52.90, "img" => "womanimg/mod.jpg"],
   ["name" => "Viktor&Rolf", "desc" => "Flowerbomb Eau de Parfum", "price" => 49.98, "img" => "womanimg/download.jpg"]
 ];
