@@ -1,32 +1,29 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
-
     if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/", $email)) {
         echo '<div class="error-message">Invalid email format.</div>';
-        exit;
-    }else{
-      echo '<div class="success-message">Thank you! Your email is valid!</div>';
+    } else {
+        echo '<div class="success-message">Thank you! Your email is valid!</div>';
     }
 }
 
 if (isset($_POST['products'])) {
   $totalProducts = intval($_POST['products']);
-
   if ($totalProducts > 0) {
       if ($totalProducts % 2 == 0) {
         echo '<div class="product-message">';
-          $each = $totalProducts / 2;
-          echo "Great! We assume you bought $each perfumes for women and $each for men</b>.<br>";
+        $each = $totalProducts / 2;
+        echo "Great! We assume you bought $each perfumes for women and $each for men.</div>";
       } else {
           $women = floor($totalProducts / 2);
           $men = $totalProducts - $women;
           echo "We'll divide your order as follows: <b>$women for women</b> and <b>$men for men</b>.<br>";
       }
-      echo '</div>';
   }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
