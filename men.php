@@ -132,9 +132,9 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
         <li><a href="website.php">Homepage</a></li>
         <li><a href="women.php">Women</a></li>
         <li><a href="#">Men</a></li>
-        <li><a href="contact.php">Gallery</a></li>
+        <li><a href="contactus.php">Gallery</a></li>
         <li><a href="aboutus.php">About Us</a></li>
-        <li><a href="contact.php">Contact</a></li>
+        <li><a href="contactus.php">Contact</a></li>
       </ul>
     </nav>
 
