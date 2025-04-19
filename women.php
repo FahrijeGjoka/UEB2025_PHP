@@ -111,7 +111,7 @@ $fruitScent = [
   ["name" => "Tom Ford Bitter Peach", "desc" => "Bitter Peach Eau De Parfum Fragrance", "price" => 350.98, "img" => "womanimg/tomfordpeach.jpg"],
   ["name" => "Tom Ford", "desc" => "Fucking Fabulous Eau de Parfum Fragrance", "price" => 399.98, "img" => "womanimg/cherry.jpg"],
   ["name" => "Tom Ford Lost Cherry", "desc" => "Lost Cherry Eau de Parfum Fragrance", "price" => 240.98, "img" => "womanimg/vanile.jpg"],
-  ["name" => "Neroli Portofino Perfume", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]
+  ["name" => "Neroli Portofino ", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]
 ];
 $fruitScent=sortProductsAscending($fruitScent);
 
