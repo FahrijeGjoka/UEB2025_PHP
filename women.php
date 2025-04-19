@@ -96,21 +96,21 @@ $floral = sortProductsAscending($floral);
 
 
 $warmAndSpicy = [
-  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "womanimg/blackopium.jpg"],
+  ["name" => "Black Opium", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "womanimg/blackopium.jpg"],
   ["name" => "BURBERRY", "desc" => "Burberry Goddess Eau de Parfum", "price" => 39.94, "img" => "womanimg/burberry.jpg"],
   ["name" => "Ariana Grande", "desc" => "Cloud Eau de Parfum", "price" => 24.98, "img" => "womanimg/Ariana Grande.jpg"],
   ["name" => "PHLUR", "desc" => "Body & Hair Fragrance Mist", "price" => 39.92, "img" => "womanimg/PHLUR.jpg"],
   ["name" => "Kayali", "desc" => "Vanilla Candy Rock Sugar", "price" => 29.98, "img" => "womanimg/Kayali.jpg"],
-  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 39.91, "img" => "womanimg/opiumred.jpg"],
-  ["name" => "Ariana Grande", "desc" => "MOD Vanilla Eau de Parfum", "price" => 52.98, "img" => "womanimg/mod.jpg"],
+  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 39.90, "img" => "womanimg/opiumred.jpg"],
+  ["name" => "Ariana Grande", "desc" => "MOD Vanilla Eau de Parfum", "price" => 52.90, "img" => "womanimg/mod.jpg"],
   ["name" => "Viktor&Rolf", "desc" => "Flowerbomb Eau de Parfum", "price" => 49.98, "img" => "womanimg/download.jpg"]
 ];
 $warmAndSpicy=sortProductsAscending($warmAndSpicy);
 
 $fruitScent = [
   ["name" => "Tom Ford Bitter Peach", "desc" => "Bitter Peach Eau De Parfum Fragrance", "price" => 350.98, "img" => "womanimg/tomfordpeach.jpg"],
-  ["name" => "Tom Ford", "desc" => "Fucking Fabulous Eau de Parfum Fragrance", "price" => 399.98, "img" => "womanimg/cherry.jpg"],
-  ["name" => "Tom Ford Lost Cherry", "desc" => "Lost Cherry Eau de Parfum Fragrance", "price" => 240.98, "img" => "womanimg/vanile.jpg"],
+  ["name" => "Tom Ford", "desc" => "Fucking Fabulous Eau de Parfum Fragrance", "price" => 399.98, "img" => "womanimg/vanile.jpg"],
+  ["name" => "Tom Ford Lost Cherry", "desc" => "Lost Cherry Eau de Parfum Fragrance", "price" => 240.98, "img" => "womanimg/cherry.jpg"],
   ["name" => "Neroli Portofino ", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]
 ];
 $fruitScent=sortProductsAscending($fruitScent);
