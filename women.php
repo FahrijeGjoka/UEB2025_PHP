@@ -59,9 +59,11 @@ function checkFreeShippingForProduct($price) {
       return "Shipping Cost: $3.99"; 
   }
 }
+
 function shkurtoPershkrimin($desc) {
   return preg_replace("/\bEau de Parfum\b/i", "EDP", $desc);
 }
+
 function sortProductsAscending($products) {
   $prices = array_column($products, 'price');
   sort($prices);
@@ -81,7 +83,7 @@ function sortProductsAscending($products) {
 
 $floral = [
   ["name" => "Valentino", "desc" => "Born In Roma Eau de Parfum", "price" => 35.98, "img" => "womanimg/valentino2.jpg.png"],
-  ["name" => "BURBERYY", "desc" => "Her Eau de Parfum", "price" => 39.98, "img" => "womanimg/burberry.jpg"],
+  ["name" => "BURBERYY", "desc" => "Her Eau de Parfum", "price" => 39.97, "img" => "womanimg/burberry.jpg"],
   ["name" => "Ariana Grande", "desc" => "MOD Blush Eau de Parfum", "price" => 29.98, "img" => "womanimg/ariana.jpg"],
   ["name" => "Carolina Herrera", "desc" => "Good Girl Blush Eau de Parfum", "price" => 19.98, "img" => "womanimg/carolina.jpg"],
   ["name" => "Yves Saint Laurent", "desc" => "Libre Eau De Parfum", "price" => 69.98, "img" => "womanimg/Yves Saint Laurent.jpg"],
@@ -95,11 +97,11 @@ $floral = sortProductsAscending($floral);
 
 $warmAndSpicy = [
   ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "womanimg/blackopium.jpg"],
-  ["name" => "BURBERRY", "desc" => "Burberry Goddess Eau de Parfum", "price" => 39.98, "img" => "womanimg/burberry.jpg"],
+  ["name" => "BURBERRY", "desc" => "Burberry Goddess Eau de Parfum", "price" => 39.94, "img" => "womanimg/burberry.jpg"],
   ["name" => "Ariana Grande", "desc" => "Cloud Eau de Parfum", "price" => 24.98, "img" => "womanimg/Ariana Grande.jpg"],
-  ["name" => "PHLUR", "desc" => "Body & Hair Fragrance Mist", "price" => 39.98, "img" => "womanimg/PHLUR.jpg"],
+  ["name" => "PHLUR", "desc" => "Body & Hair Fragrance Mist", "price" => 39.92, "img" => "womanimg/PHLUR.jpg"],
   ["name" => "Kayali", "desc" => "Vanilla Candy Rock Sugar", "price" => 29.98, "img" => "womanimg/Kayali.jpg"],
-  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 39.98, "img" => "womanimg/opiumred.jpg"],
+  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 39.91, "img" => "womanimg/opiumred.jpg"],
   ["name" => "Ariana Grande", "desc" => "MOD Vanilla Eau de Parfum", "price" => 52.98, "img" => "womanimg/mod.jpg"],
   ["name" => "Viktor&Rolf", "desc" => "Flowerbomb Eau de Parfum", "price" => 49.98, "img" => "womanimg/download.jpg"]
 ];
@@ -112,6 +114,7 @@ $fruitScent = [
   ["name" => "Neroli Portofino Perfume", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]
 ];
 $fruitScent=sortProductsAscending($fruitScent);
+
 $welcome = new WelcomeMessage("Online Shop");
 
 
