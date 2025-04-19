@@ -1,28 +1,30 @@
 <?php
+$message = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
+    $num_perfum = intval(trim($_POST['products']));  
+
     if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/", $email)) {
-        echo '<div class="error-message">Invalid email format.</div>';
+        $message = "<div class='error-message'>Invalid email format.</div>";
     } else {
-        echo '<div class="success-message">Thank you! Your email is valid!</div>';
+        $message = "<div class='success-message'>Thank you! Your email is valid!</div>";
+    }
+
+    
+    if ($num_perfum > 0) {
+        if ($num_perfum % 2 == 0) { 
+            $women = $num_perfum / 2;
+            $men = $num_perfum / 2;
+            $message .= "<div class='info-message'>We will place your order as: $women perfumes for Women and $men perfumes for Men.</div>";
+        } else { 
+            $women = floor($num_perfum / 2) + 1; 
+            $men = floor($num_perfum / 2); 
+            $message .= "<div class='info-message'>We will place your order as: $women perfumes for Women and $men perfumes for Men.</div>";
+        }
     }
 }
-
-if (isset($_POST['products'])) {
-  $totalProducts = intval($_POST['products']);
-  if ($totalProducts > 0) {
-      if ($totalProducts % 2 == 0) {
-        echo '<div class="product-message">';
-        $each = $totalProducts / 2;
-        echo "Great! We assume you bought $each perfumes for women and $each for men.</div>";
-      } else {
-          $women = floor($totalProducts / 2);
-          $men = $totalProducts - $women;
-          echo "We'll divide your order as follows: <b>$women for women</b> and <b>$men for men</b>.<br>";
-      }
-  }
-}
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -54,6 +56,8 @@ if (isset($_POST['products'])) {
         </section>
 
         <main>
+        <?php if (!empty($message)) echo $message; ?>
+
           <form id="contactForm" action="contactus.php" method="POST">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
