@@ -130,7 +130,8 @@ switch ($day) {
         <section class="hero">
       
             <h1>Welcome to Online Shop</h1>
-            <h2>Shop the latest trends in perfumes.</h2>
+            <h2 ><?php echo $random_slogan; ?></h2>
+           
 
             <button id="menuBtn"  >SCENTES</button>
           <ul id="menu"  class="start" >
@@ -273,7 +274,7 @@ switch ($day) {
                     <p><?php echo checkFreeShippingForProduct(239.98); ?></p>
                     <a href="#" class="btn">Add to Cart</a>
                  </div>
-                 <h1 ><?php echo $random_slogan; ?></h1>
+                
               </div>
 
             </section>
