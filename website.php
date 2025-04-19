@@ -196,7 +196,7 @@
     ?>
 </div>
 
-    </div>
+    
 
                 <br><br>
                 <div class="more2">
@@ -249,7 +249,7 @@
             </div>
 
         </div>
-
+        </div>
         <section>
             <div class="row2">
                 <div class="first-foot" style="padding-top: 30px;padding-right: 10px;padding-top: 10px;padding-bottom: 10px;">
@@ -358,7 +358,19 @@
               <td class="footer-section contact-info">
                 <h3><i>Contact Us</i></h3>
                 <p>Email: <a href="mailto:info@arome.com"><mark style="color: #eacaca;">info@arome.com</mark></a></p>
-                <p>Phone: <a href="tel:+38349001001">+383 49 001 001</a></p>
+                
+                <?php
+                $tel = "+38349001001";
+                $pjesa = preg_replace(
+                    "/^[+]383([0-9]{2})([0-9]{3})([0-9]{3})$/",
+                    "$1 $2 $3",
+                    $tel
+                );
+
+                $formatted = "+383 " . $pjesa;
+                echo '<p>Phone: <a href="tel:' . $tel . '">' . $formatted . '</a></p>';
+                ?>
+                
                     <ul><?php
                         $main_address = "<span>Main address:</span>";
                         var_dump($main_address);
