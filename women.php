@@ -38,7 +38,31 @@ $floral = [
   ["name" => "Prada", "desc" => "Paradoce Eau de Parfum", "price" => 59.98, "img" => "womanimg/Prada.jpg"],
   ["name" => "Gucci", "desc" => "Gardenia Eau de Parfum", "price" => 49.98, "img" => "womanimg/Gucci.jpg"]
 ];
+
 $floral = sortProductsAscending($floral);
+
+
+$warmAndSpicy = [
+  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "womanimg/blackopium.jpg"],
+  ["name" => "BURBERRY", "desc" => "Burberry Goddess Eau de Parfum", "price" => 39.98, "img" => "womanimg/burberry.jpg"],
+  ["name" => "Ariana Grande", "desc" => "Cloud Eau de Parfum", "price" => 24.98, "img" => "womanimg/Ariana Grande.jpg"],
+  ["name" => "PHLUR", "desc" => "Body & Hair Fragrance Mist", "price" => 39.98, "img" => "womanimg/PHLUR.jpg"],
+  ["name" => "Kayali", "desc" => "Vanilla Candy Rock Sugar", "price" => 29.98, "img" => "womanimg/Kayali.jpg"],
+  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 39.98, "img" => "womanimg/opiumred.jpg"],
+  ["name" => "Ariana Grande", "desc" => "MOD Vanilla Eau de Parfum", "price" => 52.98, "img" => "womanimg/mod.jpg"],
+  ["name" => "Viktor&Rolf", "desc" => "Flowerbomb Eau de Parfum", "price" => 49.98, "img" => "womanimg/download.jpg"]
+];
+$warmAndSpicy=sortProductsAscending($warmAndSpicy);
+
+$fruitScent = [
+  ["name" => "Tom Ford Bitter Peach", "desc" => "Bitter Peach Eau De Parfum Fragrance", "price" => 350.98, "img" => "womanimg/tomfordpeach.jpg"],
+  ["name" => "Tom Ford", "desc" => "Fucking Fabulous Eau de Parfum Fragrance", "price" => 399.98, "img" => "womanimg/cherry.jpg"],
+  ["name" => "Tom Ford Lost Cherry", "desc" => "Lost Cherry Eau de Parfum Fragrance", "price" => 240.98, "img" => "womanimg/vanile.jpg"],
+  ["name" => "Neroli Portofino Perfume", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]
+];
+$fruitScent=sortProductsAscending($fruitScent);
+
+
 
 $slogans = [
   "Smell like never before!",
@@ -164,116 +188,32 @@ switch ($day) {
 
             <div id="warmandspicy" >
               <h3 class="ntitle" >Warm And Spicy</h3>
-             
-                <div class="product">
-                <img src="womanimg/blackopium.jpg" alt="Product Image">
-                <h3>Yves Saint Laurent</h3>
-                <p>Black Opium Eau de Parfum</p>
-                <span class="price"><?php echo format_price(35.989); ?></span>
-                <p><?php echo checkFreeShippingForProduct(35.98); ?></p>
-                <a href="#"  class="btn">Add to Cart</a>
-                </div>
-          
-                <div class="product">
-                <img src="womanimg/burberry.jpg" alt="Product Image">
-                <h3>BURBERRY</h3>
-                <p>Burberry Goddess Eau de Parfum</p>
-                <span class="price"><?php echo format_price(39.989); ?></span>
-                <p><?php echo checkFreeShippingForProduct(39.98); ?></p>
-                <a href="#"  class="btn">Add to Cart</a>
-                </div>
-          
-                <div class="product">
-                <img src="womanimg/Ariana Grande.jpg" alt="Product Image">
-                <h3>Ariana Grande</h3>
-                <p>Cloud Eau de Parfum</p>
-                <span class="price"><?php echo format_price(24.989); ?></span>
-                <p><?php echo checkFreeShippingForProduct(24.98); ?></p>
-                <a href="#" class="btn">Add to Cart</a>
-                </div>
-                <div class="product">
-                  <img src="womanimg/PHLUR.jpg" alt="Product Image">
-                  <h3>PHLUR</h3>
-                  <p>Body & Hair Fragrance Mist</p>
-                  <span class="price"><?php echo format_price(39.989); ?></span>
-                  <p><?php echo checkFreeShippingForProduct(39.98); ?></p>
-                  <a href="#" class="btn">Add to Cart</a>
-               </div>
-          
-                <div class="product">
-                  <img src="womanimg/Kayali.jpg" alt="Product Image">
-                  <h3>Kayali</h3>
-                  <p>Vanilla Candy Rock Sugar</p>
-                  <span class="price"><?php echo format_price(29.989); ?></span>
-                  <p><?php echo checkFreeShippingForProduct(29.98); ?></p>
-                  <a href="#" class="btn">Add to Cart</a>
-                </div>
-          
-                <div class="product">
-                  <img src="womanimg/opiumred.jpg" alt="Product Image">
-                  <h3>Yves Saint Laurent</h3>
-                  <p>Black Opium Eau de Parfum</p>
-                  <span class="price"><?php echo format_price(39.989); ?></span>
-                  <p><?php echo checkFreeShippingForProduct(39.98); ?></p>
-                  <a href="#" class="btn">Add to Cart</a>
-                </div>
-          
-                <div class="product">
-                  <img src="womanimg/mod.jpg" alt="Product Image">
-                  <h3>Ariana Grande</h3>
-                  <p>MOD Vanilla Eau de Parfum</p>
-                  <span class="price"><?php echo format_price(52.989); ?></span>
-                  <p><?php echo checkFreeShippingForProduct(52.98); ?></p>
-                  <a href="#" class="btn">Add to Cart</a>
-                </div>
-  
-                <div class="product">
-                  <img src="womanimg/download.jpg" alt="Product Image">
-                  <h3>Viktor&Rolf</h3>
-                  <p>Flowerbomb Eau de Parfum</p>
-                  <span class="price"><?php echo format_price(49.989); ?></span>
-                  <p><?php echo checkFreeShippingForProduct(35.98); ?></p>
-                  <a href="#"  class="btn">Add to Cart</a>
-                </div>
+              <?php foreach ($warmAndSpicy as $product): ?>
+      <div class="product">
+        <img src="<?php echo $product['img']; ?>" alt="Product Image">
+        <h3><?php echo $product['name']; ?></h3>
+        <p><?php echo $product['desc']; ?></p>
+        <span class="price"><?php echo format_price($product['price']); ?></span>
+        <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+    <?php endforeach; ?>
+               
               </div>
 
               <div id="fruitscent" >
                 <h3 class="ntitle" >Fruit Scent</h3>
-               
-                  <div class="product">
-                  <img src="womanimg/tomfordpeach.jpg" alt="Product Image">
-                  <h3>Tom Ford Bitter Peach</h3>
-                  <p>Bitter Peach Eau De Parfum Fragrance</p>
-                  <span class="price">$350.99</span>
-                  <p><?php echo checkFreeShippingForProduct(350.98); ?></p>
-                  <a href="#"  class="btn">Add to Cart</a>
-                  </div>
-            
-                  <div class="product">
-                  <img src="womanimg/cherry.jpg" alt="Product Image">
-                  <h3>Tom Ford</h3>
-                  <p>Fucking Fabulous Eau de Parfum Fragrance</p>
-                  <span class="price"><?php echo format_price(399.989); ?></span>
-                  <p><?php echo checkFreeShippingForProduct(399.98); ?></p>
-                  <a href="#"  class="btn">Add to Cart</a>
-                  </div>
-            
-                  <div class="product">
-                  <img src="womanimg/vanile.jpg" alt="Product Image">
-                  <h3>Tom Ford Lost Cherry</h3>
-                  <p>Lost Cherry Eau de Parfum Fragrance</p>
-                  <span class="price"><?php echo format_price(240.989); ?></span>
-                  <p><?php echo checkFreeShippingForProduct(240.98); ?></p>
-                  <a href="#" class="btn">Add to Cart</a>
-                  </div>
-                  <div class="product">
-                    <img src="womanimg/tom.png" alt="Product Image">
-                    <h3>Neroli Portofino Perfume</h3>
-                    <p>Citruc floral cent</p>
-                    <span class="price"><?php echo format_price(239.989); ?></span>
-                    <p><?php echo checkFreeShippingForProduct(239.98); ?></p>
-                    <a href="#" class="btn">Add to Cart</a>
-                 </div>
+                <?php foreach ($fruitScent as $product): ?>
+      <div class="product">
+        <img src="<?php echo $product['img']; ?>" alt="Product Image">
+        <h3><?php echo $product['name']; ?></h3>
+        <p><?php echo $product['desc']; ?></p>
+        <span class="price"><?php echo format_price($product['price']); ?></span>
+        <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+    <?php endforeach; ?>
+                 
                 
               </div>
 
