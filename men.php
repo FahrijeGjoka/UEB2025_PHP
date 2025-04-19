@@ -3,7 +3,7 @@ $message = "Welcome to our store!";
 define("Arome", "Online Shop");
 
 $day = date("l");
-//Zbritjet 
+// Zbritjet bazuar në ditën e javës
 switch ($day) {
     case "Monday":
         $message = "Happy Monday! Fresh week, fresh scents!";
@@ -31,6 +31,7 @@ switch ($day) {
         break;
 }
 
+// Funksion per te formatuar kategorine (string ne uppercase).
 function formatCategory($cat) {
     return strtoupper($cat);
 }
@@ -41,6 +42,7 @@ function checkFreeShippingForProduct($price) {
       return "Shipping Cost: $3.99"; 
   }
 }
+//Varg associativ per slogane te rastesishme.
 $slogans = [
   "Smell like never before!",
   "Find your signature scent.",
@@ -50,10 +52,12 @@ $slogans = [
 $random_slogan = $slogans[array_rand($slogans)];
 
 //OOP
+// Definimi i klases kryesore per produktet.
 class Product {
   public $name;
   public $price;
 
+  // Konstruktori per te inicializuar produktin.
   public function __construct($name, $price) {
       $this->name = $name;
       $this->price = $price;
@@ -64,6 +68,7 @@ class Product {
   }
 }
 
+// Nen-klasa per parfume qe trashegon klasen Product.
 class Perfume extends Product {
   public $brand;
 
@@ -77,6 +82,7 @@ class Perfume extends Product {
   }
 }
 
+// Lista e parfumeve ne vargun $parfumeList.
 $parfumeList = [
 new Perfume("Dior Sauvage", 89.99, "Dior"),
 new Perfume("Bleu de Chanel", 99.99, "Chanel"),
@@ -103,6 +109,7 @@ new Perfume("Chanel Allure Homme", 119.99, "Chanel"),
 new Perfume("Tom Ford Black Orchid", 139.99, "Tom Ford")
 ];
 
+// Produkti i dites bazuar ne indeksin e dites se javes.
 $dayIndex = date("w"); // 0-6 (e Diel - e Shtune)
 $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
 
