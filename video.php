@@ -1,5 +1,5 @@
 <?php
-
+//Perdorimi i klasave, trashegimise, modifikatorit protected, konstruktorit, destruktorit, metodave get dhe set
 class PerfumeMedia {
     protected $title;
     protected $filePath;

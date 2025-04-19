@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="read-more">
-                    <p style="font-size: 20px; font-weight: bold;"><a style="color: #eacaca;" href="video.php">SEE</a> <a style="color: #eacaca;" href="video.html">VIDEOS</a> <a style="color: #eacaca;" href="video.html">... </a></p>
+                    <p style="font-size: 20px; font-weight: bold;"><a style="color: #eacaca;" href="video.php">SEE</a> <a style="color: #eacaca;" href="video.php">VIDEOS</a> <a style="color: #eacaca;" href="video.php">... </a></p>
                 </div>
             </div>
 
@@ -89,6 +89,7 @@
     <div class="text" style="color: #eacaca;">
         <h2 style="color: #ffcaca;">Top 5 Most Used Perfumes</h2>
         <ul>
+            <!-- Pjesa ku jane perdorur vargjet asociative dhe sortimi i tyre ne descending order-->
             <?php
             
             $topPerfumes = [
@@ -113,6 +114,7 @@
 
         <h2 style="color: #ffcaca;">Top 5 Least Used Perfumes</h2>
         <ul>
+            <!-- Pjesa ku jane perdorur vargjet asociative dhe sortimi i tyre ne ascending order-->
             <?php
             $leastUsedPerfumes = [
                 "Calvin Klein CK One" => 200,
@@ -145,6 +147,7 @@
     </div>
 
     <div class="services">
+        <!-- Pjesa ku jane perdorur funksioni, vargjet multidimensionale dhe regEx-->
     <?php
     function perfumeDiscount($price) {
         $discount = 0.1; 
@@ -358,7 +361,7 @@
               <td class="footer-section contact-info">
                 <h3><i>Contact Us</i></h3>
                 <p>Email: <a href="mailto:info@arome.com"><mark style="color: #eacaca;">info@arome.com</mark></a></p>
-                
+                <!-- Pjesa ku eshte perdorur regEx per numer-->
                 <?php
                 $tel = "+38349001001";
                 $pjesa = preg_replace(
@@ -370,7 +373,7 @@
                 $formatted = "+383 " . $pjesa;
                 echo '<p>Phone: <a href="tel:' . $tel . '">' . $formatted . '</a></p>';
                 ?>
-                
+                <!-- Pjesa ku eshte perdorur var_dump-->
                     <ul><?php
                         $main_address = "<span>Main address:</span>";
                         var_dump($main_address);
@@ -394,6 +397,7 @@
               </td>
             </tr>
             <tr>
+                <!-- Pjesa ku jane perdorur vargjet asociative-->
             <?php
             $ekipi = [
                 ["emri" => "Elsa Krasniqi", "pozita" => "CEO"],
@@ -418,6 +422,7 @@
             </tr>
           </table>
         </div>
+        <!-- Pjesa ku eshte perdorur variabla dhe qasja e saj-->
         <?php
         $kompania = "Aromé";
         ?>
