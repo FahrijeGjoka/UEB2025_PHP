@@ -151,13 +151,13 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <h1>Welcome to Online Shop</h1>
     <p>Shop the latest trends in perfumes.</p>
 </section>
-<section class="product-of-day" style="background-color: #ffebcd; padding: 30px; margin: 30px; border: 2px solid red; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <h2 style="color: #8b4513; font-size: 2em; text-align: center;"> Product of the Day </h2>
+<section class="product-of-day" style="background-color:rgb(195, 214, 227); padding: 30px; margin: 30px; border: 2px solid #f4c2c2; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <h2 style="color: #2c3e50; font-size: 2em; text-align: center;"> Product of the Day </h2>
   <div style="display: flex; flex-direction: column; align-items: center;">
-    <h3 style="font-size: 1.5em; margin-bottom: 15px;"><?php echo $perfumeOfTheDay->name; ?> by <?php echo $perfumeOfTheDay->brand; ?></h3>
-    <p style="font-weight: bold; font-size: 1.3em; margin-bottom: 10px;">Price: $<?php echo number_format($perfumeOfTheDay->price, 2); ?></p>
-    <p style="font-size: 1.1em; margin-bottom: 20px;"><?php echo checkFreeShippingForProduct($perfumeOfTheDay->price); ?></p>
-    <a href="#" class="btn" style="font-size: 1.2em; padding: 12px 20px; background-color: #ff6347; color: white; border-radius: 5px;">Add to Cart</a>
+    <h3 style="font-size: 1.5em; margin-bottom: 15px; color: #2c3e50;"><?php echo $perfumeOfTheDay->name; ?> by <?php echo $perfumeOfTheDay->brand; ?></h3>
+    <p style="font-weight: bold; font-size: 1.3em; margin-bottom: 10px; color: #2c3e50;">Price: $<?php echo number_format($perfumeOfTheDay->price, 2); ?></p>
+    <p style="font-size: 1.1em; margin-bottom: 20px; color: #2c3e50;"><?php echo checkFreeShippingForProduct($perfumeOfTheDay->price); ?></p>
+    <a href="#" class="btn" style="font-size: 1.2em; padding: 12px 20px; background-color: #2c3e50; color: #f4c2c2; border-radius: 5px;">Add to Cart</a>
   </div>
 </section>
 <section class="products">
