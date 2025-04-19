@@ -12,6 +12,9 @@ function checkFreeShippingForProduct($price) {
       return "Shipping Cost: $3.99"; 
   }
 }
+function shkurtoPershkrimin($desc) {
+  return preg_replace("/\bEau de Parfum\b/i", "EDP", $desc);
+}
 function sortProductsAscending($products) {
   $prices = array_column($products, 'price');
   sort($prices);
@@ -27,6 +30,7 @@ function sortProductsAscending($products) {
 
   return $sortedProducts;
 }
+
 
 $floral = [
   ["name" => "Valentino", "desc" => "Born In Roma Eau de Parfum", "price" => 35.98, "img" => "womanimg/valentino2.jpg.png"],
@@ -174,7 +178,7 @@ switch ($day) {
       <div class="product">
         <img src="<?php echo $product['img']; ?>" alt="Product Image">
         <h3><?php echo $product['name']; ?></h3>
-        <p><?php echo $product['desc']; ?></p>
+        <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
         <span class="price"><?php echo format_price($product['price']); ?></span>
         <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
         <a href="#" class="btn">Add to Cart</a>
@@ -192,7 +196,7 @@ switch ($day) {
       <div class="product">
         <img src="<?php echo $product['img']; ?>" alt="Product Image">
         <h3><?php echo $product['name']; ?></h3>
-        <p><?php echo $product['desc']; ?></p>
+        <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
         <span class="price"><?php echo format_price($product['price']); ?></span>
         <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
         <a href="#" class="btn">Add to Cart</a>
@@ -207,7 +211,7 @@ switch ($day) {
       <div class="product">
         <img src="<?php echo $product['img']; ?>" alt="Product Image">
         <h3><?php echo $product['name']; ?></h3>
-        <p><?php echo $product['desc']; ?></p>
+        <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
         <span class="price"><?php echo format_price($product['price']); ?></span>
         <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
         <a href="#" class="btn">Add to Cart</a>
