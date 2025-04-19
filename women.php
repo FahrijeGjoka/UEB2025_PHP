@@ -5,6 +5,53 @@ $GLOBALS['currency'] = "$";
 function format_price($price) {
   return $GLOBALS['currency'] . number_format($price, 2);
 }
+class WelcomeMessage {
+    private $siteName;
+    private $currentDay;
+    private $slogans;
+    
+    public function __construct($siteName) {
+        $this->siteName = $siteName;
+        $this->currentDay = date("l");
+        $this->slogans = [
+            "Smell like never before!",
+            "Find your signature scent.",
+            "Elegance in every drop.",
+            "Style. Fragrance. You."
+        ];
+    }
+    
+    public function getRandomSlogan() {
+        return $this->slogans[array_rand($this->slogans)];
+    }
+    
+
+    public function getDailyMessage() {
+        switch ($this->currentDay) {
+            case "Monday":
+                return "Happy Monday! Fresh week, fresh scents!";
+            case "Tuesday":
+                return "Tuesday Treat! Free shipping on all orders!";
+            case "Wednesday":
+                return "Midweek Special! Buy 2, get 1 free!";
+            case "Thursday":
+                return "Thursday Thrill! 15% off all men's fragrances!";
+            case "Friday":
+                return "Friday Deal! Get 10% off!";
+            case "Saturday":
+                return "Weekend Vibes! 20% off select perfumes!";
+            case "Sunday":
+                return "Sunday Relax! Enjoy free samples with your order!";
+            default:
+                return "Welcome to " . $this->siteName;
+        }
+    }
+    
+    public function displayWelcome() {
+        return "<h1 class='welcome-message'>Welcome to {$this->siteName}</h1>";
+    }
+}
+
 function checkFreeShippingForProduct($price) {
   if ($price >50 ) {
       return "Free Shipping!";
@@ -65,45 +112,7 @@ $fruitScent = [
   ["name" => "Neroli Portofino Perfume", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]
 ];
 $fruitScent=sortProductsAscending($fruitScent);
-
-
-
-$slogans = [
-  "Smell like never before!",
-  "Find your signature scent.",
-  "Elegance in every drop.",
-  "Style. Fragrance. You."
-];
-$random_slogan = $slogans[array_rand($slogans)];
-
-$day = date("l");
-
-switch ($day) {
-    case "Monday":
-        $message = "Happy Monday! Fresh week, fresh scents!";
-        break;
-    case "Tuesday":
-        $message = "Tuesday Treat! Free shipping on all orders!";
-        break;
-    case "Wednesday":
-        $message = "Midweek Special! Buy 2, get 1 free!";
-        break;
-    case "Thursday":
-        $message = "Thursday Thrill! 15% off all men's fragrances!";
-        break;
-    case "Friday":
-        $message = "Friday Deal! Get 10% off!";
-        break;
-    case "Saturday":
-        $message = "Weekend Vibes! 20% off select perfumes!";
-        break;
-    case "Sunday":
-        $message = "Sunday Relax! Enjoy free samples with your order!";
-        break;
-    default:
-        $message = "Welcome to " . Arome;
-        break;
-}
+$welcome = new WelcomeMessage("Online Shop");
 
 
 ?>
@@ -151,14 +160,14 @@ switch ($day) {
           </header>
 
           <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid pink;">
-    <h3><?php echo $message; ?></h3>
+    <h3><?php echo $welcome->getDailyMessage(); ?></h3>
   </div>
         
 
         <section class="hero">
       
-            <h1>Welcome to Online Shop</h1>
-            <h2 ><?php echo $random_slogan; ?></h2>
+        <?php echo $welcome->displayWelcome(); ?>
+            <h2 ><?php echo $welcome->getRandomSlogan(); ?></h2>
            
 
             <button id="menuBtn"  >SCENTES</button>
