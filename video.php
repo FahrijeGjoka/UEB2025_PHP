@@ -120,40 +120,50 @@ $blackFriday = new AudioMedia("Black Friday", "discount.mp3");
         }
     </style>
 </head>
-<body>
+    <body>
+    <?php
+    $title = "Arom&eacute;'s Perfume Media Collection";
+    ?>
+
     <header>
-        <h1>Arom&eacute;'s Perfume Media Collection</h1>
+        <h1><?php echo $title; ?></h1>
     </header>
+
     <main>
-        <table>
-            <thead>
-                <tr>
-                    <th>Media Type</th>
-                    <th>Content</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><?php echo $womenPerfume->getTitle(); ?></td>
-                    <td><?php echo $womenPerfume->displayMedia(); ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo $menPerfume->getTitle(); ?></td>
-                    <td><?php echo $menPerfume->displayMedia(); ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo $arome->getTitle(); ?></td>
-                    <td><?php echo $arome->displayMedia(); ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo $blackFriday->getTitle(); ?></td>
-                    <td><?php echo $blackFriday->displayMedia(); ?></td>
-                </tr>
-            </tbody>
-        </table>
+        <?php
+$mediaList = [
+    $womenPerfume,
+    $menPerfume,
+    $arome,
+    $blackFriday
+];
+?>
+
+<table>
+    <thead>
+        <tr>
+            <th>Media Type</th>
+            <th>Content</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($mediaList as $media): ?>
+        <tr>
+            <td><?php echo $media->getTitle(); ?></td>
+            <td><?php echo $media->displayMedia(); ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
     </main>
+    <?php
+    $companyName = "Arom&eacute;";
+    ?>
+
     <footer>
-        <p>&copy; 2025 Arom&eacute;'s Perfume Media. All Right Reserved.</p>
+        <p>&copy; <?php echo date("Y") . " " . $companyName; ?> Perfume Media. All Rights Reserved.</p>
     </footer>
+
 </body>
 </html>
