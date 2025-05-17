@@ -26,21 +26,29 @@ header {
   font-size: 24px;
   font-weight: bold;
 }
-nav ul {
-  display: flex;
-  list-style: none;
+.nav-bar {
+    margin-top: 60px;
+    margin-left: 45px;
+    padding-top: 10px;
+    border-radius: 5px;
+    width: 93%;
+    height: 40px;
+    background:#eacaca;
 }
-nav li {
-  margin-right: 20px;
+
+.nav-bar .link {
+    padding-left: 47px;
+    align-items: center;
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
 }
-nav a {
-  color: #2c3e50;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
+
+.nav-bar .link:hover {
+    color: #2c3e50;
+    transition: .5s;
 }
-nav a:hover {
-  color: #fff;
-}
+
 .cart {
   display: flex;
   align-items: center;
@@ -72,6 +80,15 @@ nav a:hover {
 .hero p {
   font-size: 24px;
   margin-bottom: 40px;
+}
+.main-bar {
+    margin-top: 60px;
+    margin-left: 45px;
+    padding-top: 10px;
+    border-radius: 5px;
+    width: 93%;
+    height: 40px;
+    background:#eacaca;
 }
 .btn {
   display: inline-block;
