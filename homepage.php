@@ -151,3 +151,4 @@ $ekipi = [
 
 $kompania = "Aromé";
 $data = date("Y-m-d");
+?>

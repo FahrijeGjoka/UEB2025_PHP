@@ -1,6 +1,8 @@
 <?php
 include_once("homepage.php");
+include_once("cookies_homepage.php");
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -35,6 +37,11 @@ include_once("homepage.php");
                 }
                 ?>
             </p>
+            <div class="footer-extra" style="color:white;">
+                <?php if (isset($_COOKIE['favorite_perfume'])): ?>
+                    <p class="favorite-message">Your favorite perfume is <b><?php echo $_COOKIE['favorite_perfume']; ?> 🌸</b></p>
+                <?php endif; ?>
+            </div>
 
             <div class="container">
 
@@ -92,6 +99,7 @@ include_once("homepage.php");
                 <img src="<?php echo $imageSrc; ?>" alt="<?php echo $imageAlt; ?>">
             </div>
 
+
             <div class="title">
                 <h1 class="huge"><?php echo $mainTitle; ?></h1>
                 <p class="paragraph"><?php echo $description; ?></p>
@@ -104,11 +112,14 @@ include_once("homepage.php");
                     <a style="color: #eacaca;" href="<?php echo $videoLink; ?>">... </a>
                 </p>
             </div>
+
         </div>
 
 
         <div class="row">
             <div class="class1">
+                
+                <br><br><br>
                 <div class="title" style="font-style: italic;color: #eacaca;">
                     <h1>
                         <l>Arom&eacute;'s Perfumes</l>
@@ -117,6 +128,19 @@ include_once("homepage.php");
 
 
                 <div class="text" style="color: #eacaca;">
+                    <div class="photo-wrapper">
+                    <div class="photo-box">
+                        <form method="post" class="photo-select-form">
+                            <label for="mainPhoto">Choose Main Photo:</label>
+                            <select name="mainPhoto" id="mainPhoto">
+                                <option value="rosee.jpg">Rose</option>
+                                <option value="lavender.webp">Lavender</option>
+                                <option value="tulip.jpg">Tulip</option>
+                            </select>
+                            <button type="submit" name="setPhoto">Set Photo</button>
+                        </form>
+                    </div>
+                </div>
                     <h2 style="color: #ffcaca;">Top 5 Most Used Perfumes</h2>
                     <ul>
                         <!-- Pjesa ku jane perdorur vargjet asociative dhe sortimi i tyre ne descending order-->
@@ -271,6 +295,30 @@ include_once("homepage.php");
     </div>
 
     <div class="footer">
+        <div class="favorite-perfume-container">
+            <h4>Set Your Favorite Perfume</h4>
+
+            <form method="post" action="">
+                <select name="selected_perfume">
+                    <option value="">-- Choose --</option>
+                    <?php foreach ($allPerfumes as $p): ?>
+                        <option value="<?php echo $p; ?>" <?php echo (isset($_COOKIE['favorite_perfume']) && $_COOKIE['favorite_perfume'] === $p) ? 'selected' : ''; ?>>
+                            <?php echo $p; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <button type="submit"><i class="fas fa-check"></i></button>
+            </form>
+        </div>
+
+        <div class="favorite-perfume-container" style="flex-direction: column;">
+            <p><?php echo $cookieMessage; ?></p>
+            <?php if (!empty($cookieDeleteStatus)): ?>
+                <p style="color: red;"><?php echo $cookieDeleteStatus; ?></p>
+            <?php endif; ?>
+            <a href="?delete_cookie=true">Delete favorite perfume</a>
+        </div>
+
         <div class="footer-container">
             <table class="footer-table">
                 <tr>
@@ -321,6 +369,7 @@ include_once("homepage.php");
                 </tr>
             </table>
         </div>
+
 
         <p class="footer-credit">© <span><?php echo $data; ?></span> <?php echo $kompania; ?>. All Rights Reserved.</p>
     </div>
