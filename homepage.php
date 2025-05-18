@@ -104,6 +104,7 @@ $collaborations = [
     ["Prada", "https://www.prada-beauty.com/fragrance/"]
 ];
 
+
 $blogPosts = [
     [
         "title" => "Floral Fragrance",
@@ -165,5 +166,11 @@ function doubleUsage(&$usage) {
     $usage *= 1.2;
 }
 doubleUsage($leastUsedPerfumes["Jaguar Classic Black"]);
+
+
+//Vendosja e referencave në mes të anëtarëve të vargut
+$collaborations[1][1] = &$collaborations[4][1];
+// Ndryshojmë linkun e Dior-it
+$collaborations[4][1] = "https://www.dior.com/en_us";
 
 ?>
