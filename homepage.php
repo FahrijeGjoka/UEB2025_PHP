@@ -151,4 +151,12 @@ $ekipi = [
 
 $kompania = "Aromé";
 $data = date("Y-m-d");
+
+
+
+//Pjesa me pointera
+$titlee = "Aromé's Perfumes";
+$mainTitlee = &$titlee; 
+
+$mainTitlee = "aromé's perfumes";
 ?>

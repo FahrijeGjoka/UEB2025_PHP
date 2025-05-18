@@ -118,29 +118,29 @@ include_once("cookies_homepage.php");
 
         <div class="row">
             <div class="class1">
-                
+
                 <br><br><br>
                 <div class="title" style="font-style: italic;color: #eacaca;">
                     <h1>
-                        <l>Arom&eacute;'s Perfumes</l>
+                        <?php echo $titlee; ?>
                     </h1>
                 </div>
 
 
                 <div class="text" style="color: #eacaca;">
                     <div class="photo-wrapper">
-                    <div class="photo-box">
-                        <form method="post" class="photo-select-form">
-                            <label for="mainPhoto">Choose Main Photo:</label>
-                            <select name="mainPhoto" id="mainPhoto">
-                                <option value="rosee.jpg">Rose</option>
-                                <option value="lavender.webp">Lavender</option>
-                                <option value="tulip.jpg">Tulip</option>
-                            </select>
-                            <button type="submit" name="setPhoto">Set Photo</button>
-                        </form>
+                        <div class="photo-box">
+                            <form method="post" class="photo-select-form">
+                                <label for="mainPhoto">Choose Main Photo:</label>
+                                <select name="mainPhoto" id="mainPhoto">
+                                    <option value="rosee.jpg">Rose</option>
+                                    <option value="lavender.webp">Lavender</option>
+                                    <option value="tulip.jpg">Tulip</option>
+                                </select>
+                                <button type="submit" name="setPhoto">Set Photo</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
                     <h2 style="color: #ffcaca;">Top 5 Most Used Perfumes</h2>
                     <ul>
                         <!-- Pjesa ku jane perdorur vargjet asociative dhe sortimi i tyre ne descending order-->
