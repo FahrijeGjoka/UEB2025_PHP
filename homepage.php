@@ -182,4 +182,23 @@ function modifyTweets(&$tweetsArray) {
 
 modifyTweets($tweets);
 
+
+// Funksion që kthen referencë tek një social link me bazë URL
+function &findSocialLinkByUrl(&$links, $url) {
+    foreach ($links as &$link) {
+        if ($link['url'] === $url) {
+            return $link; 
+        }
+    }
+
+    $null = null;
+    return $null;
+}
+
+$linkRef =& findSocialLinkByUrl($socialLinks, "https://www.pinterest.com/");
+if ($linkRef !== null) {
+    $linkRef['icon'] = "fa-brands fa-pinterest-p"; 
+}
+
+
 ?>
