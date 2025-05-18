@@ -173,4 +173,13 @@ $collaborations[1][1] = &$collaborations[4][1];
 // Ndryshojmë linkun e Dior-it
 $collaborations[4][1] = "https://www.dior.com/en_us";
 
+//Përdorimi i funksioneve me referencë
+function modifyTweets(&$tweetsArray) {
+    foreach ($tweetsArray as &$tweet) {
+        $tweet = "🧴 " . $tweet; // Shto një emoji në fillim
+    }
+}
+
+modifyTweets($tweets);
+
 ?>

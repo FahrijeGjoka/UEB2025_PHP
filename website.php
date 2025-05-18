@@ -258,7 +258,9 @@ include_once("cookies_homepage.php");
             <div class="first-foot" style="padding: 10px;">
                 <h3 style="color: #2c3e50;"><u>LATEST TWEETS</u></h3>
                 <?php foreach ($tweets as $tweet): ?>
-                    <p style="color: #eacaca;"><b style="color: #eacaca;">@Arom&eacute;</b>: "<?php echo $tweet; ?>"</p><br>
+                    <p style="color: #eacaca;">
+                        <b style="color: #eacaca;">@aromé</b>: "<?php echo $tweet; ?>"
+                    </p><br>
                 <?php endforeach; ?>
             </div>
 
