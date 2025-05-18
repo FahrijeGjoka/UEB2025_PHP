@@ -65,7 +65,9 @@ include_once("cookies_homepage.php");
 
                 <div class="brand">
 
-                    <h1 style="font-size: 50px;color: #eacaca;"><?php echo $brandName; ?></h1>
+                    <?php
+                    printBrandName();
+                    ?>
                     <p class="byline" style="color:#eacaca;padding-bottom:20px;"><?php echo $byline; ?></p>
                 </div>
             </div>

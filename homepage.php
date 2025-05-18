@@ -182,7 +182,6 @@ function modifyTweets(&$tweetsArray) {
 
 modifyTweets($tweets);
 
-
 // Funksion që kthen referencë tek një social link me bazë URL
 function &findSocialLinkByUrl(&$links, $url) {
     foreach ($links as &$link) {
@@ -200,5 +199,9 @@ if ($linkRef !== null) {
     $linkRef['icon'] = "fa-brands fa-pinterest-p"; 
 }
 
-
+//Funksioni per çasje në variablën globale
+function printBrandName() {
+    global $brandName; 
+    echo '<h1 style="font-size: 50px;color: #eacaca;">' . $brandName . '</h1>';
+}
 ?>
