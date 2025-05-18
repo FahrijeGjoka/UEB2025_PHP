@@ -350,7 +350,8 @@ include_once("cookies_homepage.php");
 
                     <td class="footer-section social-media">
                         <h3><i>Follow Us</i></h3>
-                        <?php foreach ($socials as $social): ?>
+                        <?php 
+                        foreach ($socials as $social): ?>
                             <a href="#" class="social-icon"><?php echo $social; ?></a><br>
                         <?php endforeach; ?>
                     </td>

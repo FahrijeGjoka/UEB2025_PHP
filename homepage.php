@@ -176,7 +176,7 @@ $collaborations[4][1] = "https://www.dior.com/en_us";
 //Përdorimi i funksioneve me referencë
 function modifyTweets(&$tweetsArray) {
     foreach ($tweetsArray as &$tweet) {
-        $tweet = "🧴 " . $tweet; // Shto një emoji në fillim
+        $tweet = "🧴 " . $tweet; 
     }
 }
 
@@ -204,4 +204,13 @@ function printBrandName() {
     global $brandName; 
     echo '<h1 style="font-size: 50px;color: #eacaca;">' . $brandName . '</h1>';
 }
+
+// Largimi i referencës. Përdorimi i funksionit unset()
+foreach ($socials as &$social) {
+    $social .= " 🔗";
+}
+unset($social);
+
+
+
 ?>
