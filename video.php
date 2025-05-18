@@ -1,5 +1,19 @@
 <?php
-//Perdorimi i klasave, trashegimise, modifikatorit protected, konstruktorit, destruktorit, metodave get dhe set
+// KËRKESA: ERROR HANDLER
+set_error_handler("customErrorHandler");
+
+function customErrorHandler($errno, $errstr, $errfile, $errline, $errcontext = [])
+{
+    echo "<div style='color: red; font-weight: bold;'>
+        <p><u>Gabim i personalizuar!</u></p>
+        <p><b>Gabimi:</b> [$errno] $errstr</p>
+        <p><b>Skedari:</b> $errfile</p>
+        <p><b>Linja:</b> $errline</p>
+    </div>";
+    return true;
+}
+
+// DEFINIMI I KLASAVE
 class PerfumeMedia
 {
     protected $title;
@@ -38,23 +52,26 @@ class PerfumeMedia
 
     public function __destruct()
     {
-        echo "<p>Object for '{$this->title}' is being destroyed.</p>";
+        echo "<p style='color: gray;'>Objekti për '{$this->title}' u shkatërrua.</p>";
     }
 }
+
 class WomensPerfume extends PerfumeMedia
 {
     public function displayMedia()
     {
-        return "<video controls poster='women's thumbnail.png'><source src='" . $this->filePath . "' type='video/mp4'>Your browser does not support the video tag.</video>";
+        return "<video controls poster='women_thumbnail.png'><source src='" . $this->filePath . "' type='video/mp4'>Your browser does not support the video tag.</video>";
     }
 }
+
 class MensPerfume extends PerfumeMedia
 {
     public function displayMedia()
     {
-        return "<video controls poster='men's thumbnail.png'><source src='" . $this->filePath . "' type='video/mp4'>Your browser does not support the video tag.</video>";
+        return "<video controls poster='men_thumbnail.png'><source src='" . $this->filePath . "' type='video/mp4'>Your browser does not support the video tag.</video>";
     }
 }
+
 class AudioMedia extends PerfumeMedia
 {
     public function displayMedia()
@@ -63,11 +80,43 @@ class AudioMedia extends PerfumeMedia
     }
 }
 
-$womenPerfume = new WomensPerfume("Women's Perfume", "women perfumes.mp4");
-$menPerfume = new MensPerfume("Men's Perfume", "men perfumes.mp4");
+// KËRKESA: TRAJTIMI I PËRJASHTIMEVE
+class SecurePerfumeMedia extends PerfumeMedia
+{
+    public function __construct($title, $filePath)
+    {
+        if (empty($title)) {
+            throw new Exception("Titulli nuk mund të jetë bosh! Ju lutem jepni emrin e parfumit.");
+        }
+        parent::__construct($title, $filePath);
+    }
+}
+
+try {
+    $invalidMedia = new SecurePerfumeMedia("", "missing.mp4"); // Përjashtim qëllimisht
+} catch (Exception $e) {
+    echo "<p style='color:red;'>Përjashtim i kapur: " . $e->getMessage() . "</p>";
+}
+
+// KRIJIMI I OBJEKTEVE
+$womenPerfume = new WomensPerfume("Women's Perfume", "women_perfumes.mp4");
+$menPerfume = new MensPerfume("Men's Perfume", "men_perfumes.mp4");
 $arome = new AudioMedia("Arom&eacute;", "arome.mp3");
 $blackFriday = new AudioMedia("Black Friday", "discount.mp3");
 
+// KËRKESA 25: GABIM I PERSONALIZUAR
+if (empty($arome->getFilePath())) {
+    trigger_error("Gabim: Skedari për Aromé mungon!", E_USER_WARNING);
+}
+
+$mediaList = [
+    $womenPerfume,
+    $menPerfume,
+    $arome,
+    $blackFriday
+];
+$companyName = "Arom&eacute;";
+$title = "Arom&eacute;'s Perfume Media Collection";
 ?>
 
 <!DOCTYPE html>
@@ -117,10 +166,7 @@ $blackFriday = new AudioMedia("Black Friday", "discount.mp3");
             align-items: center;
             color: #2c3e50;
             font-weight: bold;
-            margin-right: 200px;
-            margin-left: 200px;
-            margin-top: 100px;
-            margin-bottom: 100px;
+            margin: 100px auto;
             background-color: #eacaca;
             box-shadow: 0 4px 6px #2c3e50;
         }
@@ -147,29 +193,18 @@ $blackFriday = new AudioMedia("Black Friday", "discount.mp3");
 </head>
 
 <body>
-    <?php
-    $title = "Arom&eacute;'s Perfume Media Collection";
-    ?>
 
     <header>
         <h1><?php echo $title; ?></h1>
     </header>
 
     <main>
-        <?php
-        $mediaList = [
-            $womenPerfume,
-            $menPerfume,
-            $arome,
-            $blackFriday
-        ];
-        ?>
 
         <table>
             <thead>
                 <tr>
-                    <th>Media Type</th>
-                    <th>Content</th>
+                    <th>Lloji i Mediave</th>
+                    <th>Përmbajtja</th>
                 </tr>
             </thead>
             <tbody>
@@ -181,14 +216,10 @@ $blackFriday = new AudioMedia("Black Friday", "discount.mp3");
                 <?php endforeach; ?>
             </tbody>
         </table>
-
     </main>
-    <?php
-    $companyName = "Arom&eacute;";
-    ?>
 
     <footer>
-        <p>&copy; <?php echo date("Y") . " " . $companyName; ?> Perfume Media. All Rights Reserved.</p>
+        <p>&copy; <?php echo date("Y") . " " . $companyName; ?> Perfume Media. Të gjitha të drejtat e rezervuara.</p>
     </footer>
 
 </body>
