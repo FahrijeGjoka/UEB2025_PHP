@@ -159,4 +159,11 @@ $titlee = "Aromé's Perfumes";
 $mainTitlee = &$titlee; 
 
 $mainTitlee = "aromé's perfumes";
+
+//
+function doubleUsage(&$usage) {
+    $usage *= 1.2;
+}
+doubleUsage($leastUsedPerfumes["Jaguar Classic Black"]);
+
 ?>

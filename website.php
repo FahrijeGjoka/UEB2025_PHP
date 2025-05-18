@@ -165,7 +165,7 @@ include_once("cookies_homepage.php");
 
                         $rank = 1;
                         foreach ($leastUsedPerfumes as $name => $uses) {
-                            echo "<li><strong>Top $rank:</strong> $name - <em>$uses uses</em></li>";
+                            echo "<li><strong>Top $rank:</strong> <span style='color: #eacaca;'>$name</span> - <em>$uses uses</em></li>";
                             $rank++;
                         }
                         ?>
