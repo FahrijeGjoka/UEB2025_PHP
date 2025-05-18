@@ -160,7 +160,7 @@ $mainTitlee = &$titlee;
 
 $mainTitlee = "aromé's perfumes";
 
-//
+//Përcjellja përmes referencës
 function doubleUsage(&$usage) {
     $usage *= 1.2;
 }
