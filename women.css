@@ -7,20 +7,21 @@ body {
   font-family: Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #333;
+
 }
 a{
   text-decoration: none;
-  color: #2c3e50;
+  color: red;
+
 }
-header {
+/* header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: #eacaca;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .logo {
   font-size: 24px;
@@ -56,6 +57,7 @@ header {
 .cart a {
   color: #333;
   text-decoration: none;
+
 }
 .cart-items {
   display: inline-block;
@@ -67,6 +69,7 @@ header {
   border-radius: 50%;
   margin-left: 5px;
 }
+
 
 .cart-sidebar {
     position: fixed;
@@ -166,6 +169,7 @@ header {
   width: 300px;
 
 }
+
 .product img {
   width: 100%;
   height: 300px;
