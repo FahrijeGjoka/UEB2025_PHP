@@ -143,23 +143,17 @@ $welcome = new WelcomeMessage("Online Shop");
 
         <header>
             <div class="logo"><?php echo $GLOBALS['site_name']; ?></div>
-
-         <div class="nav-bar">
-            <?php
-            $navItems = [
-                ["label" => "HOMEPAGE", "href" => "#", "class" => "link 1"],
-                ["label" => "WOMEN", "href" => "women.php", "class" => "link 4"],
-                ["label" => "MEN", "href" => "men.php", "class" => "link 4"],
-                ["label" => "GALLERY", "href" => "gallery.html", "class" => "link 5"],
-                ["label" => "ABOUT US", "href" => "aboutus.php", "class" => "link 7"],
-                ["label" => "CONTACT", "href" => "contactus.php", "class" => "link 8"]
-                ];
-
-                foreach ($navItems as $item) {
-                    echo '<a class="' . $item['class'] . '" href="' . $item['href'] . '">' . $item['label'] . '</a>';
-                }
-            ?>
-        </div>
+            <nav>
+              
+              <ul>
+                <li><a href="Website.php">Homepage</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="men.php">Men</a></li>
+                <li><a href="gallery.php">Gallery</a></li>
+                <li><a href="aboutus.php">About Us</a></li>
+                <li><a href="contactus.php">Contact</a></li>
+              </ul>
+            </nav>
           
             <div class="cart">
               <a href="#">Cart</a>
@@ -280,4 +274,5 @@ $(function(){
         
           
     </body>
-</html>         
+</html>
+         

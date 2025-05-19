@@ -67,6 +67,39 @@ header {
   border-radius: 50%;
   margin-left: 5px;
 }
+
+.cart-sidebar {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 350px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-item {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
 .hero {
   background:rgb(255, 240, 245);;
   padding: 100px 0;
