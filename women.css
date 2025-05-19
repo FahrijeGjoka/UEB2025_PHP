@@ -11,6 +11,245 @@ body {
   background-color: green;
   
 }
+
+/* Light Theme (Default) */
+body.light {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --header-bg: #ffffff;
+    --header-border: #e9ecef;
+    --product-bg: #ffffff;
+    --product-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    --border-color: #dee2e6;
+    --price-color: #d63384;
+    --btn-bg: #6f42c1;
+    --btn-hover: #5a32a3;
+    --welcome-bg: #e9ecef;
+    --welcome-border: #ced4da;
+    --menu-bg: #ffffff;
+    --menu-text: #495057;
+    --menu-hover: #f1f3f5;
+}
+
+/* Dark Theme - Përshtatur me stilin ekzistues */
+body.dark {
+   --message-bg: #000000;       /* E zezë për daily message */
+    --section-title-bg: #000000; /* E zezë për titujt e seksioneve */
+    --section-title-text: #bb86fc; /* Vjollcë e hapur për tekstin */
+    --message-border: #bb86fc;   
+    --bg-color: #1a1a2e;
+    --text-color: #f0f0f0;
+    --header-bg: #0f0c29;
+    --header-border: #24243e;
+    --product-bg: #16213e;
+    --product-shadow: 0 0 15px rgba(102, 51, 153, 0.2);
+    --border-color: #24243e;
+    --price-color: #00d1cd;
+    --btn-bg: #6a3093;
+    --btn-hover: #5a1d8a;
+    --welcome-bg: #24243e;
+    --welcome-border: #6a3093;
+    --menu-bg: #0f0c29;
+    --menu-text: #f0f0f0;
+    --menu-hover: #6a3093;
+}
+
+/* Aplikimi i Dark Theme */
+body.dark {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+body.dark header {
+    background-color: var(--header-bg);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-bottom-color: var(--header-border);
+}
+
+body.dark .logo,
+body.dark nav a,
+body.dark .cart a {
+    color: var(--text-color);
+}
+
+body.dark nav a:hover {
+    color: #bb86fc;
+}
+
+body.dark .cart-items {
+    background: var(--price-color);
+    color: var(--header-bg);
+}
+
+body.dark .hero {
+    background: linear-gradient(to right, #0f0c29, #24243e);
+}
+
+body.dark .products {
+    background: var(--header-bg);
+}
+.mesazhi{
+  color: black;
+}
+
+body.dark .products h2 {
+    color: var(--price-color);
+}
+
+body.dark .product {
+    background: var(--product-bg);
+    box-shadow: var(--product-shadow);
+    border-color: var(--border-color);
+}
+
+body.dark .product:hover {
+    box-shadow: 0 5px 20px rgba(102, 51, 153, 0.4);
+}
+
+body.dark .price {
+    color: var(--price-color);
+}
+body.dark .ntitle{
+  color: black;
+}
+
+body.dark .btn,
+body.dark .product a {
+    background: var(--btn-bg);
+    color: white;
+}
+
+body.dark .btn:hover,
+body.dark .product a:hover {
+    background: var(--btn-hover);
+}
+
+body.dark footer {
+    background: var(--header-bg);
+    color: var(--text-color);
+    border-top-color: var(--border-color);
+}
+
+body.dark .daily-message {
+    background: var(--welcome-bg);
+    border-left-color: var(--price-color);
+}
+
+body.dark #menu {
+    background: var(--menu-bg);
+}
+
+body.dark #menu li a {
+    color: var(--menu-text);
+}
+
+body.dark #menu li:hover {
+    background: var(--menu-hover);
+}
+
+/* Ruajmë të njëjtat media queries */
+@media (max-width: 768px) {
+    .product {
+        flex: 0 1 calc(50% - 40px); 
+    }
+}
+
+@media (max-width: 480px) {
+    .product {
+        flex: 0 1 calc(100% - 20px); 
+    }
+}
+
+
+
+/* Base Styles */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+header {
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--header-border);
+}
+
+/* Product Cards */
+.product {
+    background-color: var(--product-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--product-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.price {
+    color: var(--price-color);
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+    background-color: var(--btn-bg);
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover);
+    color: white;
+}
+
+/* Welcome Message */
+.welcome-message {
+    color: var(--text-color);
+}
+
+/* Menu */
+#menu {
+    background-color: var(--menu-bg);
+}
+
+#menu li a {
+    color: var(--menu-text);
+}
+
+#menu li:hover {
+    background-color: var(--menu-hover);
+}
+
+/* Theme Switcher */
+.theme-switcher {
+    padding: 8px 12px;
+    border-radius: 20px;
+    background-color: var(--btn-bg);
+    margin-left: 15px;
+}
+
+.theme-switcher a {
+    color: white !important;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--header-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Daily Message */
+.daily-message {
+    background-color: var(--welcome-bg);
+    border-left: 5px solid var(--price-color);
+}
 a{
   text-decoration: none;
   color: #2c3e50;

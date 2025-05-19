@@ -1,10 +1,22 @@
 <?php
+// Theme switcher functionality
+if (isset($_GET['theme'])) {
+    $theme = $_GET['theme'];
+    setcookie('theme', $theme, time() + (86400 * 30), "/"); // Cookie expires in 30 days
+    $_COOKIE['theme'] = $theme; // Update current session
+}
+
+// Get current theme or default to light
+$currentTheme = $_COOKIE['theme'] ?? 'light';
+
 $GLOBALS['site_name'] = "Online Shop";
 $GLOBALS['current_year'] = date('Y');
 $GLOBALS['currency'] = "$";
+
 function format_price($price) {
   return $GLOBALS['currency'] . number_format($price, 2);
 }
+
 class WelcomeMessage {
     private $siteName;
     private $currentDay;
@@ -25,7 +37,6 @@ class WelcomeMessage {
         return $this->slogans[array_rand($this->slogans)];
     }
     
-
     public function getDailyMessage() {
         switch ($this->currentDay) {
             case "Monday":
@@ -53,7 +64,7 @@ class WelcomeMessage {
 }
 
 function checkFreeShippingForProduct($price) {
-  if ($price >50 ) {
+  if ($price > 50) {
       return "Free Shipping!";
   } else {
       return "Shipping Cost: $3.99"; 
@@ -72,14 +83,12 @@ function sortProductsAscending($products) {
     foreach ($products as $product) {
       if ($product['price'] == $price) {
         $sortedProducts[] = $product;
-        break; // 
+        break;
       }
     }
   }
-
   return $sortedProducts;
 }
-
 
 $floral = [
   ["name" => "Valentino", "desc" => "Born In Roma Eau de Parfum", "price" => 35.98, "img" => "womanimg/valentino2.jpg.png"],
@@ -94,7 +103,6 @@ $floral = [
 
 $floral = sortProductsAscending($floral);
 
-
 $warmAndSpicy = [
   ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "womanimg/blackopium.jpg"],
   ["name" => "BURBERRY", "desc" => "Burberry Goddess Eau de Parfum", "price" => 39.94, "img" => "womanimg/burberry.jpg"],
@@ -105,7 +113,7 @@ $warmAndSpicy = [
   ["name" => "Ariana Grande", "desc" => "MOD Vanilla Eau de Parfum", "price" => 52.90, "img" => "womanimg/mod.jpg"],
   ["name" => "Viktor&Rolf", "desc" => "Flowerbomb Eau de Parfum", "price" => 49.98, "img" => "womanimg/download.jpg"]
 ];
-$warmAndSpicy=sortProductsAscending($warmAndSpicy);
+$warmAndSpicy = sortProductsAscending($warmAndSpicy);
 
 $fruitScent = [
   ["name" => "Tom Ford Bitter Peach", "desc" => "Bitter Peach Eau De Parfum Fragrance", "price" => 350.98, "img" => "womanimg/tomfordpeach.jpg"],
@@ -113,165 +121,158 @@ $fruitScent = [
   ["name" => "Tom Ford Lost Cherry", "desc" => "Lost Cherry Eau de Parfum Fragrance", "price" => 240.98, "img" => "womanimg/cherry.jpg"],
   ["name" => "Neroli Portofino ", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]
 ];
-$fruitScent=sortProductsAscending($fruitScent);
+$fruitScent = sortProductsAscending($fruitScent);
 
 $welcome = new WelcomeMessage("Online Shop");
-
-
 ?>
-
-
-
-
-
 <!DOCTYPE html>
 <html>
-    <head>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            Women
-        </title>
-        <link rel="stylesheet" href="women.css?v=1.1">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women</title>
+    <link rel="stylesheet" href="women.css?v=1.1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Theme switcher functionality
+        function getTheme() {
+            return document.cookie.split('; ').find(row => row.startsWith('theme='))?.split('=')[1] || 'light';
+        }
 
+        function setTheme(theme) {
+            document.body.className = theme;
+            document.cookie = `theme=${theme}; path=/; max-age=${60*60*24*30}`;
+            updateThemeButton(theme);
+        }
 
+        function updateThemeButton(theme) {
+            const themeSwitcher = document.querySelector('.theme-switcher a');
+            if (themeSwitcher) {
+                themeSwitcher.textContent = theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+                themeSwitcher.href = `?theme=${theme === 'light' ? 'dark' : 'light'}`;
+            }
+        }
 
-    </head>
+        document.querySelector('.theme-switcher a')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            const currentTheme = getTheme();
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
 
-    <body>
+        // Initialize theme
+        const initialTheme = getTheme();
+        document.body.className = initialTheme;
+        updateThemeButton(initialTheme);
 
-        <header>
-            <div class="logo"><?php echo $GLOBALS['site_name']; ?></div>
-            <nav>
-              
-              <ul>
+        // Existing cart functionality
+        const cartItems = document.querySelector('.cart-items');
+        let itemCount = 0;
+
+        const addToCartButtons = document.querySelectorAll('.btn');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                itemCount++;
+                cartItems.textContent = itemCount;
+            });
+        });
+
+        // Existing menu functionality
+        $("#menu").hide();
+        $("#menuBtn").on("mouseenter", function() {
+            $("#menu").slideDown(500);
+        });
+    });
+    </script>
+</head>
+<body class="<?php echo $currentTheme; ?>">
+    <header>
+        <div class="logo"><?php echo $GLOBALS['site_name']; ?></div>
+        <nav>
+            <ul>
                 <li><a href="Website.php">Homepage</a></li>
                 <li><a href="#">Women</a></li>
                 <li><a href="men.php">Men</a></li>
                 <li><a href="gallery.php">Gallery</a></li>
                 <li><a href="aboutus.php">About Us</a></li>
                 <li><a href="contactus.php">Contact</a></li>
-              </ul>
-            </nav>
-          
-            <div class="cart">
-              <a href="#">Cart</a>
-              <span class="cart-items">0</span>
-            </div>
-        
-          </header>
+            </ul>
+        </nav>
+        <div class="cart">
+            <a href="#">Cart</a>
+            <span class="cart-items">0</span>
+        </div>
+        <div class="theme-switcher">
+            <a href="?theme=<?php echo $currentTheme === 'light' ? 'dark' : 'light'; ?>">
+                <?php echo $currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'; ?>
+            </a>
+        </div>
+    </header>
 
-          <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid pink;">
-    <h3><?php echo $welcome->getDailyMessage(); ?></h3>
-  </div>
-        
+    <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid pink;">
+        <h3 class="mesazhi"><?php echo $welcome->getDailyMessage(); ?></h3>
+    </div>
 
-        <section class="hero">
-      
+    <section class="hero">
         <?php echo $welcome->displayWelcome(); ?>
-            <h2 ><?php echo $welcome->getRandomSlogan(); ?></h2>
-           
-
-            <button id="menuBtn"  >SCENTES</button>
-          <ul id="menu"  class="start" >
-          <li><a href="#floralscent">Floral Scent</a></li>
-          <li ><a href="#warmandspicy">Warm and Spicy</a></li>
-          <li ><a href="#fruitscent">Fruit Scent</a></li>
+        <h2><?php echo $welcome->getRandomSlogan(); ?></h2>
+        <button id="menuBtn">SCENTES</button>
+        <ul id="menu" class="start">
+            <li><a href="#floralscent">Floral Scent</a></li>
+            <li><a href="#warmandspicy">Warm and Spicy</a></li>
+            <li><a href="#fruitscent">Fruit Scent</a></li>
         </ul>
-        </section>
+    </section>
 
-          <section class="products">
-            <h2 style="font-size: 60px;" >Featured Products</h2>
+    <section class="products">
+        <h2 style="font-size: 60px;">Featured Products</h2>
 
-            <div id="floralscent" >
-            <h3 class="ntitle" >Floral Scent</h3>
+        <div id="floralscent">
+            <h3 class="ntitle">Floral Scent</h3>
             <?php foreach ($floral as $product): ?>
-      <div class="product">
-        <img src="<?php echo $product['img']; ?>" alt="Product Image">
-        <h3><?php echo $product['name']; ?></h3>
-        <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
-        <span class="price"><?php echo format_price($product['price']); ?></span>
-        <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
-        <a href="#" class="btn">Add to Cart</a>
-      </div>
-    <?php endforeach; ?>
-           
-           
-            </div>
+                <div class="product">
+                    <img src="<?php echo $product['img']; ?>" alt="Product Image">
+                    <h3><?php echo $product['name']; ?></h3>
+                    <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
+                    <span class="price"><?php echo format_price($product['price']); ?></span>
+                    <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
-      
+        <div id="warmandspicy">
+            <h3 class="ntitle">Warm And Spicy</h3>
+            <?php foreach ($warmAndSpicy as $product): ?>
+                <div class="product">
+                    <img src="<?php echo $product['img']; ?>" alt="Product Image">
+                    <h3><?php echo $product['name']; ?></h3>
+                    <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
+                    <span class="price"><?php echo format_price($product['price']); ?></span>
+                    <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
-            <div id="warmandspicy" >
-              <h3 class="ntitle" >Warm And Spicy</h3>
-              <?php foreach ($warmAndSpicy as $product): ?>
-      <div class="product">
-        <img src="<?php echo $product['img']; ?>" alt="Product Image">
-        <h3><?php echo $product['name']; ?></h3>
-        <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
-        <span class="price"><?php echo format_price($product['price']); ?></span>
-        <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
-        <a href="#" class="btn">Add to Cart</a>
-      </div>
-    <?php endforeach; ?>
-               
-              </div>
+        <div id="fruitscent">
+            <h3 class="ntitle">Fruit Scent</h3>
+            <?php foreach ($fruitScent as $product): ?>
+                <div class="product">
+                    <img src="<?php echo $product['img']; ?>" alt="Product Image">
+                    <h3><?php echo $product['name']; ?></h3>
+                    <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
+                    <span class="price"><?php echo format_price($product['price']); ?></span>
+                    <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
 
-              <div id="fruitscent" >
-                <h3 class="ntitle" >Fruit Scent</h3>
-                <?php foreach ($fruitScent as $product): ?>
-      <div class="product">
-        <img src="<?php echo $product['img']; ?>" alt="Product Image">
-        <h3><?php echo $product['name']; ?></h3>
-        <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
-        <span class="price"><?php echo format_price($product['price']); ?></span>
-        <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
-        <a href="#" class="btn">Add to Cart</a>
-      </div>
-    <?php endforeach; ?>
-                 
-                
-              </div>
-
-            </section>
-
-            <footer>
-                <p>&copy; <?php echo $GLOBALS['current_year'] . ' ' . $GLOBALS['site_name']; ?></p>
-              </footer> 
-              <script>
-
-const cartItems = document.querySelector('.cart-items');
-
-let itemCount = 0;
-
-
-const addToCartButtons = document.querySelectorAll('.btn');
-
-
-addToCartButtons.forEach(button => {
-  button.addEventListener('click', () => {
-   
-    itemCount++;
-    
-   
-    cartItems.textContent = itemCount;
-  });
-});
-
-$(function(){
-
-  $("#menu").hide();
-      
-      $("#menuBtn").on("mouseenter",function(){
-        $("#menu").slideDown(500);
-      });
-      
-    });
-
-
-
-          </script>
-        
-          
-    </body>
+    <footer>
+        <p>&copy; <?php echo $GLOBALS['current_year'] . ' ' . $GLOBALS['site_name']; ?></p>
+    </footer>
+</body>
 </html>
