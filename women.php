@@ -127,11 +127,16 @@ $welcome = new WelcomeMessage("Online Shop");
 <!DOCTYPE html>
 <html>
     <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Women</title>
+        <title>
+            Women
+        </title>
         <link rel="stylesheet" href="women.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
     </head>
 
     <body>
