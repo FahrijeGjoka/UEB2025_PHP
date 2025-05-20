@@ -110,7 +110,8 @@ new Perfume("Tom Ford Black Orchid", 139.99, "Tom Ford")
 ];
 
 // Produkti i dites bazuar ne indeksin e dites se javes.
-$dayIndex = date("w"); // 0-6 (e Diel - e Shtune)
+$dayIndex = date("w"); 
+// 0-6 (e Diel - e Shtune)
 $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
 
 
