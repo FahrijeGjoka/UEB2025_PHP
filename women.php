@@ -53,7 +53,7 @@ $cart_count = 0;
 foreach ($_SESSION['cart'] as $item) {
     $cart_count += $item['quantity'];
 }
-?>
+
 // Theme switcher functionality
 if (isset($_GET['theme'])) {
     $theme = $_GET['theme'];
@@ -180,13 +180,14 @@ $fruitScent = sortProductsAscending($fruitScent);
 
 $welcome = new WelcomeMessage("Online Shop");
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women</title>
-    <link rel="stylesheet" href="women.css?v=1.1">
+    <link rel="stylesheet" href="css/women.css?v=1.1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {

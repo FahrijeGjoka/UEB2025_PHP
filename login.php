@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="CSS/login.css?v=1.1">
+    <link rel="stylesheet" type="text/css" href="css/login.css?v=1.1">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
