@@ -368,7 +368,7 @@ include_once("cookies_homepage.php");
 
                     <td class="footer-section company-photo">
                         <h3><i><?php echo $kompania; ?></i></h3>
-                        <img src="company.avif" alt="Company Building" />
+                        <img src="images/company.avif" alt="Company Building" />
                     </td>
                 </tr>
             </table>

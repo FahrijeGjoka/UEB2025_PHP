@@ -4,7 +4,7 @@ $allPerfumes = ["Dior", "Chanel", "Gucci", "Tom Ford", "Prada", "YSL", "Good Gir
 if (isset($_POST['selected_perfume'])) {
     $selectedPerfume = $_POST['selected_perfume'];
     setcookie("favorite_perfume", $selectedPerfume, time() + (86400 * 7), "/");
-    header("Location: " . $_SERVER['PHP_SELF']); // refresh page to apply cookie
+    header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
 $cookieMessage = isset($_COOKIE['favorite_perfume'])
@@ -18,13 +18,11 @@ if (isset($_GET['delete_cookie'])) {
 }
 if (isset($_POST['setPhoto'])) {
     $selectedPhoto = $_POST['mainPhoto'];
-    setcookie("main_image", $selectedPhoto, time() + (86400 * 7), "/"); // Ruhet për 7 ditë
-    $_COOKIE['main_image'] = $selectedPhoto; // për përdorim menjëherë
+    $imagePath = "images/" . $selectedPhoto;
+    setcookie("main_image", $imagePath, time() + (86400 * 7), "/");
+    $_COOKIE['main_image'] = $imagePath;
 }
 
 // Vendosja e vlerave për foto
-$imageSrc = isset($_COOKIE['main_image']) ? $_COOKIE['main_image'] : "img_0107.jpg";
+$imageSrc = isset($_COOKIE['main_image']) ? $_COOKIE['main_image'] : "images/img_0107.jpg";
 $imageAlt = isset($_COOKIE['main_image']) ? pathinfo($_COOKIE['main_image'], PATHINFO_FILENAME) : "Default";
-
-
-?>
