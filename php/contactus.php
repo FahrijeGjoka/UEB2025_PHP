@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <head>
     <meta charset="UTF-8">
     <title>Contact Page</title>
-    <link rel="stylesheet" href="contactus.css?v=1.1">
+    <link rel="stylesheet" href="CSS/contactus.css?v=1.1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   </head>

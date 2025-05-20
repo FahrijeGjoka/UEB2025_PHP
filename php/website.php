@@ -11,7 +11,7 @@ include_once("cookies_homepage.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UEB24_Gr30</title>
-    <link rel="stylesheet" type="text/css" href="css/website.css?v=1.1">
+    <link rel="stylesheet" type="text/css" href="CSS/website.css">
     <script src="https://kit.fontawesome.com/5427edee06.js" crossorigin="anonymous"></script>
 
 </head>

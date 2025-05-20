@@ -1,5 +1,4 @@
 <?php
-<?php
 session_start();
 
 // Inicializoni shportën nëse nuk ekziston
@@ -376,3 +375,4 @@ $welcome = new WelcomeMessage("Online Shop");
     </footer>
 </body>
 </html>
+?>
