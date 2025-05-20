@@ -1,4 +1,60 @@
 <?php
+<?php
+session_start();
+
+// Inicializoni shportën nëse nuk ekziston
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+// Përpunoni shtimin në shportë
+if (isset($_POST['add_to_cart'])) {
+    $product_id = $_POST['product_id'];
+    
+    // Gjej produktin në listat e ndryshme
+    $product = null;
+    foreach ([$floral, $warmAndSpicy, $fruitScent] as $category) {
+        foreach ($category as $p) {
+            if (md5($p['name'] . $p['price']) == $product_id) {
+                $product = $p;
+                break 2;
+            }
+        }
+    }
+    
+    if ($product) {
+        // Kontrollo nëse produkti ekziston tashmë në shportë
+        $found = false;
+        foreach ($_SESSION['cart'] as &$item) {
+            if ($item['id'] == $product_id) {
+                $item['quantity']++;
+                $found = true;
+                break;
+            }
+        }
+        
+        if (!$found) {
+            $_SESSION['cart'][] = [
+                'id' => $product_id,
+                'name' => $product['name'],
+                'price' => $product['price'],
+                'image' => $product['img'],
+                'quantity' => 1
+            ];
+        }
+        
+        // Rifresko faqen pa dërguar sërish formën
+        header("Location: ".$_SERVER['PHP_SELF']);
+        exit;
+    }
+}
+
+// Llogarit numrin total të produkteve në shportë
+$cart_count = 0;
+foreach ($_SESSION['cart'] as $item) {
+    $cart_count += $item['quantity'];
+}
+?>
 // Theme switcher functionality
 if (isset($_GET['theme'])) {
     $theme = $_GET['theme'];
@@ -188,6 +244,7 @@ $welcome = new WelcomeMessage("Online Shop");
 </head>
 <body class="<?php echo $currentTheme; ?>">
     <header>
+
         <div class="logo"><?php echo $GLOBALS['site_name']; ?></div>
         <nav>
             <ul>
@@ -208,6 +265,38 @@ $welcome = new WelcomeMessage("Online Shop");
                 <?php echo $currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'; ?>
             </a>
         </div>
+          <div class="cart">
+        <a href="#" id="cart-toggle">Cart (<?php echo $cart_count; ?>)</a>
+        <div class="cart-dropdown" id="cart-dropdown">
+            <h3>Your Cart</h3>
+            <div class="cart-items-list">
+                <?php if (!empty($_SESSION['cart'])): ?>
+                    <?php foreach ($_SESSION['cart'] as $item): ?>
+                        <div class="cart-item">
+                            <img src="<?php echo $item['image']; ?>" alt="<?php echo $item['name']; ?>">
+                            <div class="cart-item-details">
+                                <h4><?php echo $item['name']; ?></h4>
+                                <p><?php echo format_price($item['price']); ?></p>
+                                <p>Quantity: <?php echo $item['quantity']; ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                    <div class="cart-total">
+                        Total: <?php 
+                            $total = 0;
+                            foreach ($_SESSION['cart'] as $item) {
+                                $total += $item['price'] * $item['quantity'];
+                            }
+                            echo format_price($total);
+                        ?>
+                    </div>
+                    <a href="checkout.php" class="btn">Checkout</a>
+                <?php else: ?>
+                    <p>Your cart is empty</p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
     </header>
 
     <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid pink;">
@@ -238,6 +327,11 @@ $welcome = new WelcomeMessage("Online Shop");
                     <span class="price"><?php echo format_price($product['price']); ?></span>
                     <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
                     <a href="#" class="btn">Add to Cart</a>
+                        <form method="post">
+        <input type="hidden" name="product_id" value="<?php echo md5($product['name'] . $product['price']); ?>">
+        <button type="submit" name="add_to_cart" class="btn">Add to Cart</button>
+    </form>
+
                 </div>
             <?php endforeach; ?>
         </div>
@@ -252,6 +346,11 @@ $welcome = new WelcomeMessage("Online Shop");
                     <span class="price"><?php echo format_price($product['price']); ?></span>
                     <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
                     <a href="#" class="btn">Add to Cart</a>
+                        <form method="post">
+        <input type="hidden" name="product_id" value="<?php echo md5($product['name'] . $product['price']); ?>">
+        <button type="submit" name="add_to_cart" class="btn">Add to Cart</button>
+    </form>
+
                 </div>
             <?php endforeach; ?>
         </div>
@@ -266,6 +365,7 @@ $welcome = new WelcomeMessage("Online Shop");
                     <span class="price"><?php echo format_price($product['price']); ?></span>
                     <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
                     <a href="#" class="btn">Add to Cart</a>
+                    
                 </div>
             <?php endforeach; ?>
         </div>
