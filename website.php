@@ -318,7 +318,7 @@ require_once 'db.php';
         </div>
 
         <div class="favorite-perfume-container" style="flex-direction: column;">
-            <p><?php echo $cookieMessage; ?></p>
+          
             <?php if (!empty($cookieDeleteStatus)): ?>
                 <p style="color: red;"><?php echo $cookieDeleteStatus; ?></p>
             <?php endif; ?>
