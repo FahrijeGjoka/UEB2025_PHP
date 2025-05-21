@@ -16,6 +16,7 @@ include_once("cookies_homepage.php");
 </head>
 
 <body onload="start()">
+    <?php include_once("cookie-banner.php"); ?>
     <div class="main">
         <div class="header">
             <p>

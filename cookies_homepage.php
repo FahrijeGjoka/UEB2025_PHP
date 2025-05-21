@@ -26,3 +26,4 @@ if (isset($_POST['setPhoto'])) {
 // Vendosja e vlerave për foto
 $imageSrc = isset($_COOKIE['main_image']) ? $_COOKIE['main_image'] : "images/img_0107.jpg";
 $imageAlt = isset($_COOKIE['main_image']) ? pathinfo($_COOKIE['main_image'], PATHINFO_FILENAME) : "Default";
+
