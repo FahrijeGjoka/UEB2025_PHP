@@ -1,83 +1,54 @@
 <?php
 session_start();
-require_once 'db.php';
 
-// Inicializoni shportën nëse nuk ekziston
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
 
-// Përpunoni shtimin në shportë
-if (isset($_POST['add_to_cart'])) {
-    $product_id = $_POST['product_id'];
-    
-    // Gjej produktin në listat e ndryshme
-    $product = null;
-    foreach ([$floral, $warmAndSpicy, $fruitScent] as $category) {
-        foreach ($category as $p) {
-            if (md5($p['name'] . $p['price']) == $product_id) {
-                $product = $p;
-                break 2;
-            }
-        }
-    }
-    
-    if ($product) {
-        // Kontrollo nëse produkti ekziston tashmë në shportë
-        $found = false;
-        foreach ($_SESSION['cart'] as &$item) {
-            if ($item['id'] == $product_id) {
-                $item['quantity']++;
-                $found = true;
-                break;
-            }
-        }
-        
-        if (!$found) {
-            $_SESSION['cart'][] = [
-                'id' => $product_id,
-                'name' => $product['name'],
-                'price' => $product['price'],
-                'image' => $product['img'],
-                'quantity' => 1
-            ];
-        }
-        
-        // Rifresko faqen pa dërguar sërish formën
-        header("Location: ".$_SERVER['PHP_SELF']);
-        exit;
-    }
-}
-
-// Llogarit numrin total të produkteve në shportë
-$cart_count = 0;
-foreach ($_SESSION['cart'] as $item) {
-    $cart_count += $item['quantity'];
-}
-
-// Theme switcher functionality
+// Theme switcher
 if (isset($_GET['theme'])) {
     $theme = $_GET['theme'];
-    setcookie('theme', $theme, time() + (86400 * 30), "/"); // Cookie expires in 30 days
-    $_COOKIE['theme'] = $theme; // Update current session
+    setcookie('theme', $theme, time() + (86400 * 30), "/");
+    $_COOKIE['theme'] = $theme;
 }
 
-// Get current theme or default to light
 $currentTheme = $_COOKIE['theme'] ?? 'light';
 
+// Gjëra globale
 $GLOBALS['site_name'] = "Online Shop";
 $GLOBALS['current_year'] = date('Y');
 $GLOBALS['currency'] = "$";
 
+// Funksione ndihmëse
 function format_price($price) {
-  return $GLOBALS['currency'] . number_format($price, 2);
+    return $GLOBALS['currency'] . number_format($price, 2);
+}
+
+function checkFreeShippingForProduct($price) {
+    return $price > 50 ? "Free Shipping!" : "Shipping Cost: $3.99";
+}
+
+function shkurtoPershkrimin($desc) {
+    return preg_replace("/\bEau de Parfum\b/i", "EDP", $desc);
+}
+
+function sortProductsAscending($products) {
+    $prices = array_column($products, 'price');
+    sort($prices);
+    $sorted = [];
+    foreach ($prices as $price) {
+        foreach ($products as $product) {
+            if ($product['price'] == $price) {
+                $sorted[] = $product;
+                break;
+            }
+        }
+    }
+    return $sorted;
 }
 
 class WelcomeMessage {
     private $siteName;
     private $currentDay;
     private $slogans;
-    
+
     public function __construct($siteName) {
         $this->siteName = $siteName;
         $this->currentDay = date("l");
@@ -88,96 +59,58 @@ class WelcomeMessage {
             "Style. Fragrance. You."
         ];
     }
-    
+
     public function getRandomSlogan() {
         return $this->slogans[array_rand($this->slogans)];
     }
-    
+
     public function getDailyMessage() {
         switch ($this->currentDay) {
-            case "Monday":
-                return "Happy Monday! Fresh week, fresh scents!";
-            case "Tuesday":
-                return "Tuesday Treat! Free shipping on all orders!";
-            case "Wednesday":
-                return "Midweek Special! Buy 2, get 1 free!";
-            case "Thursday":
-                return "Thursday Thrill! 15% off all men's fragrances!";
-            case "Friday":
-                return "Friday Deal! Get 10% off!";
-            case "Saturday":
-                return "Weekend Vibes! 20% off select perfumes!";
-            case "Sunday":
-                return "Sunday Relax! Enjoy free samples with your order!";
-            default:
-                return "Welcome to " . $this->siteName;
+            case "Monday": return "Happy Monday! Fresh week, fresh scents!";
+            case "Tuesday": return "Tuesday Treat! Free shipping on all orders!";
+            case "Wednesday": return "Midweek Special! Buy 2, get 1 free!";
+            case "Thursday": return "Thursday Thrill! 15% off all men's fragrances!";
+            case "Friday": return "Friday Deal! Get 10% off!";
+            case "Saturday": return "Weekend Vibes! 20% off select perfumes!";
+            case "Sunday": return "Sunday Relax! Enjoy free samples with your order!";
+            default: return "Welcome to " . $this->siteName;
         }
     }
-    
+
     public function displayWelcome() {
         return "<h1 class='welcome-message'>Welcome to {$this->siteName}</h1>";
     }
 }
 
-function checkFreeShippingForProduct($price) {
-  if ($price > 50) {
-      return "Free Shipping!";
-  } else {
-      return "Shipping Cost: $3.99"; 
-  }
-}
-
-function shkurtoPershkrimin($desc) {
-  return preg_replace("/\bEau de Parfum\b/i", "EDP", $desc);
-}
-
-function sortProductsAscending($products) {
-  $prices = array_column($products, 'price');
-  sort($prices);
-  $sortedProducts = [];
-  foreach ($prices as $price) {
-    foreach ($products as $product) {
-      if ($product['price'] == $price) {
-        $sortedProducts[] = $product;
-        break;
-      }
-    }
-  }
-  return $sortedProducts;
-}
-
-$floral = [
-  ["name" => "Valentino", "desc" => "Born In Roma Eau de Parfum", "price" => 35.98, "img" => "womanimg/valentino2.jpg.png"],
+// Popullo produktet dhe llogarit karrocën
+$floral = [  ["name" => "Valentino", "desc" => "Born In Roma Eau de Parfum", "price" => 35.98, "img" => "womanimg/valentino2.jpg.png"],
   ["name" => "BURBERYY", "desc" => "Her Eau de Parfum", "price" => 39.97, "img" => "womanimg/burberry.jpg"],
   ["name" => "Ariana Grande", "desc" => "MOD Blush Eau de Parfum", "price" => 29.98, "img" => "womanimg/ariana.jpg"],
   ["name" => "Carolina Herrera", "desc" => "Good Girl Blush Eau de Parfum", "price" => 19.98, "img" => "womanimg/carolina.jpg"],
   ["name" => "Yves Saint Laurent", "desc" => "Libre Eau De Parfum", "price" => 69.98, "img" => "womanimg/Yves Saint Laurent.jpg"],
   ["name" => "JIMMY CHOO", "desc" => "I want Choo Eau de Parfum", "price" => 33.98, "img" => "womanimg/JIMMY CHOO.jpg"],
   ["name" => "Prada", "desc" => "Paradoce Eau de Parfum", "price" => 59.98, "img" => "womanimg/Prada.jpg"],
-  ["name" => "Gucci", "desc" => "Gardenia Eau de Parfum", "price" => 49.98, "img" => "womanimg/Gucci.jpg"]
-];
-
+  ["name" => "Gucci", "desc" => "Gardenia Eau de Parfum", "price" => 49.98, "img" => "womanimg/Gucci.jpg"]]; // produktet e floral
 $floral = sortProductsAscending($floral);
-
-$warmAndSpicy = [
-  ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "womanimg/blackopium.jpg"],
+$warmAndSpicy = [ ["name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "womanimg/blackopium.jpg"],
   ["name" => "BURBERRY", "desc" => "Burberry Goddess Eau de Parfum", "price" => 39.94, "img" => "womanimg/burberry.jpg"],
   ["name" => "Ariana Grande", "desc" => "Cloud Eau de Parfum", "price" => 24.98, "img" => "womanimg/Ariana Grande.jpg"],
   ["name" => "PHLUR", "desc" => "Body & Hair Fragrance Mist", "price" => 39.92, "img" => "womanimg/PHLUR.jpg"],
   ["name" => "Kayali", "desc" => "Vanilla Candy Rock Sugar", "price" => 29.98, "img" => "womanimg/Kayali.jpg"],
   ["name" => "Opium Red", "desc" => "Black Opium Eau de Parfum", "price" => 39.90, "img" => "womanimg/opiumred.jpg"],
   ["name" => "Ariana Grande", "desc" => "MOD Vanilla Eau de Parfum", "price" => 52.90, "img" => "womanimg/mod.jpg"],
-  ["name" => "Viktor&Rolf", "desc" => "Flowerbomb Eau de Parfum", "price" => 49.98, "img" => "womanimg/download.jpg"]
-];
+  ["name" => "Viktor&Rolf", "desc" => "Flowerbomb Eau de Parfum", "price" => 49.98, "img" => "womanimg/download.jpg"]]; // produktet warmAndSpicy
 $warmAndSpicy = sortProductsAscending($warmAndSpicy);
-
-$fruitScent = [
-  ["name" => "Tom Ford Bitter Peach", "desc" => "Bitter Peach Eau De Parfum Fragrance", "price" => 350.98, "img" => "womanimg/tomfordpeach.jpg"],
+$fruitScent = [  ["name" => "Tom Ford Bitter Peach", "desc" => "Bitter Peach Eau De Parfum Fragrance", "price" => 350.98, "img" => "womanimg/tomfordpeach.jpg"],
   ["name" => "Tom Ford", "desc" => "Fucking Fabulous Eau de Parfum Fragrance", "price" => 399.98, "img" => "womanimg/vanile.jpg"],
   ["name" => "Tom Ford Lost Cherry", "desc" => "Lost Cherry Eau de Parfum Fragrance", "price" => 240.98, "img" => "womanimg/cherry.jpg"],
-  ["name" => "Neroli Portofino ", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]
-];
+  ["name" => "Neroli Portofino ", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]]; // produktet e fruit scent
 $fruitScent = sortProductsAscending($fruitScent);
+
+$cart_count = 0;
+foreach ($_SESSION['cart'] as $item) {
+    $cart_count += $item['quantity'];
+}
 
 $welcome = new WelcomeMessage("Online Shop");
 ?>
@@ -330,7 +263,7 @@ $welcome = new WelcomeMessage("Online Shop");
                     <a href="#" class="btn">Add to Cart</a>
                         <form method="post">
         <input type="hidden" name="product_id" value="<?php echo md5($product['name'] . $product['price']); ?>">
-        <button type="submit" name="add_to_cart" class="btn">Add to Cart</button>
+  
     </form>
 
                 </div>
@@ -349,7 +282,7 @@ $welcome = new WelcomeMessage("Online Shop");
                     <a href="#" class="btn">Add to Cart</a>
                         <form method="post">
         <input type="hidden" name="product_id" value="<?php echo md5($product['name'] . $product['price']); ?>">
-        <button type="submit" name="add_to_cart" class="btn">Add to Cart</button>
+
     </form>
 
                 </div>
@@ -365,7 +298,7 @@ $welcome = new WelcomeMessage("Online Shop");
                     <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
                     <span class="price"><?php echo format_price($product['price']); ?></span>
                     <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
-                    <a href="#" class="btn">Add to Cart</a>
+       
                     
                 </div>
             <?php endforeach; ?>

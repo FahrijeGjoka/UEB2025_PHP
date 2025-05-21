@@ -8,20 +8,44 @@ $cookieConsentAccepted = isset($_COOKIE['cookie_consent']) && $_COOKIE['cookie_c
 if ($cookieConsentAccepted && isset($_POST['selected_perfume'])) {
     $selectedPerfume = $_POST['selected_perfume'];
     setcookie("favorite_perfume", $selectedPerfume, time() + (86400 * 7), "/");
+
+    // Vendos një flag për mesazh pas redirect
+    setcookie("perfume_set", "1", time() + 5, "/");
+
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
-
-// Mesazhi në bazë të cookies (nëse ekziston)
-$cookieMessage = isset($_COOKIE['favorite_perfume'])
-    ? "Your favorite perfume is: <strong>{$_COOKIE['favorite_perfume']}</strong>"
-    : "No favorite perfume selected yet.";
-
 // Fshij parfumin vetëm nëse cookies janë lejuar
-$cookieDeleteStatus = "";
 if ($cookieConsentAccepted && isset($_GET['delete_cookie'])) {
     setcookie("favorite_perfume", "", time() - 3600, "/");
+    unset($_COOKIE['favorite_perfume']); // ❗ heqja nga PHP
+
+    // Vendos një flag për mesazh pas redirect
+    setcookie("perfume_deleted", "1", time() + 5, "/");
+
+    // Largo query string pas veprimit
+    header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
+    exit();
+}
+
+// Mesazhe të përkohshme
+$cookieMessage = "";
+$cookieDeleteStatus = "";
+
+if (isset($_COOKIE['perfume_set'])) {
+    $cookieMessage = "Your favorite perfume has been saved!";
+    setcookie("perfume_set", "", time() - 3600, "/");
+}
+if (isset($_COOKIE['perfume_deleted'])) {
     $cookieDeleteStatus = "Favorite perfume has been deleted.";
+    setcookie("perfume_deleted", "", time() - 3600, "/");
+}
+
+// Mesazhi i zakonshëm
+if (isset($_COOKIE['favorite_perfume'])) {
+    $cookieMessage = "Your favorite perfume is: <strong>{$_COOKIE['favorite_perfume']}</strong> 🌸";
+} elseif (empty($cookieMessage)) {
+    $cookieMessage = "No favorite perfume selected yet.";
 }
 
 // Vendos fotografinë vetëm nëse është pranuar përdorimi i cookies

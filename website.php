@@ -1,6 +1,8 @@
 <?php
 include_once("homepage.php");
 include_once("cookies_homepage.php");
+include_once("suggest.php");
+require_once 'db.php';
 ?>
 
 <!DOCTYPE html>
@@ -212,12 +214,12 @@ include_once("cookies_homepage.php");
                 <div class="pic' . ($index + 1) . '">
                     <img src="' . $perfume["image"] . '" style="border-radius: 20%;" alt="' . $perfume["name"] . '">
                 </div>
-                <div class="ser-name' . ($index + 1) . '">
-                    <h3 style="color: #eacaca; font-style: italic;">' . $perfume["name"] . '</h3>
-                    <p style="color: #eacaca; font-style: inherit;">' . $perfume["desc"] . '</p>
-                    <p style="color: #ffcaca; font-weight: bold;">On Sale: ' . perfumeDiscount($perfume["price"]) . ' EUR</p>
-                </div>
-            </div>';
+                         <div class="ser-name' . ($index + 1) . '">
+                         <h3 style="color: #eacaca; font-style: italic;">' . $perfume["name"] . '</h3>
+                         <p style="color: #eacaca; font-style: inherit;">' . $perfume["desc"] . '</p>
+                         <p style="color: #ffcaca; font-weight: bold;">On Sale: ' . perfumeDiscount($perfume["price"]) . ' EUR</p>
+                     </div>
+                </div>';
                     }
                     ?>
                 </div>
@@ -285,12 +287,12 @@ include_once("cookies_homepage.php");
 
             <div class="contact-form" style="padding-top: 30px;">
                 <h2>Suggestions</h2>
-                <form method="POST" action="submit_suggestions.php">
+                <form method="post">
                     <input type="text" name="name" class="field" placeholder="Name" required>
                     <input type="email" name="email" class="field" placeholder="Email" required>
                     <input type="text" name="subject" class="field" placeholder="Subject" required>
                     <textarea name="message" class="field" placeholder="Message" required></textarea>
-                    <button type="submit" class="submit-button">Submit</button>
+                    <button type="submit" name="submit" class="submit-button">Submit</button>
                 </form>
             </div>
         </div>
@@ -316,7 +318,7 @@ include_once("cookies_homepage.php");
         </div>
 
         <div class="favorite-perfume-container" style="flex-direction: column;">
-            <p><?php echo $cookieMessage; ?></p>
+          
             <?php if (!empty($cookieDeleteStatus)): ?>
                 <p style="color: red;"><?php echo $cookieDeleteStatus; ?></p>
             <?php endif; ?>
@@ -378,6 +380,14 @@ include_once("cookies_homepage.php");
 
         <p class="footer-credit">© <span><?php echo $data; ?></span> <?php echo $kompania; ?>. All Rights Reserved.</p>
     </div>
+    <script>
+        setTimeout(function() {
+            var msg = document.getElementById("success-msg");
+            if (msg) {
+                msg.style.display = "none";
+            }
+        }, 1000);
+    </script>
 
 </body>
 

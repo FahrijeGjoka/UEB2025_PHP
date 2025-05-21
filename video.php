@@ -93,16 +93,16 @@ class SecurePerfumeMedia extends PerfumeMedia
 }
 
 try {
-    $invalidMedia = new SecurePerfumeMedia("", "missing.mp4"); // Përjashtim qëllimisht
+  //  $invalidMedia = new SecurePerfumeMedia("", "missing.mp4"); 
 } catch (Exception $e) {
     echo "<p style='color:red;'>Përjashtim i kapur: " . $e->getMessage() . "</p>";
 }
 
 // KRIJIMI I OBJEKTEVE
-$womenPerfume = new WomensPerfume("Women's Perfume", "women_perfumes.mp4");
-$menPerfume = new MensPerfume("Men's Perfume", "men_perfumes.mp4");
-$arome = new AudioMedia("Arom&eacute;", "arome.mp3");
-$blackFriday = new AudioMedia("Black Friday", "discount.mp3");
+$womenPerfume = new WomensPerfume("Women's Perfume", "video/women perfumes.mp4");
+$menPerfume = new MensPerfume("Men's Perfume", "video/men perfumes.mp4");
+$arome = new AudioMedia("Arom&eacute;", "video/arome.mp3");
+$blackFriday = new AudioMedia("Black Friday", "video/discount.mp3");
 
 // KËRKESA 25: GABIM I PERSONALIZUAR
 if (empty($arome->getFilePath())) {
