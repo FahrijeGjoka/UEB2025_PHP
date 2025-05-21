@@ -1,6 +1,8 @@
 <?php
 include_once("homepage.php");
 include_once("cookies_homepage.php");
+include_once("suggest.php");
+require_once 'db.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,12 +13,12 @@ include_once("cookies_homepage.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UEB24_Gr30</title>
-    <link rel="stylesheet" type="text/css" href="CSS/website.css">
+    <link rel="stylesheet" href="css/website.css?v=1.1">
     <script src="https://kit.fontawesome.com/5427edee06.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body onload="start()">
+    <?php include_once("cookie-banner.php"); ?>
     <div class="main">
         <div class="header">
             <p>
@@ -45,8 +47,8 @@ include_once("cookies_homepage.php");
 
             <div class="container">
 
-                <form action="<?php echo $searchAction; ?>" method="get" class="search-bar">
-                    <input type="text" name="s" id="s" placeholder="<?php echo $searchPlaceholder; ?>">
+                <form action="search.php" method="post" class="search-bar">
+                    <input type="text" name="s" id="s" placeholder="search perfume..." required>
                     <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
                 </form>
             </div>
@@ -212,12 +214,12 @@ include_once("cookies_homepage.php");
                 <div class="pic' . ($index + 1) . '">
                     <img src="' . $perfume["image"] . '" style="border-radius: 20%;" alt="' . $perfume["name"] . '">
                 </div>
-                <div class="ser-name' . ($index + 1) . '">
-                    <h3 style="color: #eacaca; font-style: italic;">' . $perfume["name"] . '</h3>
-                    <p style="color: #eacaca; font-style: inherit;">' . $perfume["desc"] . '</p>
-                    <p style="color: #ffcaca; font-weight: bold;">On Sale: ' . perfumeDiscount($perfume["price"]) . ' EUR</p>
-                </div>
-            </div>';
+                         <div class="ser-name' . ($index + 1) . '">
+                         <h3 style="color: #eacaca; font-style: italic;">' . $perfume["name"] . '</h3>
+                         <p style="color: #eacaca; font-style: inherit;">' . $perfume["desc"] . '</p>
+                         <p style="color: #ffcaca; font-weight: bold;">On Sale: ' . perfumeDiscount($perfume["price"]) . ' EUR</p>
+                     </div>
+                </div>';
                     }
                     ?>
                 </div>
@@ -285,12 +287,12 @@ include_once("cookies_homepage.php");
 
             <div class="contact-form" style="padding-top: 30px;">
                 <h2>Suggestions</h2>
-                <form method="POST" action="submit_suggestions.php">
+                <form method="post">
                     <input type="text" name="name" class="field" placeholder="Name" required>
                     <input type="email" name="email" class="field" placeholder="Email" required>
                     <input type="text" name="subject" class="field" placeholder="Subject" required>
                     <textarea name="message" class="field" placeholder="Message" required></textarea>
-                    <button type="submit" class="submit-button">Submit</button>
+                    <button type="submit" name="submit" class="submit-button">Submit</button>
                 </form>
             </div>
         </div>
@@ -316,7 +318,7 @@ include_once("cookies_homepage.php");
         </div>
 
         <div class="favorite-perfume-container" style="flex-direction: column;">
-            <p><?php echo $cookieMessage; ?></p>
+          
             <?php if (!empty($cookieDeleteStatus)): ?>
                 <p style="color: red;"><?php echo $cookieDeleteStatus; ?></p>
             <?php endif; ?>
@@ -350,7 +352,7 @@ include_once("cookies_homepage.php");
 
                     <td class="footer-section social-media">
                         <h3><i>Follow Us</i></h3>
-                        <?php 
+                        <?php
                         foreach ($socials as $social): ?>
                             <a href="#" class="social-icon"><?php echo $social; ?></a><br>
                         <?php endforeach; ?>
@@ -369,7 +371,7 @@ include_once("cookies_homepage.php");
 
                     <td class="footer-section company-photo">
                         <h3><i><?php echo $kompania; ?></i></h3>
-                        <img src="company.avif" alt="Company Building" />
+                        <img src="images/company.avif" alt="Company Building" />
                     </td>
                 </tr>
             </table>
@@ -378,37 +380,13 @@ include_once("cookies_homepage.php");
 
         <p class="footer-credit">© <span><?php echo $data; ?></span> <?php echo $kompania; ?>. All Rights Reserved.</p>
     </div>
-
-
     <script>
-        const submitButton = document.querySelector('.submit-button');
-        submitButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            alert('Button clicked!');
-        });
-
-        document.getElementById('searchButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            const searchQuery = document.getElementById('s').value.trim();
-            const parfume = searchForPerfume(searchQuery);
-
-            try {
-                if (!parfume) throw "Gabim: Parfumi nuk ekziston!";
-                console.log(parfume);
-                alert("Parfumi është gjetur!");
-            } catch (error) {
-                console.error(error);
-                alert(error);
+        setTimeout(function() {
+            var msg = document.getElementById("success-msg");
+            if (msg) {
+                msg.style.display = "none";
             }
-        });
-
-        function searchForPerfume(query) {
-            if (query === "") {
-                return null;
-            }
-            const parfumeList = ["Dior", "Chanel", "Gucci", "Tom Ford", "Prada", "YSL", "Good Girl", "Versace", "Armani", "Valentino"];
-            return parfumeList.includes(query) ? query : null;
-        }
+        }, 1000);
     </script>
 
 </body>

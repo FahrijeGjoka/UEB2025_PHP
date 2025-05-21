@@ -1,6 +1,6 @@
 <?php
-$searchAction = "";
-$searchPlaceholder = "Search...";
+$searchAction = "search.php";
+$searchPlaceholder = "Search perfume..";
 $brandName = "Arom&eacute;";
 $byline = "The best perfume seller";
 $socialLinks = [
@@ -18,7 +18,7 @@ $navItems = [
     ["label" => "ABOUT US", "href" => "aboutus.php", "class" => "link 7"],
     ["label" => "CONTACT", "href" => "contactus.php", "class" => "link 8"]
 ];
-$imageSrc = "img_0107.jpg";
+$imageSrc = "images/img_0107.jpg";
 $imageAlt = "Arom&eacute;";
 $mainTitle = '"Unveiling Elegance, One Scent at a Time."';
 $description = 'At <u>Arom&eacute;</u>, we take pride in being recognized as the best-selling perfume company,
@@ -52,23 +52,23 @@ $perfumes = [
     [
         "name" => "Gucci Flora",
         "desc" => "Soft and romantic, featuring notes like rose, jasmine, or lily.",
-        "image" => "floral.webp",
+        "image" => "images/floral.webp",
         "price" => 89.99
     ],
     [
         "name" => "Chanel Allure Home",
         "desc" => "Warm and sensual with hints of amber, vanilla, and exotic spices.",
-        "image" => "ALLURE.avif",
+        "image" => "images/ALLURE.avif",
         "price" => 120.00
     ],
     [
         "name" => "Tom Ford Noir De Noir ",
         "desc" => "Warm, earthy, and grounding scents like sandalwood, cedar, and vetiver.",
-        "image" => "noir tomford.avif",
+        "image" => "images/noir tomford.avif",
         "price" => 180.50
     ]
 ];
-$galleryLinkHref = "gallery.html";
+$galleryLinkHref = "gallery.php";
 $galleryLinkText = "View Our Gallery ...";
 $sectionTitle = "What Our Clients Say";
 $sectionStyle = "font-style: italic; color: #eacaca;";

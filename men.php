@@ -123,7 +123,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Shop</title>
-  <link rel="stylesheet" href="CSS/men.css?v=1.1">
+  <link rel="stylesheet" href="css/men.css?v=1.1">
 </head>
 <body>
   <header>
