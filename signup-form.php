@@ -13,7 +13,7 @@ $address = $_GET['address'] ?? '';
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
-    <link rel="stylesheet" href="c">
+    <link rel="stylesheet" href="css/signup.css?v=1.1">
 </head>
 <body>
     <h2>Regjistrohu</h2>
