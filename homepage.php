@@ -1,6 +1,6 @@
 <?php
-$searchAction = "";
-$searchPlaceholder = "Search...";
+$searchAction = "search.php";
+$searchPlaceholder = "Search perfume..";
 $brandName = "Arom&eacute;";
 $byline = "The best perfume seller";
 $socialLinks = [

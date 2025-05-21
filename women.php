@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'db.php';
 
 // Inicializoni shportën nëse nuk ekziston
 if (!isset($_SESSION['cart'])) {

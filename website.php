@@ -45,8 +45,8 @@ include_once("cookies_homepage.php");
 
             <div class="container">
 
-                <form action="<?php echo $searchAction; ?>" method="get" class="search-bar">
-                    <input type="text" name="s" id="s" placeholder="<?php echo $searchPlaceholder; ?>">
+                <form action="search.php" method="post" class="search-bar">
+                    <input type="text" name="s" id="s" placeholder="search perfume..." required>
                     <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
                 </form>
             </div>
@@ -350,7 +350,7 @@ include_once("cookies_homepage.php");
 
                     <td class="footer-section social-media">
                         <h3><i>Follow Us</i></h3>
-                        <?php 
+                        <?php
                         foreach ($socials as $social): ?>
                             <a href="#" class="social-icon"><?php echo $social; ?></a><br>
                         <?php endforeach; ?>
@@ -378,38 +378,6 @@ include_once("cookies_homepage.php");
 
         <p class="footer-credit">© <span><?php echo $data; ?></span> <?php echo $kompania; ?>. All Rights Reserved.</p>
     </div>
-
-
-    <script>
-        const submitButton = document.querySelector('.submit-button');
-        submitButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            alert('Button clicked!');
-        });
-
-        document.getElementById('searchButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            const searchQuery = document.getElementById('s').value.trim();
-            const parfume = searchForPerfume(searchQuery);
-
-            try {
-                if (!parfume) throw "Gabim: Parfumi nuk ekziston!";
-                console.log(parfume);
-                alert("Parfumi është gjetur!");
-            } catch (error) {
-                console.error(error);
-                alert(error);
-            }
-        });
-
-        function searchForPerfume(query) {
-            if (query === "") {
-                return null;
-            }
-            const parfumeList = ["Dior", "Chanel", "Gucci", "Tom Ford", "Prada", "YSL", "Good Girl", "Versace", "Armani", "Valentino"];
-            return parfumeList.includes(query) ? query : null;
-        }
-    </script>
 
 </body>
 
