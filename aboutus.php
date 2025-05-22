@@ -1,16 +1,20 @@
 <?php
 /*session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
+function handleUserSession() {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit();
+    }
+
+    if (!isset($_SESSION['visit_count'])) {
+        $_SESSION['visit_count'] = 1;
+    } else {
+        $_SESSION['visit_count']++;
+    }
 }
 
-if (!isset($_SESSION['visit_count'])) {
-    $_SESSION['visit_count'] = 1;
-} else {
-    $_SESSION['visit_count']++;
-}*/
+handleUserSession();*/
 
 $pageTitle = "About Us - aromé";
 $brandName = "Aromé";
@@ -96,11 +100,11 @@ echo "<footer class='site-footer'>
 foreach ($socialLinks as $platform => $url) {
     echo "<a href='$url' target='_blank' aria-label='Follow us on $platform'><i class='fab fa-$platform'></i></a>";
 }
-echo "</div>
+/*echo "</div>
       <p>Ju keni vizituar këtë faqe " . $_SESSION['visit_count'] . " herë gjatë këtij sesioni.</p>
       <p>&copy; " . date("Y") . " " . htmlspecialchars(strtolower($brandName)) . ". All Rights Reserved.</p>
       <p><a href='website.html' target='_blank'>Visit our official page</a></p>
-    </footer>";
+    </footer>";*/
 
 
 
