@@ -260,10 +260,10 @@ $welcome = new WelcomeMessage("Online Shop");
                     <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
                     <span class="price"><?php echo format_price($product['price']); ?></span>
                     <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
-                    <a href="#" class="btn">Add to Cart</a>
+               
                         <form method="post">
         <input type="hidden" name="product_id" value="<?php echo md5($product['name'] . $product['price']); ?>">
-  
+        <button type="submit" name="add_to_cart" class="btn">Add to Cart</button>
     </form>
 
                 </div>
@@ -282,7 +282,7 @@ $welcome = new WelcomeMessage("Online Shop");
                     <a href="#" class="btn">Add to Cart</a>
                         <form method="post">
         <input type="hidden" name="product_id" value="<?php echo md5($product['name'] . $product['price']); ?>">
-
+        <button type="submit" name="add_to_cart" class="btn">Add to Cart</button>
     </form>
 
                 </div>
@@ -298,7 +298,7 @@ $welcome = new WelcomeMessage("Online Shop");
                     <p><?php echo shkurtoPershkrimin($product['desc']); ?></p>
                     <span class="price"><?php echo format_price($product['price']); ?></span>
                     <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
-       
+                    <a href="#" class="btn">Add to Cart</a>
                     
                 </div>
             <?php endforeach; ?>
