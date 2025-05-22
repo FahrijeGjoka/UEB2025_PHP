@@ -2,7 +2,9 @@
 session_start();
 require 'db.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if (isset($_POST['username']) && isset($_POST['password']) &&
+    isset($_POST['name']) && isset($_POST['re_password']) &&
+    isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['address'])) {
 
     function validate($data) {
         return htmlspecialchars(stripslashes(trim($data)));
@@ -41,31 +43,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    // Kontrollo nëse username apo email ekziston
-    $stmt1 = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt1->execute([$username]);
-    if ($stmt1->rowCount() > 0) {
+    $check_username = "SELECT id FROM users WHERE username = '$username'";
+    $check_email = "SELECT id FROM users WHERE email = '$email'";
+
+    $result_username = mysqli_query($conn, $check_username);
+    $result_email = mysqli_query($conn, $check_email);
+
+    if (mysqli_num_rows($result_username) > 0) {
         header("Location: signup-form.php?error=Username already exists&$user_data");
         exit();
     }
 
-    $stmt2 = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt2->execute([$email]);
-    if ($stmt2->rowCount() > 0) {
-        header("Location: signup-form.php?error=Email already in use&$user_data");
+    if (mysqli_num_rows($result_email) > 0) {
+        header("Location: signup-form.php?error=Email already registered&$user_data");
         exit();
     }
 
-    // Hash fjalëkalimin
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    $hashed = password_hash($password, PASSWORD_BCRYPT);
+    $sql = "INSERT INTO users (username, password, name, email, phone, address) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ssssss", $username, $hashed, $name, $email, $phone, $address);
 
-    // INSERT përdoruesin
-    $stmt = $pdo->prepare("INSERT INTO users (username, password, name, email, phone, address) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$username, $hashed_password, $name, $email, $phone, $address]);
+    if (mysqli_stmt_execute($stmt)) {
+        header("Location: login.php?success=Account created successfully");
+        exit();
+    } else {
+        header("Location: signup-form.php?error=Something went wrong&$user_data");
+        exit();
+    }
 
-    header("Location: login.php?success=Account created successfully");
-    exit();
 } else {
     header("Location: signup-form.php");
     exit();
 }
+?>
