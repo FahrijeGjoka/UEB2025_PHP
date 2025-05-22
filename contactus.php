@@ -1,14 +1,17 @@
 <?php
-$message = "";
+$errors = [];
+$successMessages = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $num_perfum = intval(trim($_POST['products']));
+    $perfumeInterests = $_POST['perfume'] ?? []; 
+    $experience = $_POST['perfumes'] ?? '';
 
     if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/", $email)) {
-        $message = "<div class='error-message'>Invalid email format.</div>";
+        $errors[] = "Invalid email format.";
     } else {
-        $message = "<div class='success-message'>Thank you! Your email is valid!</div>";
+        $successMessages[] = "Thank you! Your email is valid!";
     }
 
     if ($num_perfum > 0) {
@@ -19,7 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $women = floor($num_perfum / 2) + 1;
             $men = floor($num_perfum / 2);
         }
-        $message .= "<div class='info-message'>We will place your order as: $women perfumes for Women and $men perfumes for Men.</div>";
+        $successMessages[] = "We will place your order as: $women perfumes for Women and $men perfumes for Men.";
+    } else {
+        $errors[] = "Please enter a valid number of perfumes.";
+    }
+    
+    if (!empty($perfumeInterests)) {
+        $interests = implode(", ", $perfumeInterests);
+        $successMessages[] = "You showed interest in: $interests.";
+    }
+    
+    if ($experience) {
+        $successMessages[] = "Your experience rating: $experience.";
     }
 }
 
@@ -55,8 +69,17 @@ $html = <<<HTML
 <main>
 HTML;
 
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        $html .= "<div class='error-message'>$error</div>";
+    }
+}
 
-$html .= $message;
+if (!empty($successMessages)) {
+    foreach ($successMessages as $msg) {
+        $html .= "<div class='success-message'>$msg</div>";
+    }
+}
 
 $html .= <<<HTML
     <form id="contactForm" action="contactus.php" method="POST">
@@ -74,8 +97,8 @@ $html .= <<<HTML
                 Are you interested in women or men perfumes?<br><br>
             </div>
             <div class="options">
-                <label><input type="checkbox" name="perfume" value="women"> Women</label>
-                <label><input type="checkbox" name="perfume" value="men"> Men</label>
+                <label><input type="checkbox" name="perfume[]" value="women"> Women</label>
+                <label><input type="checkbox" name="perfume[]" value="men"> Men</label>
             </div>
         </div>
 
