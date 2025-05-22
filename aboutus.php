@@ -1,5 +1,17 @@
 <?php
-// Të dhënat
+/*session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+if (!isset($_SESSION['visit_count'])) {
+    $_SESSION['visit_count'] = 1;
+} else {
+    $_SESSION['visit_count']++;
+}*/
+
 $pageTitle = "About Us - aromé";
 $brandName = "Aromé";
 $aboutText = "Aromé offers a diverse collection of perfumes crafted for both women and men. Blending premium ingredients with unique scents, our fragrances cater to every style and occasion, delivering elegance and individuality in every bottle.";
@@ -78,16 +90,19 @@ echo "<section id='contact'>
 
 echo "<button id='backToTopButton'>⬆️ Back to Top</button>";
 
-echo "<footer>
+echo "<footer class='site-footer'>
         <p>Follow us on:</p>
         <div class='footer-icons'>";
 foreach ($socialLinks as $platform => $url) {
-    echo "<a href='$url' target='_blank'><i class='fab fa-$platform'></i></a>";
+    echo "<a href='$url' target='_blank' aria-label='Follow us on $platform'><i class='fab fa-$platform'></i></a>";
 }
 echo "</div>
-        <p>&copy; " . date("Y") . " " . strtolower($brandName) . ". All Rights Reserved.</p>
-        <a href='website.html' target='_blank'>Visit our official page</a>
+      <p>Ju keni vizituar këtë faqe " . $_SESSION['visit_count'] . " herë gjatë këtij sesioni.</p>
+      <p>&copy; " . date("Y") . " " . htmlspecialchars(strtolower($brandName)) . ". All Rights Reserved.</p>
+      <p><a href='website.html' target='_blank'>Visit our official page</a></p>
     </footer>";
+
+
 
 echo "<script>
         const btn = document.getElementById('backToTopButton');
