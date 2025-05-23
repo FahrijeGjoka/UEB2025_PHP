@@ -29,10 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (!empty($perfumeInterests)) {
         $interests = implode(", ", $perfumeInterests);
+        setcookie("interest", $interests, time() + 3600); 
         $successMessages[] = "You showed interest in: $interests.";
     }
     
     if ($experience) {
+        setcookie("experience", $experience, time() + 3600); 
         $successMessages[] = "Your experience rating: $experience.";
     }
 }
@@ -147,6 +149,25 @@ document.getElementById("contactForm").addEventListener("submit", function(event
         event.preventDefault();
     } else {
         alert("Thank you! Your form has been submitted successfully.");
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    function getCookie(name) {
+        const value = "; " + document.cookie;
+        const parts = value.split("; " + name + "=");
+        if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+    const interest = getCookie("interest");
+    const experience = getCookie("experience");
+
+    if (experience === "excellent") {
+        document.body.style.backgroundColor = "#e6ffe6"; // sfond i gjelbert
+    } else if (interest && interest.includes("women")) {
+        document.body.style.backgroundColor = "#fff0f5"; // sfond pink
+    } else if (interest && interest.includes("men")) {
+        document.body.style.backgroundColor = "#f0f8ff"; // sfond blu
     }
 });
 </script>
