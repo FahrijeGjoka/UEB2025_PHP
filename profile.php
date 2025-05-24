@@ -21,7 +21,7 @@ if (!isset($_SESSION['user_id'])) {
         <a href="men.php">Men</a>
         <a href="women.php">Women</a>
         <a href="contact.php">Contact</a>
-        <a href="about.php">About</a>
+        <a href="aboutus.php">About</a>
         <a href="logout.php">Logout</a>
     </nav>
 </header>

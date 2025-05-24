@@ -1,20 +1,45 @@
 <?php
-/*session_start();
+session_start();
+require_once 'db.php';
 
-function handleUserSession() {
+function handleUserSession($conn) {
     if (!isset($_SESSION['user_id'])) {
         header("Location: login.php");
         exit();
     }
 
-    if (!isset($_SESSION['visit_count'])) {
-        $_SESSION['visit_count'] = 1;
+    $user_id = $_SESSION['user_id'];
+
+    $stmt = $conn->prepare("SELECT visits FROM uservisits WHERE userId = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+    
+        $stmt->bind_result($visit_count);
+        $stmt->fetch();
+        $stmt->close();
+
+        $visit_count++;
+        $update = $conn->prepare("UPDATE uservisits SET visits = ? WHERE userId = ?");
+        $update->bind_param("ii", $visit_count, $user_id);
+        $update->execute();
+        $update->close();
     } else {
-        $_SESSION['visit_count']++;
+       
+        $stmt->close();
+        $visit_count = 1;
+        $insert = $conn->prepare("INSERT INTO uservisits (userId, visits) VALUES (?, ?)");
+        $insert->bind_param("ii", $user_id, $visit_count);
+        $insert->execute();
+        $insert->close();
     }
+
+    $_SESSION['visit_count'] = $visit_count;
 }
 
-handleUserSession();*/
+handleUserSession($conn);
 
 $pageTitle = "About Us - aromé";
 $brandName = "Aromé";
@@ -52,75 +77,73 @@ function renderPerfumeTable($perfumes) {
     return $html;
 }
 
-echo "<!DOCTYPE html><html lang='en'><head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>$pageTitle</title>
-        <link rel='stylesheet' href='CSS/aboutus.css'>
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
-    </head><body>";
-
-
+echo "<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>$pageTitle</title>
+    <link rel='stylesheet' href='CSS/aboutus.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+</head>
+<body>";
 
 echo "<header>
-        <h1>$brandName</h1>
-        <nav>
-            <ul>
-                <li><a href='#'>Homepage</a></li>
-                <li><a href='#about'>About</a></li>
-                <li><a href='#types'>Types</a></li>
-                <li><a href='#contact'>Contact</a></li>
-            </ul>
-        </nav>
-    </header>";
+    <h1>$brandName</h1>
+    <nav>
+        <ul>
+            <li><a href='website.php'>Homepage</a></li>
+            <li><a href='#about'>About</a></li>
+            <li><a href='#types'>Types</a></li>
+            <li><a href='#contact'>Contact</a></li>
+        </ul>
+    </nav>
+</header>";
 
 echo "<section id='about'>
-        <h2>About " . strtolower($brandName) . "</h2>
-        <p>$aboutText</p>
-        <img src='images/lancome.jpg' alt='Perfume bottles' width=300>
-    </section>";
-
+    <h2>About " . strtolower($brandName) . "</h2>
+    <p>$aboutText</p>
+    <img src='images/lancome.jpg' alt='Perfume bottles' width='300'>
+</section>";
 
 echo "<section id='types'>
-        <h2>Types of Perfumes</h2>
-        <h3>Men's Perfumes</h3>" . renderPerfumeTable($menPerfumes) .
-      "<h3>Women's Perfumes</h3>" . renderPerfumeTable($womenPerfumes) .
-    "</section>";
+    <h2>Types of Perfumes</h2>
+    <h3>Men's Perfumes</h3>" . renderPerfumeTable($menPerfumes) . 
+    "<h3>Women's Perfumes</h3>" . renderPerfumeTable($womenPerfumes) . 
+"</section>";
 
 echo "<section id='contact'>
-        <h2>Contact Us</h2>
-        <p>Have questions? <a href='mailto:$contactEmail'>Email us</a> and we will get back to you soon!</p>
-    </section>";
+    <h2>Contact Us</h2>
+    <p>Have questions? <a href='mailto:$contactEmail'>Email us</a> and we will get back to you soon!</p>
+</section>";
 
 echo "<button id='backToTopButton'>⬆️ Back to Top</button>";
 
 echo "<footer class='site-footer'>
-        <p>Follow us on:</p>
-        <div class='footer-icons'>";
+    <p>Follow us on:</p>
+    <div class='footer-icons'>";
 foreach ($socialLinks as $platform => $url) {
     echo "<a href='$url' target='_blank' aria-label='Follow us on $platform'><i class='fab fa-$platform'></i></a>";
 }
-/*echo "</div>
-      <p>Ju keni vizituar këtë faqe " . $_SESSION['visit_count'] . " herë gjatë këtij sesioni.</p>
-      <p>&copy; " . date("Y") . " " . htmlspecialchars(strtolower($brandName)) . ". All Rights Reserved.</p>
-      <p><a href='website.html' target='_blank'>Visit our official page</a></p>
-    </footer>";*/
-
-
+echo "</div>
+    <p>Ju keni vizituar këtë faqe " . $_SESSION['visit_count'] . " herë në total.</p>
+    <p>&copy; " . date("Y") . " " . htmlspecialchars(strtolower($brandName)) . ". All Rights Reserved.</p>
+    <p><a href='website.html' target='_blank'>Visit our official page</a></p>
+</footer>";
 
 echo "<script>
-        const btn = document.getElementById('backToTopButton');
-        window.onscroll = function() {
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                btn.style.display = 'block';
-            } else {
-                btn.style.display = 'none';
-            }
-        };
-        btn.onclick = function() {
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        };
-    </script>";
+    const btn = document.getElementById('backToTopButton');
+    window.onscroll = function() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            btn.style.display = 'block';
+        } else {
+            btn.style.display = 'none';
+        }
+    };
+    btn.onclick = function() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+</script>";
 
 echo "</body></html>";
 ?>
