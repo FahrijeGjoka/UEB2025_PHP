@@ -21,7 +21,7 @@ switch ($day) {
         $message = "Friday Deal! Get 10% off!";
         break;
     case "Saturday":
-        $message = "Weekend Vibes! 20% off select perfumes!";
+        $message = "Weekend Vibes! 20% off select perfumes!!";
         break;
     case "Sunday":
         $message = "Sunday Relax! Enjoy our free samples with your order!";
