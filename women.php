@@ -120,7 +120,7 @@ class WelcomeMessage {
 
 // Produktet
 $floral = [
-    ["name" => "Valentino", "desc" => "Born In Roma Eau de Parfum", "price" => 35.98, "img" => "womanimg/valentino2.jpg.png"],
+    ["name" => "Valentino", "desc" => "Born In Roma Eau de Parfum", "price" => 35.98, "img" => "images/valentino2.jpg.png"],
     ["name" => "BURBERYY", "desc" => "Her Eau de Parfum", "price" => 39.97, "img" => "womanimg/burberry.jpg"],
     ["name" => "Ariana Grande", "desc" => "MOD Blush Eau de Parfum", "price" => 29.98, "img" => "womanimg/ariana.jpg"],
     ["name" => "Carolina Herrera", "desc" => "Good Girl Blush Eau de Parfum", "price" => 19.98, "img" => "womanimg/carolina.jpg"],
@@ -145,7 +145,7 @@ $warmAndSpicy = sortProductsAscending($warmAndSpicy);
 
 $fruitScent = [
     ["name" => "Tom Ford Bitter Peach", "desc" => "Bitter Peach Eau De Parfum Fragrance", "price" => 350.98, "img" => "womanimg/tomfordpeach.jpg"],
-    ["name" => "Tom Ford", "desc" => "Fucking Fabulous Eau de Parfum Fragrance", "price" => 399.98, "img" => "womanimg/vanile.jpg"],
+    ["name" => "Tom Ford", "desc" => "Fucking Fabulous Eau de Parfum Fragrance", "price" => 399.98, "img" => "images/vanile.jpg"],
     ["name" => "Tom Ford Lost Cherry", "desc" => "Lost Cherry Eau de Parfum Fragrance", "price" => 240.98, "img" => "womanimg/cherry.jpg"],
     ["name" => "Neroli Portofino", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "womanimg/tom.png"]
 ];
@@ -166,35 +166,7 @@ $welcome = new WelcomeMessage("Online Shop");
     <link rel="stylesheet" href="css/women.css?v=1.1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-    .cart-dropdown {
-        display: none;
-        position: absolute;
-        right: 0;
-        background: white;
-        border: 1px solid #ddd;
-        padding: 15px;
-        width: 300px;
-        z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .cart-item {
-        display: flex;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
-    }
-    .cart-item img {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
-    }
-    .cart-total {
-        font-weight: bold;
-        margin: 10px 0;
-    }
-    .show {
-        display: block !important;
-    }
+
     </style>
 </head>
 <body class="<?php echo $currentTheme; ?>">
