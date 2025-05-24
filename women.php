@@ -260,6 +260,7 @@ $welcome = new WelcomeMessage("Online Shop");
                         <input type="hidden" name="add_to_cart" value="1">
                         <button type="submit" class="btn">Add to Cart</button>
                     </form>
+                       <button class="details-btn" onclick="showDetails('$nameForDialog', '$descForDialog', '$priceFormatted', '$imageForDialog')">Details</button>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -282,6 +283,7 @@ $welcome = new WelcomeMessage("Online Shop");
                         <input type="hidden" name="add_to_cart" value="1">
                         <button type="submit" class="btn">Add to Cart</button>
                     </form>
+                       <button class="details-btn" onclick="showDetails('$nameForDialog', '$descForDialog', '$priceFormatted', '$imageForDialog')">Details</button>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -304,6 +306,7 @@ $welcome = new WelcomeMessage("Online Shop");
                         <input type="hidden" name="add_to_cart" value="1">
                         <button type="submit" class="btn">Add to Cart</button>
                     </form>
+                       <button class="details-btn" onclick="showDetails('$nameForDialog', '$descForDialog', '$priceFormatted', '$imageForDialog')">Details</button>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -417,6 +420,22 @@ $welcome = new WelcomeMessage("Online Shop");
             $("#menu").slideDown(500);
         });
     });
+
+    function showDetails(name, desc, price, img) {
+    const dialog = document.getElementById('detailsDialog');
+    dialog.querySelector('h3').textContent = name;
+    dialog.querySelector('.desc').textContent = desc;
+    dialog.querySelector('.price').textContent = price;
+    dialog.querySelector('img').src = img;
+    document.getElementById('dialogOverlay').style.display = 'block';
+    dialog.style.display = 'block';
+}
+
+function closeDetails() {
+    document.getElementById('detailsDialog').style.display = 'none';
+    document.getElementById('dialogOverlay').style.display = 'none';
+}
+
     </script>
 </body>
 </html>
