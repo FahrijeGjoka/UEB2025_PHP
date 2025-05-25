@@ -7,7 +7,6 @@ if (isset($_POST['submit'])) {
     $subject = $_POST['subject'];
     $message = $_POST['message'];
 
-    // Pastrimi për siguri minimale
     $name = mysqli_real_escape_string($conn, $name);
     $email = mysqli_real_escape_string($conn, $email);
     $subject = mysqli_real_escape_string($conn, $subject);
