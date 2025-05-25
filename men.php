@@ -166,7 +166,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <h2>Featured Products</h2>
 
   <div class="product">
-    <img src="dior-008555di_01.webp"alt="Dior Sauvage">
+    <img src="images/dior-008555di_01.webp"alt="Dior Sauvage">
     <h3>Dior Sauvage</h3>
     <p>An intense and fresh fragrance with notes of bergamot and pepper.</p>
     <span class="price">$89.99</span>
