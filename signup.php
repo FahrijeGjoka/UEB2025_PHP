@@ -2,10 +2,16 @@
 session_start();
 require 'db.php';
 
-if (isset($_POST['username']) && isset($_POST['password']) &&
-    isset($_POST['name']) && isset($_POST['re_password']) &&
-    isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['address'])) {
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+require 'vendor/autoload.php';
+
+if (
+    isset($_POST['username']) && isset($_POST['password']) &&
+    isset($_POST['name']) && isset($_POST['re_password']) &&
+    isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['address'])
+) {
     function validate($data) {
         return htmlspecialchars(stripslashes(trim($data)));
     }
@@ -59,19 +65,45 @@ if (isset($_POST['username']) && isset($_POST['password']) &&
         exit();
     }
 
+    // Gjenero token për aktivizim
+    $activation_token = bin2hex(random_bytes(32));
     $hashed = password_hash($password, PASSWORD_BCRYPT);
-    $sql = "INSERT INTO users (username, password, name, email, phone, address) VALUES (?, ?, ?, ?, ?, ?)";
+
+    $sql = "INSERT INTO users (username, password, name, email, phone, address, activation_token, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, 0)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ssssss", $username, $hashed, $name, $email, $phone, $address);
+    mysqli_stmt_bind_param($stmt, "sssssss", $username, $hashed, $name, $email, $phone, $address, $activation_token);
 
     if (mysqli_stmt_execute($stmt)) {
-        header("Location: login.php?success=Account created successfully");
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'fahrijegjokiqi1@gmail.com'; // <-- vendos Gmail-in tënd
+            $mail->Password = 'app_password_16_shifror'; // <-- vendos App Password nga Google
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom('emriyt@gmail.com', 'Parfumeria');
+            $mail->addAddress($email, $name);
+
+            $activation_link = "http://localhost/UEB2025_PHP/activate.php?token=$activation_token";
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Aktivizo llogarinë tënde';
+            $mail->Body = "<h2>Përshëndetje $name!</h2><p>Faleminderit që u regjistrove. Për të aktivizuar llogarinë tënde, kliko në linkun më poshtë:</p><p><a href='$activation_link'>$activation_link</a></p>";
+            $mail->AltBody = "Përshëndetje $name, aktivizo llogarinë tënde duke klikuar këtë link: $activation_link";
+
+            $mail->send();
+            header("Location: login.php?success=Account created. Check your email to activate.");
+        } catch (Exception $e) {
+            header("Location: login.php?success=Account created but email failed");
+        }
         exit();
     } else {
         header("Location: signup-form.php?error=Something went wrong&$user_data");
         exit();
     }
-
 } else {
     header("Location: signup-form.php");
     exit();
