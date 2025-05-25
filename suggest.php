@@ -2,17 +2,16 @@
 if (isset($_POST['submit'])) {
     require_once 'db.php';
 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $subject = $_POST['subject'];
-    $message = $_POST['message'];
+    $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+    $subject = filter_var(trim($_POST['subject']), FILTER_SANITIZE_STRING);
+    $message = filter_var(trim($_POST['message']), FILTER_SANITIZE_STRING);
 
     $name = mysqli_real_escape_string($conn, $name);
     $email = mysqli_real_escape_string($conn, $email);
     $subject = mysqli_real_escape_string($conn, $subject);
     $message = mysqli_real_escape_string($conn, $message);
 
-    // Ruajtja në databazë
     $sql = "INSERT INTO sugjerimet (name, email, subject, message)
             VALUES ('$name', '$email', '$subject', '$message')";
 
@@ -22,5 +21,14 @@ if (isset($_POST['submit'])) {
         echo "<p style='color: red;'>Gabim gjatë ruajtjes në databazë: " . mysqli_error($conn) . "</p>";
     }
 
+    $to = "elsa.krasniqi12@student.uni-pr.edu";
+    $email_subject = "Sugjerim nga $name: $subject";
+    $email_body = "Emri: $name\nEmail: $email\n\nMesazhi:\n$message";
+    $headers = "From: $email\r\n";
+    $headers .= "Reply-To: $email\r\n";
+
+    //mail($to, $email_subject, $email_body, $headers);
+
     mysqli_close($conn);
 }
+?>

@@ -18,11 +18,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = mysqli_stmt_get_result($stmt);
         $user = mysqli_fetch_assoc($result);
 
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['username'];
-            header("Location: profile.php");
-            exit();
+        if ($user) {
+            if ($user['is_active'] == 0) {
+                $error = "Llogaria nuk është aktivizuar. Kontrollo emailin.";
+            } elseif (password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_name'] = $user['username'];
+                header("Location: profile.php");
+                exit();
+            } else {
+                $error = "Email ose fjalëkalim i pasaktë.";
+            }
         } else {
             $error = "Email ose fjalëkalim i pasaktë.";
         }
