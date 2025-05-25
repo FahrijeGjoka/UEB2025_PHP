@@ -260,3 +260,69 @@ footer a:hover {
 table tr {
     transition: background-color 0.3s ease;
 }
+
+/* Filter Section */
+#filter {
+    background-color: #eacaca;
+    padding: 2.5rem;
+    margin: 3rem auto;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.2);
+    text-align: center;
+    font-family: 'Bradley Hand', cursive;
+    color: #2c3e50;
+}
+
+#filter h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+#filter form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+#filter input[type="text"] {
+    padding: 10px 15px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#filter button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+#filter button[type="submit"] {
+    background-color: #2c3e50;
+    color: #fff;
+}
+
+#filter button[type="submit"]:hover {
+    background-color: #1a252f;
+}
+
+#filter button[type="button"] {
+    background-color: #fff;
+    color: #2c3e50;
+    border: 2px solid #2c3e50;
+}
+
+#filter button[type="button"]:hover {
+    background-color: #2c3e50;
+    color: #fff;
+}
