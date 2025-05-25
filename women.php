@@ -1,3 +1,4 @@
+
 <?php
 
 require_once 'db.php';
@@ -6,12 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $_SESSION['cart'] = [];
 }
 
-// Nëse shporta nuk ekziston, krijo një të re
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// Ndryshimi i temës
 if (isset($_GET['theme'])) {
     $theme = $_GET['theme'];
     setcookie('theme', $theme, time() + (86400 * 30), "/");
@@ -20,15 +19,13 @@ if (isset($_GET['theme'])) {
 
 $currentTheme = $_COOKIE['theme'] ?? 'light';
 
-// Përpunimi i shtimit në shportë
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $productId =(int)$_POST['product_id'];
     $productName = $_POST['product_name'];
     $productPrice = (float)$_POST['product_price'];
     $productImage = $_POST['product_image'];
     $productCategory = $_POST['product_category'];
-    
-    // Kontrollo nëse produkti ekziston në shportë
+
     $found = false;
     foreach ($_SESSION['cart'] as &$item) {
         if ($item['id'] === $productId) {
@@ -37,8 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             break;
         }
     }
-    
-    // Nëse produkti nuk ekziston, shtoje
+
     if (!$found) {
         $_SESSION['cart'][] = [
             'id' => $productId,
@@ -49,8 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             'quantity' => 1
         ];
     }
-    
-    // Kthe përgjigjen si JSON
+
     header('Content-Type: application/json');
     echo json_encode([
         'success' => true,
@@ -60,12 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     exit;
 }
 
-// Variabla globale
 $GLOBALS['site_name'] = "Online Shop";
 $GLOBALS['current_year'] = date('Y');
 $GLOBALS['currency'] = "$";
 
-// Funksione ndihmëse
 function format_price($price) {
     return $GLOBALS['currency'] . number_format($price, 2);
 }
@@ -75,14 +68,7 @@ function checkFreeShippingForProduct($price) {
 }
 
 function shkurtoPershkrimin($desc) {
-    return preg_replace("/\bEau de Parfum\b/i", "EDP", $desc);
-}
-
-function sortProductsAscending($products) {
-    usort($products, function($a, $b) {
-        return $a['price'] <=> $b['price'];
-    });
-    return $products;
+    return preg_replace("/Eau de Parfum/i", "EDP", $desc);
 }
 
 class WelcomeMessage {
@@ -123,50 +109,39 @@ class WelcomeMessage {
     }
 }
 
-// Produktet
+function merrProduktetNgaDB($conn, $nenkategoria) {
+    $sql = "SELECT * FROM parfumet WHERE kategoria = 'Women' AND nenkategoria = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $nenkategoria);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-$floral = [];
-$warmAndSpicy = [];
-$fruitScent = [];
-
-$sql = "SELECT * FROM pafumet WHERE kategoria = 'Women'";
-$result = mysqli_query($conn, $sql);
-
-if ($result && mysqli_num_rows($result) > 0) {
-    $id = 1;
-    while ($row = mysqli_fetch_assoc($result)) {
-        $product = [
-            'id' => $id++,
+    $products = [];
+    while ($row = $result->fetch_assoc()) {
+        $products[] = [
+            'id' => $row['id'] ?? null,
             'name' => $row['emri'],
             'desc' => $row['pershkrimi'],
-            'price' => $row['cmimi'],
-            'img' => 'images/default.jpg' // ose vendos një foto specifike në DB ose bëje dinamike
+            'price' => (float)$row['cmimi'],
+            'img' => $row['foto']
         ];
-
-        // Opsionale: Ndaj sipas fjalëve kyçe në përshkrim ose emër
-        $desc = strtolower($row['pershkrimi']);
-        if (strpos($desc, 'floral') !== false || strpos($desc, 'rose') !== false) {
-            $floral[] = $product;
-        } elseif (strpos($desc, 'spicy') !== false || strpos($desc, 'vanilla') !== false) {
-            $warmAndSpicy[] = $product;
-        } elseif (strpos($desc, 'fruit') !== false || strpos($desc, 'cherry') !== false || strpos($desc, 'peach') !== false) {
-            $fruitScent[] = $product;
-        } else {
-            $floral[] = $product; // fallback
-        }
     }
+
+    usort($products, function($a, $b) {
+        return $a['price'] <=> $b['price'];
+    });
+
+    return $products;
 }
 
-// Shto renditjen në fund për çdo kategori
-$floral = sortProductsAscending($floral);
-$warmAndSpicy = sortProductsAscending($warmAndSpicy);
-$fruitScent = sortProductsAscending($fruitScent);
+$floral = merrProduktetNgaDB($conn, 'Floral');
+$warmAndSpicy = merrProduktetNgaDB($conn, 'WarmAndSpicy');
+$fruitScent = merrProduktetNgaDB($conn, 'FruitScent');
 
-// Numri i produkteve në shportë
 $cart_count = array_sum(array_column($_SESSION['cart'], 'quantity'));
-
 $welcome = new WelcomeMessage("Online Shop");
 ?>
+
 
 <!DOCTYPE html>
 <html>
