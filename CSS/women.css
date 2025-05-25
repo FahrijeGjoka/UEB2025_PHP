@@ -498,43 +498,8 @@ p{
   
 }
 
-  #detailsDialog {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: <?= $currentTheme === 'dark' ? '#333' : '#fff' ?>;
-        color: <?= $currentTheme === 'dark' ? '#eee' : '#000' ?>;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.7);
-        padding: 20px;
-        width: 320px;
-        display: none;
-        z-index: 1000;
-    }
-    #detailsDialog img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-    #detailsDialog h3 {
-        margin: 0 0 10px 0;
-    }
-    #detailsDialog p {
-        margin: 5px 0;
-    }
 
-    #detailsDialog button.close-btn {
-        margin-top: 15px;
-        padding: 6px 10px;
-        background-color: <?= $currentTheme === 'dark' ? '#f8b400' : '#0073e6' ?>;
-        border: none;
-        color: #fff;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+
 
     /* Overlay */
     #dialogOverlay {
