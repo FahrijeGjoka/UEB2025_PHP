@@ -1,4 +1,6 @@
 <?php
+
+require_once 'db.php';
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $_SESSION['cart'] = [];
@@ -122,36 +124,42 @@ class WelcomeMessage {
 }
 
 // Produktet
-$floral = [
-    ["id" => 1,"name" => "Valentino", "desc" => "Born In Roma Eau de Parfum", "price" => 35.98, "img" => "images/valentino2.jpg.png"],
-    ["id" => 2,"name" => "BURBERYY", "desc" => "Her Eau de Parfum", "price" => 39.97, "img" => "images/burberry.jpg"],
-    ["id" => 3,"name" => "Ariana Grande", "desc" => "MOD Blush Eau de Parfum", "price" => 29.98, "img" => "images/ariana.jpg"],
-    ["id" => 4,"name" => "Carolina Herrera", "desc" => "Good Girl Blush Eau de Parfum", "price" => 19.98, "img" => "images/carolina.jpg"],
-    ["id" => 5,"name" => "Yves Saint Laurent", "desc" => "Libre Eau De Parfum", "price" => 69.98, "img" => "images/Yves Saint Laurent.jpg"],
-    ["id" => 6,"name" => "JIMMY CHOO", "desc" => "I want Choo Eau de Parfum", "price" => 33.98, "img" => "images/JIMMY CHOO.jpg"],
-    ["id" => 7,"name" => "Prada", "desc" => "Paradoce Eau de Parfum", "price" => 59.98, "img" => "images/Prada.jpg"],
-    ["id" => 8,"name" => "Gucci", "desc" => "Gardenia Eau de Parfum", "price" => 49.98, "img" => "images/Gucci.jpg"]
-];
+
+$floral = [];
+$warmAndSpicy = [];
+$fruitScent = [];
+
+$sql = "SELECT * FROM pafumet WHERE kategoria = 'Women'";
+$result = mysqli_query($conn, $sql);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $id = 1;
+    while ($row = mysqli_fetch_assoc($result)) {
+        $product = [
+            'id' => $id++,
+            'name' => $row['emri'],
+            'desc' => $row['pershkrimi'],
+            'price' => $row['cmimi'],
+            'img' => 'images/default.jpg' // ose vendos një foto specifike në DB ose bëje dinamike
+        ];
+
+        // Opsionale: Ndaj sipas fjalëve kyçe në përshkrim ose emër
+        $desc = strtolower($row['pershkrimi']);
+        if (strpos($desc, 'floral') !== false || strpos($desc, 'rose') !== false) {
+            $floral[] = $product;
+        } elseif (strpos($desc, 'spicy') !== false || strpos($desc, 'vanilla') !== false) {
+            $warmAndSpicy[] = $product;
+        } elseif (strpos($desc, 'fruit') !== false || strpos($desc, 'cherry') !== false || strpos($desc, 'peach') !== false) {
+            $fruitScent[] = $product;
+        } else {
+            $floral[] = $product; // fallback
+        }
+    }
+}
+
+// Shto renditjen në fund për çdo kategori
 $floral = sortProductsAscending($floral);
-
-$warmAndSpicy = [
-    ["id" => 9,"name" => "Yves Saint Laurent", "desc" => "Black Opium Eau de Parfum", "price" => 35.98, "img" => "images/blackopium.jpg"],
-    ["id" => 10,"name" => "BURBERRY", "desc" => "Burberry Goddess Eau de Parfum", "price" => 39.94, "img" => "images/burberry.jpg"],
-    ["id" => 11,"name" => "Ariana Grande", "desc" => "Cloud Eau de Parfum", "price" => 24.98, "img" => "images/Ariana Grande.jpg"],
-    ["id" => 12,"name" => "PHLUR", "desc" => "Body & Hair Fragrance Mist", "price" => 39.92, "img" => "images/PHLUR.jpg"],
-    ["id" => 13,"name" => "Kayali", "desc" => "Vanilla Candy Rock Sugar", "price" => 29.98, "img" => "images/Kayali.jpg"],
-    ["id" => 14,"name" => "Opium Red", "desc" => "Black Opium Eau de Parfum", "price" => 39.90, "img" => "images/opiumred.jpg"],
-    ["id" => 15,"name" => "Ariana Grande", "desc" => "MOD Vanilla Eau de Parfum", "price" => 52.90, "img" => "images/mod.jpg"],
-    ["id" => 16,"name" => "Viktor&Rolf", "desc" => "Flowerbomb Eau de Parfum", "price" => 49.98, "img" => "images/download.jpg"]
-];
 $warmAndSpicy = sortProductsAscending($warmAndSpicy);
-
-$fruitScent = [
-    ["id" => 17,"name" => "Tom Ford Bitter Peach", "desc" => "Bitter Peach Eau De Parfum Fragrance", "price" => 350.98, "img" => "images/tomfordpeach.jpg"],
-    ["id" => 18,"name" => "Tom Ford", "desc" => "Fucking Fabulous Eau de Parfum Fragrance", "price" => 399.98, "img" => "images/vanile.jpg"],
-    ["id" => 19,"name" => "Tom Ford Lost Cherry", "desc" => "Lost Cherry Eau de Parfum Fragrance", "price" => 240.98, "img" => "images/cherry.jpg"],
-    ["id" => 20,"name" => "Neroli Portofino", "desc" => "Citruc floral cent", "price" => 239.98, "img" => "images/tom.png"]
-];
 $fruitScent = sortProductsAscending($fruitScent);
 
 // Numri i produkteve në shportë
@@ -260,7 +268,6 @@ $welcome = new WelcomeMessage("Online Shop");
                         <input type="hidden" name="add_to_cart" value="1">
                         <button type="submit" class="btn">Add to Cart</button>
                     </form>
-                       <button class="details-btn" onclick="showDetails('$nameForDialog', '$descForDialog', '$priceFormatted', '$imageForDialog')">Details</button>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -283,7 +290,6 @@ $welcome = new WelcomeMessage("Online Shop");
                         <input type="hidden" name="add_to_cart" value="1">
                         <button type="submit" class="btn">Add to Cart</button>
                     </form>
-                       <button class="details-btn" onclick="showDetails('$nameForDialog', '$descForDialog', '$priceFormatted', '$imageForDialog')">Details</button>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -306,7 +312,6 @@ $welcome = new WelcomeMessage("Online Shop");
                         <input type="hidden" name="add_to_cart" value="1">
                         <button type="submit" class="btn">Add to Cart</button>
                     </form>
-                       <button class="details-btn" onclick="showDetails('$nameForDialog', '$descForDialog', '$priceFormatted', '$imageForDialog')">Details</button>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -420,22 +425,7 @@ $welcome = new WelcomeMessage("Online Shop");
             $("#menu").slideDown(500);
         });
     });
-
-    function showDetails(name, desc, price, img) {
-    const dialog = document.getElementById('detailsDialog');
-    dialog.querySelector('h3').textContent = name;
-    dialog.querySelector('.desc').textContent = desc;
-    dialog.querySelector('.price').textContent = price;
-    dialog.querySelector('img').src = img;
-    document.getElementById('dialogOverlay').style.display = 'block';
-    dialog.style.display = 'block';
-}
-
-function closeDetails() {
-    document.getElementById('detailsDialog').style.display = 'none';
-    document.getElementById('dialogOverlay').style.display = 'none';
-}
-
+    
     </script>
 </body>
 </html>
