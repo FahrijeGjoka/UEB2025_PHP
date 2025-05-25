@@ -14,7 +14,7 @@ $navItems = [
     ["label" => "HOMEPAGE", "href" => "#", "class" => "link 1"],
     ["label" => "WOMEN", "href" => "women.php", "class" => "link 4"],
     ["label" => "MEN", "href" => "men.php", "class" => "link 4"],
-    ["label" => "GALLERY", "href" => "gallery.html", "class" => "link 5"],
+    ["label" => "GALLERY", "href" => "gallery.php", "class" => "link 5"],
     ["label" => "ABOUT US", "href" => "aboutus.php", "class" => "link 7"],
     ["label" => "CONTACT", "href" => "contactus.php", "class" => "link 8"]
 ];

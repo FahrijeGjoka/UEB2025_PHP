@@ -20,7 +20,7 @@ if (!isset($_SESSION['user_id'])) {
     <nav class="nav-links">
         <a href="men.php">Men</a>
         <a href="women.php">Women</a>
-        <a href="contact.php">Contact</a>
+        <a href="contactus.php">Contact</a>
         <a href="aboutus.php">About</a>
         <a href="logout.php">Logout</a>
     </nav>
