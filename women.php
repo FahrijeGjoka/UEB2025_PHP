@@ -139,6 +139,9 @@ class WelcomeMessage {
 function merrProduktetNgaDB($conn, $nenkategoria) {
     $sql = "SELECT * FROM parfumet WHERE kategoria = 'Women' AND nenkategoria = ?";
     $stmt = $conn->prepare($sql);
+     if (!$stmt) {
+            throw new Exception("Gabim në përgatitjen e deklaratës SQL");
+        }
     $stmt->bind_param("s", $nenkategoria);
     $stmt->execute();
     $result = $stmt->get_result();
