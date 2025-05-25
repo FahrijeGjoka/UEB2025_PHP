@@ -1,6 +1,9 @@
 <?php
 session_start();
 require 'db.php';
+require 'config.php';
+
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -76,11 +79,12 @@ if (
     if (mysqli_stmt_execute($stmt)) {
         $mail = new PHPMailer(true);
         try {
+            $mail->CharSet = 'UTF-8';
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'fahrijegjokiqi1@gmail.com'; // <-- vendos Gmail-in tënd
-            $mail->Password = 'app_password_16_shifror'; // <-- vendos App Password nga Google
+            $mail->Username =  MAIL_USERNAME;
+            $mail->Password = MAIL_PASSWORD;
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
