@@ -1,31 +1,77 @@
 <?php
+include 'db.php';  
+
 $errors = [];
 $successMessages = [];
 
+$name = '';
+$email = '';
+$message = '';
+$perfumeInterests = [];
+$experience = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['email']);
-    $perfumeInterests = $_POST['perfume'] ?? []; 
-    $experience = $_POST['perfumes'] ?? '';
+    $name = isset($_POST['name']) ? trim($_POST['name']) : '';
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $message = isset($_POST['message']) ? trim($_POST['message']) : '';
+    $perfumeInterests = isset($_POST['perfume']) && is_array($_POST['perfume']) ? $_POST['perfume'] : [];
+    $experience = isset($_POST['perfumes']) ? $_POST['perfumes'] : '';
 
-    if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/", $email)) {
-        $errors[] = "Invalid email format.";
-    } else {
-        $successMessages[] = "Thank you! Your email is valid!";
+    if (empty($name)) {
+        $errors[] = "Ju lutem shkruani emrin tuaj.";
+    }
+    if (empty($email)) {
+        $errors[] = "Ju lutem shkruani email-in tuaj.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Email-i është në format të gabuar.";
+    }
+    if (empty($message)) {
+        $errors[] = "Ju lutem shkruani mesazhin tuaj.";
+    }
+    if (empty($perfumeInterests)) {
+        $errors[] = "Ju lutem zgjidhni interesat për parfume.";
+    }
+    if (empty($experience)) {
+        $errors[] = "Ju lutem tregoni eksperiencën tuaj.";
     }
 
-    if (!empty($perfumeInterests)) {
-        $interests = implode(", ", $perfumeInterests);
-        setcookie("interest", $interests, time() + 3600); 
-        $successMessages[] = "You showed interest in: $interests.";
-    }
+    if (empty($errors)) {
+        // Sigurohemi që emaili është i sigurt për query
+        $email_safe = mysqli_real_escape_string($conn, $email);
 
-    if ($experience) {
-        setcookie("experience", $experience, time() + 3600); 
-        $successMessages[] = "Your experience rating: $experience.";
+        $sql_check_user = "SELECT id FROM users WHERE email = '$email_safe'";
+        $result = mysqli_query($conn, $sql_check_user);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $userId = $row['id'];
+
+            $name_db = mysqli_real_escape_string($conn, $name);
+            $message_db = mysqli_real_escape_string($conn, $message);
+            $interests_db = mysqli_real_escape_string($conn, implode(", ", $perfumeInterests));
+            $experience_db = mysqli_real_escape_string($conn, $experience);
+
+            $sql_insert = "INSERT INTO contact (userId, name, email, message, interest, experience)
+                           VALUES ('$userId', '$name_db', '$email_safe', '$message_db', '$interests_db', '$experience_db')";
+
+            if (mysqli_query($conn, $sql_insert)) {
+                $successMessages[] = "Faleminderit! Forma u dërgua me sukses.";
+
+                // Pastrimi i vlerave pas dërgimit të suksesshëm
+                $name = $email = $message = '';
+                $perfumeInterests = [];
+                $experience = '';
+            } else {
+                $errors[] = "Gabim gjatë dërgimit të formës: " . mysqli_error($conn);
+            }
+        } else {
+            $errors[] = "Email-i nuk është i regjistruar. Ju lutem krijoni një llogari para se të dërgoni formularin.";
+            $errors[] = "<a href='signup.php'>Regjistrohu këtu</a>";
+        }
     }
 }
+?>
 
-$html = <<<HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,63 +101,62 @@ $html = <<<HTML
 </section>
 
 <main>
-HTML;
 
+<?php
 if (!empty($errors)) {
     foreach ($errors as $error) {
-        $html .= "<div class='error-message'>$error</div>";
+        echo "<div class='error-message'>$error</div>";
     }
 }
-
 if (!empty($successMessages)) {
     foreach ($successMessages as $msg) {
-        $html .= "<div class='success-message'>$msg</div>";
+        echo "<div class='success-message'>$msg</div>";
     }
 }
+?>
 
-$html .= <<<HTML
-    <form id="contactForm" action="contactus.php" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+<form id="contactForm" action="contactus.php" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>">
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>">
 
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message"><?php echo htmlspecialchars($message); ?></textarea>
 
-        <div class="chkbx">
-            <div class="question">
-                Are you interested in women or men perfumes?<br><br>
-            </div>
-            <div class="options">
-                <label><input type="checkbox" name="perfume[]" value="women"> Women</label>
-                <label><input type="checkbox" name="perfume[]" value="men"> Men</label>
-            </div>
+    <div class="chkbx">
+        <div class="question">
+            Are you interested in women or men perfumes?<br><br>
         </div>
-
-        <div class="rdbtn">
-            <div class="write">
-                How was your experience?<br><br>
-            </div>
-            <div class="options">
-                <label><input type="radio" name="perfumes" value="excellent"> Excellent</label>
-                <label><input type="radio" name="perfumes" value="Verygood"> Very good</label>
-                <label><input type="radio" name="perfumes" value="Good"> Good</label>
-            </div>
+        <div class="options">
+            <label><input type="checkbox" name="perfume[]" value="women" <?php if(in_array("women", $perfumeInterests)) echo "checked"; ?>> Women</label>
+            <label><input type="checkbox" name="perfume[]" value="men" <?php if(in_array("men", $perfumeInterests)) echo "checked"; ?>> Men</label>
         </div>
-
-        <br>
-        <input type="submit" value="Send">
-    </form>
-
-    <div class="ul">
-        <ul>For more informations, visit our site in:<br>
-            <li class="li"><a href="https://facebook.com"><i class="fab fa-facebook"></i> Facebook</a></li>
-            <li class="li"><a href="https://instagram.com"><i class="fab fa-instagram"></i> Instagram</a></li>
-            <li class="li"><a href="https://tiktok.com"><i class="fab fa-tiktok"></i> TikTok</a></li>
-        </ul>
     </div>
+
+    <div class="rdbtn">
+        <div class="write">
+            How was your experience?<br><br>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="perfumes" value="excellent" <?php if($experience === "excellent") echo "checked"; ?>> Excellent</label>
+            <label><input type="radio" name="perfumes" value="Verygood" <?php if($experience === "Verygood") echo "checked"; ?>> Very good</label>
+            <label><input type="radio" name="perfumes" value="Good" <?php if($experience === "Good") echo "checked"; ?>> Good</label>
+        </div>
+    </div>
+
+    <br>
+    <input type="submit" value="Send">
+</form>
+
+<div class="ul">
+    <ul>For more informations, visit our site in:<br>
+        <li class="li"><a href="https://facebook.com"><i class="fab fa-facebook"></i> Facebook</a></li>
+        <li class="li"><a href="https://instagram.com"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li class="li"><a href="https://tiktok.com"><i class="fab fa-tiktok"></i> TikTok</a></li>
+    </ul>
+</div>
 </main>
 
 <footer>
@@ -120,41 +165,27 @@ $html .= <<<HTML
 </footer>
 
 <script>
-document.getElementById("contactForm").addEventListener("submit", function(event) {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
-
-    if (!name || !email || !message) {
-        alert("Please fill in all required fields.");
-        event.preventDefault();
-    } else {
-        alert("Thank you! Your form has been submitted successfully.");
-    }
-});
-
 document.addEventListener("DOMContentLoaded", function () {
-    function getCookie(name) {
-        const value = "; " + document.cookie;
-        const parts = value.split("; " + name + "=");
-        if (parts.length === 2) return parts.pop().split(";").shift();
+    const body = document.body;
+    const womenCheckbox = document.querySelector('input[name="perfume[]"][value="women"]');
+    const menCheckbox = document.querySelector('input[name="perfume[]"][value="men"]');
+
+    function updateBackground() {
+        if (womenCheckbox.checked) {
+            body.style.backgroundColor = "#fff0f5"; 
+        } else if (menCheckbox.checked) {
+            body.style.backgroundColor = "#f0f8ff";
+        } else {
+            body.style.backgroundColor = "#e6ffe6"; 
+        }
     }
 
-    const interest = getCookie("interest");
-    const experience = getCookie("experience");
+    womenCheckbox.addEventListener('change', updateBackground);
+    menCheckbox.addEventListener('change', updateBackground);
 
-    if (experience === "excellent") {
-        document.body.style.backgroundColor = "#e6ffe6"; // green
-    } else if (interest && interest.includes("women")) {
-        document.body.style.backgroundColor = "#fff0f5"; // pink
-    } else if (interest && interest.includes("men")) {
-        document.body.style.backgroundColor = "#f0f8ff"; // blue
-    }
+    updateBackground();
 });
 </script>
+
 </body>
 </html>
-HTML;
-
-echo $html;
-?>
