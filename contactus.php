@@ -4,7 +4,6 @@ $successMessages = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
-    $num_perfum = intval(trim($_POST['products']));
     $perfumeInterests = $_POST['perfume'] ?? []; 
     $experience = $_POST['perfumes'] ?? '';
 
@@ -14,25 +13,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $successMessages[] = "Thank you! Your email is valid!";
     }
 
-    if ($num_perfum > 0) {
-        if ($num_perfum % 2 == 0) {
-            $women = $num_perfum / 2;
-            $men = $num_perfum / 2;
-        } else {
-            $women = floor($num_perfum / 2) + 1;
-            $men = floor($num_perfum / 2);
-        }
-        $successMessages[] = "We will place your order as: $women perfumes for Women and $men perfumes for Men.";
-    } else {
-        $errors[] = "Please enter a valid number of perfumes.";
-    }
-    
     if (!empty($perfumeInterests)) {
         $interests = implode(", ", $perfumeInterests);
         setcookie("interest", $interests, time() + 3600); 
         $successMessages[] = "You showed interest in: $interests.";
     }
-    
+
     if ($experience) {
         setcookie("experience", $experience, time() + 3600); 
         $successMessages[] = "Your experience rating: $experience.";
@@ -115,11 +101,6 @@ $html .= <<<HTML
             </div>
         </div>
 
-        <div class="products">
-            <br>
-            <label for="products">How many perfumes did you buy?</label><br><br>
-            <input type="number" id="products" name="products" min="1" placeholder="Enter total number" required>
-        </div>
         <br>
         <input type="submit" value="Send">
     </form>
@@ -163,11 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const experience = getCookie("experience");
 
     if (experience === "excellent") {
-        document.body.style.backgroundColor = "#e6ffe6"; // sfond i gjelbert
+        document.body.style.backgroundColor = "#e6ffe6"; // green
     } else if (interest && interest.includes("women")) {
-        document.body.style.backgroundColor = "#fff0f5"; // sfond pink
+        document.body.style.backgroundColor = "#fff0f5"; // pink
     } else if (interest && interest.includes("men")) {
-        document.body.style.backgroundColor = "#f0f8ff"; // sfond blu
+        document.body.style.backgroundColor = "#f0f8ff"; // blue
     }
 });
 </script>
