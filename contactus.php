@@ -1,5 +1,5 @@
 <?php
-include 'db.php';  
+include 'db.php'; 
 
 $errors = [];
 $successMessages = [];
@@ -10,12 +10,14 @@ $message = '';
 $perfumeInterests = [];
 $experience = '';
 
+$logfile = 'form_submissions.log'; 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = isset($_POST['name']) ? trim($_POST['name']) : '';
     $email = isset($_POST['email']) ? trim($_POST['email']) : '';
     $message = isset($_POST['message']) ? trim($_POST['message']) : '';
     $perfumeInterests = isset($_POST['perfume']) && is_array($_POST['perfume']) ? $_POST['perfume'] : [];
-    $experience = isset($_POST['perfumes']) ? $_POST['perfumes'] : '';
+    $experience = isset($_POST['perfumes']) ? trim($_POST['perfumes']) : '';
 
     if (empty($name)) {
         $errors[] = "Ju lutem shkruani emrin tuaj.";
@@ -36,37 +38,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        // Sigurohemi që emaili është i sigurt për query
-        $email_safe = mysqli_real_escape_string($conn, $email);
+        $sql_check_user = "SELECT id FROM users WHERE email = ?";
+        if ($stmt = mysqli_prepare($conn, $sql_check_user)) {
+            mysqli_stmt_bind_param($stmt, "s", $email);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_store_result($stmt);
 
-        $sql_check_user = "SELECT id FROM users WHERE email = '$email_safe'";
-        $result = mysqli_query($conn, $sql_check_user);
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                mysqli_stmt_bind_result($stmt, $userId);
+                mysqli_stmt_fetch($stmt);
+                mysqli_stmt_close($stmt);
 
-        if ($result && mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            $userId = $row['id'];
+                
+                $sql_insert = "INSERT INTO contact (userId, name, email, message, interest, experience) VALUES (?, ?, ?, ?, ?, ?)";
+                if ($stmt2 = mysqli_prepare($conn, $sql_insert)) {
+                    
+                    $interests_str = implode(", ", $perfumeInterests);
+                    mysqli_stmt_bind_param($stmt2, "isssss", $userId, $name, $email, $message, $interests_str, $experience);
 
-            $name_db = mysqli_real_escape_string($conn, $name);
-            $message_db = mysqli_real_escape_string($conn, $message);
-            $interests_db = mysqli_real_escape_string($conn, implode(", ", $perfumeInterests));
-            $experience_db = mysqli_real_escape_string($conn, $experience);
+                    if (mysqli_stmt_execute($stmt2)) {
+                        $successMessages[] = "Faleminderit! Forma u dërgua me sukses.";
 
-            $sql_insert = "INSERT INTO contact (userId, name, email, message, interest, experience)
-                           VALUES ('$userId', '$name_db', '$email_safe', '$message_db', '$interests_db', '$experience_db')";
+            
+                        $logEntry = date("Y-m-d H:i:s") . " | Emri: $name, Email: $email, Mesazhi: $message, Interesat: " . $interests_str . ", Eksperienca: $experience\n";
+                        $file = fopen($logfile, "a"); 
+                        if ($file) {
+                            fwrite($file, $logEntry);
+                            fclose($file);
+                        }
 
-            if (mysqli_query($conn, $sql_insert)) {
-                $successMessages[] = "Faleminderit! Forma u dërgua me sukses.";
+                        $name = $email = $message = '';
+                        $perfumeInterests = [];
+                        $experience = '';
+                    } else {
+                        $errors[] = "Gabim gjatë dërgimit të formës: " . mysqli_error($conn);
+                    }
+                    mysqli_stmt_close($stmt2);
+                } else {
+                    $errors[] = "Gabim në përgatitjen e pyetjes për insert: " . mysqli_error($conn);
+                }
 
-                // Pastrimi i vlerave pas dërgimit të suksesshëm
-                $name = $email = $message = '';
-                $perfumeInterests = [];
-                $experience = '';
             } else {
-                $errors[] = "Gabim gjatë dërgimit të formës: " . mysqli_error($conn);
+                $errors[] = "Email-i nuk është i regjistruar. Ju lutem krijoni një llogari para se të dërgoni formularin.";
+                $errors[] = "<a href='signup.php'>Regjistrohu këtu</a>";
+                mysqli_stmt_close($stmt);
             }
         } else {
-            $errors[] = "Email-i nuk është i regjistruar. Ju lutem krijoni një llogari para se të dërgoni formularin.";
-            $errors[] = "<a href='signup.php'>Regjistrohu këtu</a>";
+            $errors[] = "Gabim në përgatitjen e pyetjes për kontroll: " . mysqli_error($conn);
         }
     }
 }
@@ -157,6 +175,7 @@ if (!empty($successMessages)) {
         <li class="li"><a href="https://tiktok.com"><i class="fab fa-tiktok"></i> TikTok</a></li>
     </ul>
 </div>
+
 </main>
 
 <footer>
