@@ -1,6 +1,5 @@
 
 <?php
-
 require_once 'db.php';
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -28,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 
     $found = false;
     foreach ($_SESSION['cart'] as &$item) {
-        if ($item['id'] === $productId) {
+        if ($item['id'] === (int)$productId) {
             $item['quantity']++;
             $found = true;
             break;
@@ -141,7 +140,6 @@ $fruitScent = merrProduktetNgaDB($conn, 'FruitScent');
 $cart_count = array_sum(array_column($_SESSION['cart'], 'quantity'));
 $welcome = new WelcomeMessage("Online Shop");
 ?>
-
 
 <!DOCTYPE html>
 <html>
