@@ -49,17 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_fetch($stmt);
                 mysqli_stmt_close($stmt);
 
-                
                 $sql_insert = "INSERT INTO contact (userId, name, email, message, interest, experience) VALUES (?, ?, ?, ?, ?, ?)";
                 if ($stmt2 = mysqli_prepare($conn, $sql_insert)) {
-                    
+
                     $interests_str = implode(", ", $perfumeInterests);
                     mysqli_stmt_bind_param($stmt2, "isssss", $userId, $name, $email, $message, $interests_str, $experience);
 
                     if (mysqli_stmt_execute($stmt2)) {
                         $successMessages[] = "Faleminderit! Forma u dërgua me sukses.";
 
-            
                         $logEntry = date("Y-m-d H:i:s") . " | Emri: $name, Email: $email, Mesazhi: $message, Interesat: " . $interests_str . ", Eksperienca: $experience\n";
                         $file = fopen($logfile, "a"); 
                         if ($file) {
@@ -184,25 +182,64 @@ if (!empty($successMessages)) {
 </footer>
 
 <script>
+function setCookie(name, value, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + (days*24*60*60*1000));
+  const expires = "expires="+ d.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+  const cname = name + "=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i].trim();
+    if (c.indexOf(cname) == 0) {
+      return c.substring(cname.length, c.length);
+    }
+  }
+  return "";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const body = document.body;
     const womenCheckbox = document.querySelector('input[name="perfume[]"][value="women"]');
     const menCheckbox = document.querySelector('input[name="perfume[]"][value="men"]');
 
-    function updateBackground() {
+    function updateBackgroundAndCookie() {
         if (womenCheckbox.checked) {
-            body.style.backgroundColor = "#fff0f5"; 
+            body.style.backgroundColor = "#fff0f5";
+            setCookie('background', 'women', 7);
+            menCheckbox.checked = false; 
         } else if (menCheckbox.checked) {
             body.style.backgroundColor = "#f0f8ff";
+            setCookie('background', 'men', 7);
+            womenCheckbox.checked = false;
         } else {
-            body.style.backgroundColor = "#e6ffe6"; 
+            body.style.backgroundColor = "#e6ffe6";
+            setCookie('background', 'none', 7);
         }
     }
 
-    womenCheckbox.addEventListener('change', updateBackground);
-    menCheckbox.addEventListener('change', updateBackground);
+    // Set background and checkboxes on load according to cookie
+    const savedBg = getCookie('background');
+    if (savedBg === 'women') {
+        womenCheckbox.checked = true;
+        menCheckbox.checked = false;
+        body.style.backgroundColor = "#fff0f5";
+    } else if (savedBg === 'men') {
+        menCheckbox.checked = true;
+        womenCheckbox.checked = false;
+        body.style.backgroundColor = "#f0f8ff";
+    } else {
+        menCheckbox.checked = false;
+        womenCheckbox.checked = false;
+        body.style.backgroundColor = "#e6ffe6";
+    }
 
-    updateBackground();
+    womenCheckbox.addEventListener('change', updateBackgroundAndCookie);
+    menCheckbox.addEventListener('change', updateBackgroundAndCookie);
 });
 </script>
 
