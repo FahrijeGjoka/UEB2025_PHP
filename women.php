@@ -6,7 +6,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_cart'])) {
     $_SESSION['cart'] = [];
-    header("Location: ".$_SERVER['PHP_SELF']);
+    header("Location: ".$_SERVER['PHP_SELF']."#top");
     exit;
 }
 
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_from_cart'])) 
   foreach ($_SESSION['cart'] as $index => &$item) {
     if ($item['id'] === $removeId) {
         if ($item['quantity'] > 1) {
-            $item['quantity']--;
+        $_SESSION['cart'][$index]['quantity']--;
         } else {
             unset($_SESSION['cart'][$index]);
         }
@@ -182,7 +182,10 @@ $welcome = new WelcomeMessage("Online Shop");
 
     </style>
 </head>
+    <a id="top"></a>
 <body class="<?php echo $currentTheme; ?>">
+
+
     <header>
         <div class="logo"><?php echo $GLOBALS['site_name']; ?></div>
  
@@ -372,6 +375,28 @@ $welcome = new WelcomeMessage("Online Shop");
         $('body').addClass(initialTheme);
         updateThemeButton(initialTheme);
 
+            $(document).on('submit', 'form[action=""][method="post"]', function(e) {
+        var resetForm = $(this);
+        if (resetForm.find('input[name="reset_cart"]').length) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "",
+                data: resetForm.serialize(),
+                dataType: "json",
+                success: function(response) {
+                    if (response.success) {
+                        $('.cart-items').text("0");
+                        $('#cart-dropdown').html('<h3>Your Cart</h3><div class="cart-items-list"><p>Your cart is empty</p></div>').addClass('show');
+                    }
+                },
+                error: function() {
+                    alert("Gabim gjatë resetimit të shportës.");
+                }
+            });
+        }
+    });
+
         // Funksioni për shtimin në shportë
         $('.add-to-cart-form').on('submit', function(e) {
             e.preventDefault();
@@ -401,7 +426,7 @@ $welcome = new WelcomeMessage("Online Shop");
                                             <h4>${item.name}</h4>
                                             <p>$${item.price.toFixed(2)}</p>
                                             <p>Quantity: ${item.quantity}</p>
-                                            <form method="post" class="remove-from-cart-form" style="display:inline;">
+                                            <form method="post" action="#top" class="remove-from-cart-form" style="display:inline;">
                     <input type="hidden" name="remove_id" value="${item.id}">
                     <input type="hidden" name="remove_from_cart" value="1">
                     <button type="submit" class="remove-btn" title="Remove item">❌</button>
@@ -436,7 +461,9 @@ $welcome = new WelcomeMessage("Online Shop");
                 }
             });
         });
-$('.remove-from-cart-form').on('submit', function(e) {
+
+
+$(document).on('submit', '.remove-from-cart-form', function(e) {
     e.preventDefault();
     var form = $(this);
     $.ajax({
@@ -447,12 +474,46 @@ $('.remove-from-cart-form').on('submit', function(e) {
         success: function(response) {
             if (response.success) {
                 $('.cart-items').text(response.cart_count);
-                location.reload(); // ose përditëso dropdown-in manualisht
+
+                     var cartHtml = '<h3>Your Cart</h3><div class="cart-items-list">';
+                if (response.cart_items.length > 0) {
+                    var total = 0;
+                    $.each(response.cart_items, function(index, item) {
+                        cartHtml += `
+                            <div class="cart-item">
+                                <img src="${item.image}" alt="${item.name}" width="50">
+                                <div class="cart-item-details">
+                                    <h4>${item.name}</h4>
+                                    <p>$${item.price.toFixed(2)}</p>
+                                    <p>Quantity: ${item.quantity}</p>
+                                    <form method="post" class="remove-from-cart-form" style="display:inline;">
+                                        <input type="hidden" name="remove_id" value="${item.id}">
+                                        <input type="hidden" name="remove_from_cart" value="1">
+                                        <button type="submit" class="remove-btn" title="Remove item">❌</button>
+                                    </form>
+                                </div>
+                            </div>
+                        `;
+                        total += item.price * item.quantity;
+                    });
+
+                    cartHtml += `
+                        <div class="cart-total">
+                            Total: $${total.toFixed(2)}
+                        </div>
+                    `;
+                } else {
+                    cartHtml += '<p>Your cart is empty</p>';
+                }
+                cartHtml += '</div>';
+
+                $('#cart-dropdown').html(cartHtml).addClass('show');
             }
         },
         error: function(xhr, status, error) {
             alert("Ndodhi një gabim gjatë largimit të produktit.");
         }
+   
     });
 });
 
