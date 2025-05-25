@@ -2,9 +2,37 @@
 <?php
 require_once 'db.php';
 session_start();
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_cart'])) {
     $_SESSION['cart'] = [];
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit;
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_from_cart'])) {
+    $removeId = (int)$_POST['remove_id'];
+  foreach ($_SESSION['cart'] as $index => &$item) {
+    if ($item['id'] === $removeId) {
+        if ($item['quantity'] > 1) {
+            $item['quantity']--;
+        } else {
+            unset($_SESSION['cart'][$index]);
+        }
+        break;
+    }
+}
+
+
+    header('Content-Type: application/json');
+    echo json_encode([
+        'success' => true,
+        'cart_count' => array_sum(array_column($_SESSION['cart'], 'quantity')),
+        'cart_items' => array_values($_SESSION['cart'])
+    ]);
+    exit;
+}
+
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
@@ -67,7 +95,7 @@ function checkFreeShippingForProduct($price) {
 }
 
 function shkurtoPershkrimin($desc) {
-    return preg_replace("/Eau de Parfum/i", "EDP", $desc);
+    return preg_replace("/\bEau de Parfum\b/i", "EDP", $desc);
 }
 
 class WelcomeMessage {
@@ -139,6 +167,7 @@ $fruitScent = merrProduktetNgaDB($conn, 'FruitScent');
 
 $cart_count = array_sum(array_column($_SESSION['cart'], 'quantity'));
 $welcome = new WelcomeMessage("Online Shop");
+
 ?>
 
 <!DOCTYPE html>
@@ -156,18 +185,29 @@ $welcome = new WelcomeMessage("Online Shop");
 <body class="<?php echo $currentTheme; ?>">
     <header>
         <div class="logo"><?php echo $GLOBALS['site_name']; ?></div>
-        <nav>
-            <ul>
-                <li><a href="Website.php">Homepage</a></li>
-                <li><a href="#">Women</a></li>
-                <li><a href="men.php">Men</a></li>
-                <li><a href="gallery.php">Gallery</a></li>
-                <li><a href="aboutus.php">About Us</a></li>
-                <li><a href="contactus.php">Contact</a></li>
-            </ul>
-        </nav>
+ 
+  <nav>
+    <ul>
+        <?php
+        $menu_items = [
+            'Homepage' => 'Website.php',
+            'Women' => '#',
+            'Men' => 'men.php',
+            'Gallery' => 'gallery.php',
+            'About Us' => 'aboutus.php',
+            'Contact' => 'contactus.php'
+        ];
+        foreach ($menu_items as $label => $url): ?>
+            <li><a href="<?php echo $url; ?>"><?php echo $label; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+</nav>
         <div class="cart">
             <a href="#" id="cart-toggle">Cart (<span class="cart-items"><?php echo $cart_count; ?></span>)</a>
+                <form method="post" style="display:inline;">
+        <input type="hidden" name="reset_cart" value="1">
+        <button type="submit" class="btn">🗑️ Reset Cart</button></form>
+    </form> 
             <div class="cart-dropdown" id="cart-dropdown">
                 <h3>Your Cart</h3>
                 <div class="cart-items-list">
@@ -179,6 +219,12 @@ $welcome = new WelcomeMessage("Online Shop");
                                     <h4><?php echo $item['name']; ?></h4>
                                     <p><?php echo format_price($item['price']); ?></p>
                                     <p>Quantity: <?php echo $item['quantity']; ?></p>
+                                                <form method="post" class="remove-from-cart-form" style="display:inline;">
+                <input type="hidden" name="remove_id" value="<?php echo $item['id']; ?>">
+                <input type="hidden" name="remove_from_cart" value="1">
+                <button type="submit" class="remove-btn" title="Remove item">❌</button>
+            </form>
+
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -191,7 +237,6 @@ $welcome = new WelcomeMessage("Online Shop");
                                 echo format_price($total);
                             ?>
                         </div>
-                        <a href="checkout.php" class="btn">Checkout</a>
                     <?php else: ?>
                         <p>Your cart is empty</p>
                     <?php endif; ?>
@@ -356,6 +401,12 @@ $welcome = new WelcomeMessage("Online Shop");
                                             <h4>${item.name}</h4>
                                             <p>$${item.price.toFixed(2)}</p>
                                             <p>Quantity: ${item.quantity}</p>
+                                            <form method="post" class="remove-from-cart-form" style="display:inline;">
+                    <input type="hidden" name="remove_id" value="${item.id}">
+                    <input type="hidden" name="remove_from_cart" value="1">
+                    <button type="submit" class="remove-btn" title="Remove item">❌</button>
+                </form>
+
                                         </div>
                                     </div>
                                 `;
@@ -366,7 +417,7 @@ $welcome = new WelcomeMessage("Online Shop");
                                 <div class="cart-total">
                                     Total: $${total.toFixed(2)}
                                 </div>
-                                <a href="checkout.php" class="btn">Checkout</a>
+   
                             `;
                         } else {
                             cartHtml += '<p>Your cart is empty</p>';
@@ -385,6 +436,25 @@ $welcome = new WelcomeMessage("Online Shop");
                 }
             });
         });
+$('.remove-from-cart-form').on('submit', function(e) {
+    e.preventDefault();
+    var form = $(this);
+    $.ajax({
+        type: "POST",
+        url: "",
+        data: form.serialize(),
+        dataType: "json",
+        success: function(response) {
+            if (response.success) {
+                $('.cart-items').text(response.cart_count);
+                location.reload(); // ose përditëso dropdown-in manualisht
+            }
+        },
+        error: function(xhr, status, error) {
+            alert("Ndodhi një gabim gjatë largimit të produktit.");
+        }
+    });
+});
 
         // Shfaq/fshih dropdown-in e shportës
         $('#cart-toggle').on('click', function(e) {
