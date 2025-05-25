@@ -3,43 +3,44 @@ session_start();
 require_once 'db.php';
 
 // -------------------------
-// Session Handling
+// Session Handling (Optional Visit Counting)
 // -------------------------
-function handleUserSession($conn) {
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
-        exit();
-    }
+function handleUserVisitCount($conn) {
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
 
-    $user_id = $_SESSION['user_id'];
+        $stmt = $conn->prepare("SELECT visits FROM uservisits WHERE userId = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $stmt->store_result();
 
-    $stmt = $conn->prepare("SELECT visits FROM uservisits WHERE userId = ?");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($visit_count);
+            $stmt->fetch();
+            $stmt->close();
 
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($visit_count);
-        $stmt->fetch();
-        $stmt->close();
+            $visit_count++;
+            $update = $conn->prepare("UPDATE uservisits SET visits = ? WHERE userId = ?");
+            $update->bind_param("ii", $visit_count, $user_id);
+            $update->execute();
+            $update->close();
+        } else {
+            $stmt->close();
+            $visit_count = 1;
+            $insert = $conn->prepare("INSERT INTO uservisits (userId, visits) VALUES (?, ?)");
+            $insert->bind_param("ii", $user_id, $visit_count);
+            $insert->execute();
+            $insert->close();
+        }
 
-        $visit_count++;
-        $update = $conn->prepare("UPDATE uservisits SET visits = ? WHERE userId = ?");
-        $update->bind_param("ii", $visit_count, $user_id);
-        $update->execute();
-        $update->close();
+        $_SESSION['visit_count'] = $visit_count;
     } else {
-        $stmt->close();
-        $visit_count = 1;
-        $insert = $conn->prepare("INSERT INTO uservisits (userId, visits) VALUES (?, ?)");
-        $insert->bind_param("ii", $user_id, $visit_count);
-        $insert->execute();
-        $insert->close();
+        // Nuk është i kyçur - nuk ruajmë asgjë
+        $_SESSION['visit_count'] = 0;
     }
-
-    $_SESSION['visit_count'] = $visit_count;
 }
-handleUserSession($conn);
+
+handleUserVisitCount($conn);
 
 // -------------------------
 // Page Content Variables
@@ -136,6 +137,13 @@ echo "<header>
     </nav>
 </header>";
 
+// About Section
+echo "<section id='about'>
+    <h2>About " . strtolower(htmlspecialchars($brandName)) . "</h2>
+    <p>" . htmlspecialchars($aboutText) . "</p>
+    <img src='images/lancome.jpg' alt='Perfume bottles' width='300'>
+</section>";
+
 // Filter Section
 echo "<section id='filter'>
     <h2>Filter Perfumes by Keyword</h2>
@@ -144,13 +152,6 @@ echo "<section id='filter'>
         <button type='submit'>Filter</button>
         <button type='button' onclick='window.location.href=\"aboutus.php\"'>Reset</button>
     </form>
-</section>";
-
-// About Section
-echo "<section id='about'>
-    <h2>About " . strtolower(htmlspecialchars($brandName)) . "</h2>
-    <p>" . htmlspecialchars($aboutText) . "</p>
-    <img src='images/lancome.jpg' alt='Perfume bottles' width='300'>
 </section>";
 
 // Perfume Types Section
@@ -163,8 +164,9 @@ echo "<section id='types'>
 // Contact Section
 echo "<section id='contact'>
     <h2>Contact Us</h2>
-    <p>Have questions? <a href='mailto:" . htmlspecialchars($contactEmail) . "'>Email us</a> and we will get back to you soon!</p>
+    <p>Have questions? <a href='contactus.php'>Email us</a> and we will get back to you soon!</p>
 </section>";
+
 
 // Back to Top Button
 echo "<button id='backToTopButton'>⬆️ Back to Top</button>";
@@ -176,10 +178,16 @@ echo "<footer class='site-footer'>
 foreach ($socialLinks as $platform => $url) {
     echo "<a href='" . htmlspecialchars($url) . "' target='_blank' aria-label='Follow us on $platform'><i class='fab fa-$platform'></i></a>";
 }
-echo "</div>
-    <p>Ju keni vizituar këtë faqe " . intval($_SESSION['visit_count']) . " herë në total.</p>
-    <p>&copy; " . date("Y") . " " . htmlspecialchars(strtolower($brandName)) . ". All Rights Reserved.</p>
-    <p><a href='website.html' target='_blank'>Visit our official page</a></p>
+echo "</div>";
+
+// Vizitat në footer (vetëm nëse është kyçur)
+if (isset($_SESSION['user_id'])) {
+    echo "<p>Ju keni vizituar këtë faqe " . intval($_SESSION['visit_count']) . " herë në total.</p>";
+} else {
+    echo "<p>Për të numëruar vizitat tuaja, ju lutemi <a href='login.php'>kyçuni në llogari</a>.</p>";
+}
+
+echo "<p>&copy; " . date("Y") . " " . htmlspecialchars(strtolower($brandName)) . ". All Rights Reserved.</p>
 </footer>";
 
 // Script
