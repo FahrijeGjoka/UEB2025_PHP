@@ -1,7 +1,8 @@
 
 <?php
+require_once 'auth.php';
 require_once 'db.php';
-session_start();
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_cart'])) {
