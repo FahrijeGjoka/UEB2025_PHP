@@ -1,32 +1,50 @@
 <?php
 
+
 //require_once 'auth.php';
+
 
 require_once 'db.php';
 
+session_start();
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['price'])) {
-    $name = $_POST['name'];
-    $price = floatval($_POST['price']);
-
-    // Check if product exists in cart
-    $found = false;
-    foreach ($_SESSION['cart'] as &$item) {
-        if ($item['name'] === $name) {
-            $item['quantity'] += 1;
-            $found = true;
-            break;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['name'])) {
+        $name = $_POST['name'];
+        foreach ($_SESSION['cart'] as $index => $item) {
+            if ($item['name'] === $name) {
+                unset($_SESSION['cart'][$index]);
+                $_SESSION['cart'] = array_values($_SESSION['cart']);
+                break;
+            }
         }
-    }
-    if (!$found) {
-        $_SESSION['cart'][] = ['name' => $name, 'price' => $price, 'quantity' => 1];
+        echo json_encode(['success' => true, 'cart_count' => array_sum(array_column($_SESSION['cart'], 'quantity'))]);
+        exit;
     }
 
-    echo json_encode(['success' => true, 'cart_count' => array_sum(array_column($_SESSION['cart'], 'quantity'))]);
-    exit;
+    if (isset($_POST['name'], $_POST['price'], $_POST['image'])) {
+        $name = $_POST['name'];
+        $price = floatval($_POST['price']);
+        $image = $_POST['image'];
+
+        $found = false;
+        foreach ($_SESSION['cart'] as &$item) {
+            if ($item['name'] === $name) {
+                $item['quantity'] += 1;
+                $found = true;
+                break;
+            }
+        }
+        if (!$found) {
+            $_SESSION['cart'][] = ['name' => $name, 'price' => $price, 'quantity' => 1, 'image' => $image];
+        }
+
+        echo json_encode(['success' => true, 'cart_count' => array_sum(array_column($_SESSION['cart'], 'quantity'))]);
+        exit;
+    }
 }
 
 $message = "Welcome to our store!";
@@ -56,8 +74,6 @@ $slogans = [
 ];
 $random_slogan = $slogans[array_rand($slogans)];
 
-
-
 $products = [];
 $sql = "SELECT * FROM parfumet WHERE kategoria = 'Men'";
 $result = $conn->query($sql);
@@ -67,7 +83,7 @@ if ($result && $result->num_rows > 0) {
         $products[] = [
             'id' => $row['id'],
             'name' => $row['emri'],
-            'brand' => '', // opsional
+            'brand' => '',
             'price' => $row['cmimi'],
             'image' => $row['foto'],
             'description' => $row['pershkrimi']
@@ -75,10 +91,6 @@ if ($result && $result->num_rows > 0) {
     }
 }
 
-$dayIndex = date("w");
-$productOfTheDay = $products[$dayIndex % count($products)];
-
-// Product of the day
 $dayIndex = date("w");
 $productOfTheDay = $products[$dayIndex % count($products)];
 ?>
@@ -90,6 +102,45 @@ $productOfTheDay = $products[$dayIndex % count($products)];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Shop</title>
     <link rel="stylesheet" href="css/men.css?v=1.1">
+    <style>
+        .side-cart {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+        .side-cart.visible {
+            transform: translateX(0);
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+        }
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        .cart-item .details {
+            flex: 1;
+        }
+        .cart-item button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -112,24 +163,35 @@ $productOfTheDay = $products[$dayIndex % count($products)];
         </div>
     </header>
 
-    <div id="side-cart" class="side-cart hidden">
-        <div class="cart-header">
-            <h2>Your Cart</h2>
-            <button onclick="toggleCart()">✖</button>
+    <div id="side-cart" class="side-cart">
+        <div class="cart-header" style="padding: 10px; border-bottom: 1px solid #ccc;">
+            <h2 style="display: inline;">Your Cart</h2>
+            <button style="float: right;" onclick="toggleCart()">✖</button>
         </div>
         <div class="cart-content" id="cart-content">
             <?php if (!empty($_SESSION['cart'])): ?>
-                <ul>
-                    <?php foreach ($_SESSION['cart'] as $item): ?>
-                        <li>
-                            <?php echo $item['name']; ?> x<?php echo $item['quantity']; ?> - $<?php echo number_format($item['price'] * $item['quantity'], 2); ?>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+                <?php foreach ($_SESSION['cart'] as $item): ?>
+                    <div class="cart-item">
+                        <img src="<?php echo $item['image']; ?>" alt="<?php echo $item['name']; ?>">
+                        <div class="details">
+                            <strong><?php echo $item['name']; ?></strong><br>
+                            x<?php echo $item['quantity']; ?> - $<?php echo number_format($item['price'] * $item['quantity'], 2); ?>
+                        </div>
+                        <button class="delete-item" data-name="<?php echo $item['name']; ?>">Delete</button>
+                    </div>
+                <?php endforeach; ?>
             <?php else: ?>
-                <p>Your cart is empty.</p>
+                <p style="padding: 10px;">Your cart is empty.</p>
             <?php endif; ?>
         </div>
+
+        <?php if (!empty($_SESSION['cart'])): ?>
+            <div style="padding: 15px; text-align: center;">
+                <a href="checkout-men.php" style="background-color: #2c3e50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                    Checkout
+                </a>
+            </div>
+        <?php endif; ?>
     </div>
 
     <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid orange;">
@@ -141,19 +203,19 @@ $productOfTheDay = $products[$dayIndex % count($products)];
         <p>Shop the latest trends in perfumes.</p>
     </section>
 
-    <section class="product-of-day" style="background-color:rgb(195, 214, 227); padding: 30px; margin: 30px; border: 2px solid #2c3e50; border-radius: 0px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <h2 style="color: #2c3e50; font-size: 2em; text-align: center;"> Product of the Day </h2>
-        <div style="display: flex; flex-direction: column; align-items: center;">
-            <h3 style="font-size: 1.5em; margin-bottom: 15px; color: #2c3e50;"><?php echo $productOfTheDay['name']; ?> by <?php echo $productOfTheDay['brand']; ?></h3>
-            <p style="font-weight: bold; font-size: 1.3em; margin-bottom: 10px; color: #2c3e50;">Price: $<?php echo number_format($productOfTheDay['price'], 2); ?></p>
-            <p style="font-size: 1.1em; margin-bottom: 20px; color: #2c3e50;"><?php echo checkFreeShippingForProduct($productOfTheDay['price']); ?></p>
-            <a href="#" class="btn add-to-cart" data-name="<?php echo $productOfTheDay['name']; ?>" data-price="<?php echo $productOfTheDay['price']; ?>" style="font-size: 1.2em; padding: 12px 20px; background-color: #2c3e50; color: #f4c2c2; border-radius: 0px;">Add to Cart</a>
+    <section class="product-of-day" style="background-color:rgb(195, 214, 227); padding: 30px; margin: 30px; border: 2px solid #2c3e50; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h2 style="color: #2c3e50; text-align: center;">Product of the Day</h2>
+        <div style="text-align: center;">
+            <h3><?php echo $productOfTheDay['name']; ?></h3>
+            <img src="<?php echo $productOfTheDay['image']; ?>" alt="<?php echo $productOfTheDay['name']; ?>" style="width: 150px;"><br>
+            <strong>Price: $<?php echo number_format($productOfTheDay['price'], 2); ?></strong><br>
+            <em><?php echo checkFreeShippingForProduct($productOfTheDay['price']); ?></em><br><br>
+            <a href="#" class="btn add-to-cart" data-name="<?php echo $productOfTheDay['name']; ?>" data-price="<?php echo $productOfTheDay['price']; ?>" data-image="<?php echo $productOfTheDay['image']; ?>">Add to Cart</a>
         </div>
     </section>
 
     <section class="products">
         <h2>Featured Products</h2>
-        
         <?php foreach ($products as $product): ?>
             <div class="product">
                 <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>">
@@ -161,14 +223,11 @@ $productOfTheDay = $products[$dayIndex % count($products)];
                 <p><?php echo $product['description']; ?></p>
                 <span class="price">$<?php echo number_format($product['price'], 2); ?></span>
                 <p><?php echo checkFreeShippingForProduct($product['price']); ?></p>
-                <a href="#" class="btn add-to-cart" data-name="<?php echo $product['name']; ?>" data-price="<?php echo $product['price']; ?>">Add to Cart</a>
+                <a href="#" class="btn add-to-cart" data-name="<?php echo $product['name']; ?>" data-price="<?php echo $product['price']; ?>" data-image="<?php echo $product['image']; ?>">Add to Cart</a>
             </div>
         <?php endforeach; ?>
-        
-        <div class="cart-details" style="width: 100%; display: flex; justify-content: center; align-items: center; margin: 20px 0;">
-            <h1 style="color: #ffc0cb; font-size: 1.8em; text-align: center;">
-                <?php echo $random_slogan; ?>
-            </h1>
+        <div class="cart-details" style="text-align: center; margin: 20px 0;">
+            <h1 style="color: #ffc0cb;"><?php echo $random_slogan; ?></h1>
         </div>
     </section>
 
@@ -178,27 +237,44 @@ $productOfTheDay = $products[$dayIndex % count($products)];
 
     <script>
         function toggleCart() {
-            const cart = document.getElementById('side-cart');
-            cart.classList.toggle('visible');
-            cart.classList.toggle('hidden');
+            document.getElementById('side-cart').classList.toggle('visible');
         }
 
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-                const name = this.getAttribute('data-name');
-                const price = this.getAttribute('data-price');
+                const name = this.dataset.name;
+                const price = this.dataset.price;
+                const image = this.dataset.image;
 
                 fetch('', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}`
+                    body: `name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&image=${encodeURIComponent(image)}`
                 })
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
                         document.getElementById('cart-count').textContent = data.cart_count;
-                        alert('Product added to cart!');
+                        location.reload();
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll('.delete-item').forEach(button => {
+            button.addEventListener('click', function() {
+                const name = this.dataset.name;
+                fetch('', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `action=delete&name=${encodeURIComponent(name)}`
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('cart-count').textContent = data.cart_count;
+                        location.reload();
                     }
                 });
             });
