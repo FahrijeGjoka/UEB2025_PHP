@@ -1,9 +1,7 @@
 <?php
-
-require_once 'auth.php';
-
 require_once 'db.php';
 
+session_start();
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -181,6 +179,14 @@ $productOfTheDay = $products[$dayIndex % count($products)];
                 <p style="padding: 10px;">Your cart is empty.</p>
             <?php endif; ?>
         </div>
+
+        <?php if (!empty($_SESSION['cart'])): ?>
+            <div style="padding: 15px; text-align: center;">
+                <a href="checkout-men.php" style="background-color: #2c3e50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                    Checkout
+                </a>
+            </div>
+        <?php endif; ?>
     </div>
 
     <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid orange;">
@@ -245,7 +251,7 @@ $productOfTheDay = $products[$dayIndex % count($products)];
                 .then(data => {
                     if (data.success) {
                         document.getElementById('cart-count').textContent = data.cart_count;
-                        location.reload(); // rifresko për të përditësuar pamjen e karrocës
+                        location.reload();
                     }
                 });
             });
@@ -263,7 +269,7 @@ $productOfTheDay = $products[$dayIndex % count($products)];
                 .then(data => {
                     if (data.success) {
                         document.getElementById('cart-count').textContent = data.cart_count;
-                        location.reload(); // rifresko për të përditësuar pamjen e karrocës
+                        location.reload();
                     }
                 });
             });
