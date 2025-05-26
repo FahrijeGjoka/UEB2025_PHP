@@ -1,4 +1,7 @@
 <?php
+
+require_once 'auth.php';
+
 $message = "Welcome to our store!";
 define("Arome", "Online Shop");
 

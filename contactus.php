@@ -1,6 +1,18 @@
 <?php
 include 'db.php'; 
 
+session_start();
+
+$allowedPages = ['homepage.php', 'aboutus.php'];
+$currentPage = basename($_SERVER['PHP_SELF']);
+
+if (!isset($_SESSION['user_id']) && !in_array($currentPage, $allowedPages)) {
+    header("Location: homepage.php");
+    exit();
+}
+
+
+
 $errors = [];
 $successMessages = [];
 
