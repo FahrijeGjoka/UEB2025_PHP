@@ -243,6 +243,12 @@ $welcome = new WelcomeMessage("Online Shop");
                                 echo format_price($total);
                             ?>
                         </div>
+                        <div class="checkout-button">
+    <form action="checkout.php" method="get">
+        <button type="submit" class="btn-checkout">Proceed to Checkout</button>
+    </form>
+</div>
+
                     <?php else: ?>
                         <p>Your cart is empty</p>
                     <?php endif; ?>
@@ -445,6 +451,11 @@ $welcome = new WelcomeMessage("Online Shop");
                                 <div class="cart-total">
                                     Total: $${total.toFixed(2)}
                                 </div>
+                                  <div class="checkout-button">
+        <form action="checkout.php" method="get">
+            <button type="submit" class="btn-checkout">Proceed to Checkout</button>
+        </form>
+    </div>
    
                             `;
                         } else {
@@ -504,6 +515,11 @@ $(document).on('submit', '.remove-from-cart-form', function(e) {
                         <div class="cart-total">
                             Total: $${total.toFixed(2)}
                         </div>
+                          <div class="checkout-button">
+        <form action="checkout.php" method="get">
+            <button type="submit" class="btn-checkout">Proceed to Checkout</button>
+        </form>
+    </div>
                     `;
                 } else {
                     cartHtml += '<p>Your cart is empty</p>';
