@@ -1,4 +1,37 @@
 <?php
+
+
+require_once 'auth.php';
+
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['price'])) {
+    $name = $_POST['name'];
+    $price = floatval($_POST['price']);
+
+    // Kontrolloj nëse produkti ekziston në shportë
+    $found = false;
+    foreach ($_SESSION['cart'] as &$item) {
+        if ($item['name'] === $name) {
+            $item['quantity'] += 1;
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) {
+        $_SESSION['cart'][] = ['name' => $name, 'price' => $price, 'quantity' => 1];
+    }
+
+    // Përgjigje për AJAX nëse do përdoret
+    echo json_encode(['success' => true, 'cart_count' => array_sum(array_column($_SESSION['cart'], 'quantity'))]);
+    exit;
+}
+
+
+
 $message = "Welcome to our store!";
 define("Arome", "Online Shop");
 
@@ -6,7 +39,7 @@ $day = date("l");
 // Zbritjet bazuar në ditën e javës
 switch ($day) {
     case "Monday":
-        $message = "Happy Monday! Fresh week, fresh scents!";
+        $message = "Happy Monday!! Fresh week, fresh scents!";
         break;
     case "Tuesday":
         $message = "Tuesday Treat! Free shipping on all orders";
@@ -24,7 +57,7 @@ switch ($day) {
         $message = "Weekend Vibes! 20% off select perfumes!";
         break;
     case "Sunday":
-        $message = "Sunday Relax! Enjoy our free samples with your order!";
+        $message = "Sunday Relax! Enjoy our free samples with your order!!";
         break;
     default:
         $message = "Welcome to " . Arome;
@@ -139,10 +172,13 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
       </ul>
     </nav>
 
-    <div class="cart">
-      <a href="#">Cart</a>
-      <span class="cart-items">0</span>
-    </div>
+   <div class="cart">
+  <a href="cart.php">Cart</a>
+  <span class="cart-items">
+    <?php echo isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'], 'quantity')) : 0; ?>
+  </span>
+</div>
+
 
   </header>
   <div style="background-color: #f0f0f0; padding: 10px; margin: 20px 0; border-left: 5px solid orange;">
@@ -151,18 +187,19 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <section class="hero">
     <h1>Welcome to Online Shop</h1>
     <p>Shop the latest trends in perfumes.</p>
-</section>
-<section class="product-of-day" style="background-color:rgb(195, 214, 227); padding: 30px; margin: 30px; border: 2px solid #2c3e50; border-radius: 0px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <h2 style="color: #2c3e50; font-size: 2em; text-align: center;"> Product of the Day </h2>
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <h3 style="font-size: 1.5em; margin-bottom: 15px; color: #2c3e50;"><?php echo $perfumeOfTheDay->name; ?> by <?php echo $perfumeOfTheDay->brand; ?></h3>
-    <p style="font-weight: bold; font-size: 1.3em; margin-bottom: 10px; color: #2c3e50;">Price: $<?php echo number_format($perfumeOfTheDay->price, 2); ?></p>
-    <p style="font-size: 1.1em; margin-bottom: 20px; color: #2c3e50;"><?php echo checkFreeShippingForProduct($perfumeOfTheDay->price); ?></p>
-    <a href="#" class="btn" style="font-size: 1.2em; padding: 12px 20px; background-color: #2c3e50; color: #f4c2c2; border-radius: 0px;">Add to Cart</a>
-  </div>
-</section>
+  </section>
 
-<section class="products">
+  <section class="product-of-day" style="background-color:rgb(195, 214, 227); padding: 30px; margin: 30px; border: 2px solid #2c3e50; border-radius: 0px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <h2 style="color: #2c3e50; font-size: 2em; text-align: center;"> Product of the Day </h2>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h3 style="font-size: 1.5em; margin-bottom: 15px; color: #2c3e50;"><?php echo $perfumeOfTheDay->name; ?> by <?php echo $perfumeOfTheDay->brand; ?></h3>
+      <p style="font-weight: bold; font-size: 1.3em; margin-bottom: 10px; color: #2c3e50;">Price: $<?php echo number_format($perfumeOfTheDay->price, 2); ?></p>
+      <p style="font-size: 1.1em; margin-bottom: 20px; color: #2c3e50;"><?php echo checkFreeShippingForProduct($perfumeOfTheDay->price); ?></p>
+      <a href="#" class="btn add-to-cart" data-name="<?php echo $perfumeOfTheDay->name; ?>" data-price="<?php echo $perfumeOfTheDay->price; ?>" style="font-size: 1.2em; padding: 12px 20px; background-color: #2c3e50; color: #f4c2c2; border-radius: 0px;">Add to Cart</a>
+    </div>
+  </section>
+
+  <section class="products">
     <h2>Featured Products</h2>
 
   <div class="product">
@@ -171,7 +208,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>An intense and fresh fragrance with notes of bergamot and pepper.</p>
     <span class="price">$89.99</span>
     <p><?php echo checkFreeShippingForProduct(89.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Dior Sauvage" data-price="89.99">Add to Cart</a>
   </div>
   <div class="product">
     <img src="images/bleuman.webp" alt="Bleu de Chanel">
@@ -179,7 +216,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>An elegant fragrance with citrus and woody notes.</p>
     <span class="price">$99.99</span>
     <p><?php echo checkFreeShippingForProduct(99.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Bleu de Chanel" data-price="99.99">Add to Cart</a>
   </div>
   <div class="product">
     <img src="images/noirtomford.avif" alt="Tom Ford Noir">
@@ -187,7 +224,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A mysterious and refined scent with notes of vanilla and amber.</p>
     <span class="price">$119.99</span>
     <p><?php echo checkFreeShippingForProduct(119.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Tom Ford Noir" data-price="119.99">Add to Cart</a>
   </div>
   <div class="product">
     <img src="images/codearmani.webp" alt="Armani Code">
@@ -195,7 +232,8 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A magnetic fragrance with lemon, olive blossom, and tonka bean.</p>
     <span class="price">$89.99</span>
     <p><?php echo checkFreeShippingForProduct(89.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+   <a href="#" class="btn add-to-cart" data-name="Armani Code" data-price="89.99">Add to Cart</a>
+
   </div>
   <div class="product">
     <img src="images/guiltygucci.avif" alt="Gucci Guilty">
@@ -203,7 +241,8 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A provocative and contemporary scent with citrus and lavender.</p>
     <span class="price">$79.99</span>
     <p><?php echo checkFreeShippingForProduct(79.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+ <a href="#" class="btn add-to-cart" data-name="Gucci Guilty" data-price="79.99">Add to Cart</a>
+
   </div>
   <div class="product">
     <img src="images/versaceEros.avif" alt="Versace Eros">
@@ -211,7 +250,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A passionate fragrance with mint, green apple, and vanilla.</p>
     <span class="price">$85.99</span>
     <p><?php echo checkFreeShippingForProduct(85.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Versace Eros" data-price="85.99">Add to Cart</a>
   </div>
   <div class="product">
     <img src="images/burberrymann.webp" alt="Burberry Touch">
@@ -219,15 +258,15 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A soft and refined fragrance with notes of musk and white pepper.</p>
     <span class="price">$74.99</span>
     <p><?php echo checkFreeShippingForProduct(74.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
-  </div>
+<a href="#" class="btn add-to-cart" data-name="Burberry Touch" data-price="74.99">Add to Cart</a> 
+ </div>
   <div class="product">
     <img src="images/HOMMEysl.avif" alt="YSL L'Homme">
     <h3>YSL L'Homme</h3>
     <p>A balanced and charismatic fragrance with ginger and vetiver.</p>
     <span class="price">$94.99</span>
     <p><?php echo checkFreeShippingForProduct(94.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="YSL L'Homme" data-price="94.99">Add to Cart</a>  
   </div>
   <div class="product">
     <img src="images/ARMANI.webp" alt="Acqua di Gio by Giorgio Armani">
@@ -235,8 +274,8 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A fresh and aquatic fragrance with notes of citrus, jasmine, and rosemary.</p>
     <span class="price">$79.99</span>
     <p><?php echo checkFreeShippingForProduct(79.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
-  </div>
+<a href="#" class="btn add-to-cart" data-name="Acqua di Gio" data-price="79.99">Add to Cart</a>  
+</div>
   
   <div class="product">
     <img src="images/mr2Burberry.webp" alt="Burberry Mr. Burberry">
@@ -244,7 +283,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A sophisticated and modern scent with grapefruit, cedarwood, and vetiver.</p>
     <span class="price">$94.99</span>
     <p><?php echo checkFreeShippingForProduct(94.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+    <a href="#" class="btn add-to-cart" data-name="Burberry Mr. Burberry" data-price="94.99">Add to Cart</a> 
   </div>
   
   <div class="product">
@@ -253,7 +292,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A warm and woody fragrance with iris, amber, and cedarwood.</p>
     <span class="price">$109.99</span>
     <p><?php echo checkFreeShippingForProduct(109.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+ <a href="#" class="btn add-to-cart" data-name="YSL L'Homme Intense" data-price="109.99">Add to Cart</a>
   </div>
   <div class="product">
     <img src="images/lunarosa.webp" alt="Prada Luna Rossa">
@@ -261,7 +300,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A fresh and invigorating scent with notes of lavender and mint.</p>
     <span class="price">$84.99</span>
     <p><?php echo checkFreeShippingForProduct(84.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+       <a href="#" class="btn add-to-cart" data-name="Prada Luna Rossa" data-price="84.99">Add to Cart</a> 
 </div>
 <div class="product">
     <img src="images/bvlgariman.png" alt="Bvlgari Man in Black">
@@ -269,7 +308,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>An intense and magnetic fragrance with notes of rum and leather.</p>
     <span class="price">$99.99</span>
     <p><?php echo checkFreeShippingForProduct(99.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+ <a href="#" class="btn add-to-cart" data-name="Bvlgari Man in Black" data-price="99.99">Add to Cart</a> 
 </div>
 <div class="product">
     <img src="images/dolceeman.webp" alt="Dolce & Gabbana The One">
@@ -277,7 +316,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
     <p>A sophisticated scent with notes of tobacco, amber, and ginger.</p>
     <span class="price">$94.99</span>
     <p><?php echo checkFreeShippingForProduct(94.99); ?></p>
-    <a href="#" class="btn">Add to Cart</a>
+    <a href="#" class="btn add-to-cart" data-name="Dolce & Gabbana The One" data-price="94.99">Add to Cart</a> 
 </div>
 <div class="product">
   <img src="images/calvinforman.jfif" alt="Calvin Klein Eternity">
@@ -285,7 +324,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <p>A timeless fragrance with a fresh and aromatic blend of notes.</p>
   <span class="price">$79.99</span>
   <p><?php echo checkFreeShippingForProduct(79.99); ?></p>
-  <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Calvin Klein Eternity" data-price="79.99">Add to Cart</a> 
 </div>
 <div class="product">
   <img src="images/joophomme.webp" alt="Joop! Homme">
@@ -293,7 +332,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <p>A bold and spicy fragrance with cinnamon, orange blossom, and vanilla.</p>
   <span class="price">$69.99</span>
   <p><?php echo checkFreeShippingForProduct(69.99); ?></p>
-  <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Joop! Homme" data-price="69.99">Add to Cart</a> 
 </div>
 <div class="product">
   <img src="images/CreedMAN.webp" alt="Creed Aventus">
@@ -301,7 +340,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <p>A luxurious fragrance with pineapple, birch, and musk.</p>
   <span class="price">$305.99</span>
   <p><?php echo checkFreeShippingForProduct(305.99); ?></p>
-  <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Creed Aventus" data-price="305.99">Add to Cart</a> 
 </div>
 <div class="product">
   <img src="images/AZZARO.jpeg" alt="Azzaro Wanted">
@@ -309,7 +348,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <p>A bold and fresh scent with lemon, ginger, and tonka bean.</p>
   <span class="price">$79.99</span>
   <p><?php echo checkFreeShippingForProduct(79.99); ?></p>
-  <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Azzaro Wanted" data-price="79.99">Add to Cart</a> 
 </div>
 <div class="product">
   <img src="images/LEGEND.jfif"alt="Montblanc Legend">
@@ -317,7 +356,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <p>An elegant and masculine scent with lavender, pineapple, and oakmoss.</p>
   <span class="price">$84.99</span>
   <p><?php echo checkFreeShippingForProduct(84.99); ?></p>
-  <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Montblanc Legend" data-price="84.99">Add to Cart</a> 
 </div>
 <div class="product">
   <img src="images/DiorHomme.webp" alt="Dior Homme">
@@ -325,7 +364,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <p>A modern and sophisticated fragrance with iris and leather notes.</p>
   <span class="price">$89.99</span>
   <p><?php echo checkFreeShippingForProduct(89.99); ?></p>
-  <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Dior Homme" data-price="89.99">Add to Cart</a> 
 </div>
 <div class="product">
   <img src="images/armaniSWY.webp" alt="Armani Stronger With You">
@@ -333,7 +372,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <p>A warm and spicy fragrance with notes of chestnut, vanilla, and amberwood.</p>
   <span class="price">$114.99</span>
   <p><?php echo checkFreeShippingForProduct(114.99); ?></p>
-  <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Armani Stronger With You" data-price="114.99">Add to Cart</a> 
 </div>
 <div class="product">
   <img src="images/ALLURE.avif" alt="Chanel Allure Homme">
@@ -341,7 +380,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <p>A refined fragrance with notes of mandarin, cedarwood, and tonka bean.</p>
   <span class="price">$119.99</span>
   <p><?php echo checkFreeShippingForProduct(119.99); ?></p>
-  <a href="#" class="btn">Add to Cart</a>
+<a href="#" class="btn add-to-cart" data-name="Chanel Allure Homme" data-price="119.99">Add to Cart</a> 
 </div>
 <div class="product">
   <img src="images/blackohrid.webp" alt="Tom Ford Black Orchid">
@@ -349,7 +388,7 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
   <p>A luxurious fragrance with notes of black orchid, patchouli, and vanilla.</p>
   <span class="price">$139.99</span>
   <p><?php echo checkFreeShippingForProduct(139.99); ?></p>
-  <a href="#" class="btn">Add to Cart</a>
+ <a href="#" class="btn add-to-cart" data-name="Tom Ford Black Orchid" data-price="139.99">Add to Cart</a> 
 </div>
 <div class="cart-details" style="width: 100%; display: flex; justify-content: center; align-items: center; margin: 20px 0;">
   <h1 style="color: #ffc0cb; font-size: 1.8em; text-align: center;">
@@ -391,7 +430,122 @@ $perfumeOfTheDay = $parfumeList[$dayIndex % count($parfumeList)];
         
       })
   
-  
+
+      ///////////
+    function addToCart(name, price) {
+  fetch('cart_handler.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams({name: name, price: price})
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Përditëso numrin e artikujve në shportë
+      const cartItemsElem = document.querySelector('.cart-items');
+      if (cartItemsElem) {
+        cartItemsElem.textContent = data.cart_count;
+      }
+      alert('Produkt u shtua në shportë!');
+    } else {
+      alert('Gabim gjatë shtimit në shportë.');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+// Lidh eventin tek butonat "Add to Cart"
+document.querySelectorAll('.add-to-cart').forEach(button => {
+  button.addEventListener('click', function(e) {
+    e.preventDefault();
+    const name = this.getAttribute('data-name');
+    const price = this.getAttribute('data-price');
+    addToCart(name, price);
+  });
+});
+
+
+  // Funksioni për shtimin e produktit në shportë
+  document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      const name = this.getAttribute('data-name');
+      const price = parseFloat(this.getAttribute('data-price'));
+
+      // Në këtë shembull po përdor LocalStorage për shportën (mund ta zëvendësosh me AJAX POST)
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Kontrolloj nëse produkti ekziston në shportë
+      const existingProductIndex = cart.findIndex(p => p.name === name);
+      if (existingProductIndex !== -1) {
+        cart[existingProductIndex].quantity += 1;
+      } else {
+        cart.push({name: name, price: price, quantity: 1});
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      alert(name + ' has been added to your cart!');
+    });
+  });
+
+  // Funksioni për përditësimin e numrit të artikujve në ikonën e shportës
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.querySelector('.cart-items').textContent = totalQuantity;
+  }
+
+  // Përditëso kur ngarkon faqen
+  updateCartCount();
             </script>
+            <script>
+document.querySelectorAll('.add-to-cart').forEach(button => {
+  button.addEventListener('click', function(e) {
+    e.preventDefault();
+    const name = this.getAttribute('data-name');
+    const price = this.getAttribute('data-price');
+
+    fetch('', {  // same page
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ name: name, price: price })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        document.querySelector('.cart-items').textContent = data.cart_count;
+        alert(`${name} added to cart!`);
+      }
+    })
+    .catch(err => console.error('Error:', err));
+  });
+});
+
+document.querySelectorAll('.add-to-cart').forEach(button => {
+  button.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    const name = this.getAttribute('data-name');
+    const price = this.getAttribute('data-price');
+
+    fetch('', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: `name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}`
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        document.querySelector('.cart-items').textContent = data.cart_count;
+        alert('Product added to cart!');
+      }
+    });
+  });
+});
+
+</script>
 </body>
 </html>
