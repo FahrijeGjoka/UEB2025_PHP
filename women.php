@@ -1,8 +1,7 @@
 
 <?php
 require_once 'db.php';
-require_once 'auth.php';
-
+session_start();
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_cart'])) {
@@ -232,6 +231,11 @@ $welcome = new WelcomeMessage("Online Shop");
                 <button type="submit" class="remove-btn" title="Remove item">❌</button>
             </form>
 
+
+            
+
+            
+
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -244,6 +248,11 @@ $welcome = new WelcomeMessage("Online Shop");
                                 echo format_price($total);
                             ?>
                         </div>
+                    <div class="checkout-button" style="text-align: center; margin-top: 10px;">
+    <a href="checkout.php" class="btn-checkout" style="padding: 10px 20px; background-color: #ff69b4; color: white; text-decoration: none; border-radius: 5px;">
+        Proceed to Checkout
+    </a>
+</div>    
                     <?php else: ?>
                         <p>Your cart is empty</p>
                     <?php endif; ?>
@@ -446,6 +455,11 @@ $welcome = new WelcomeMessage("Online Shop");
                                 <div class="cart-total">
                                     Total: $${total.toFixed(2)}
                                 </div>
+                                  <div class="checkout-button" style="text-align: center; margin-top: 10px;">
+        <a href="checkout.php" class="btn-checkout" style="padding: 10px 20px; background-color: #ff69b4; color: white; text-decoration: none; border-radius: 5px;">
+            Proceed to Checkout
+        </a>
+    </div>
    
                             `;
                         } else {
@@ -505,6 +519,11 @@ $(document).on('submit', '.remove-from-cart-form', function(e) {
                         <div class="cart-total">
                             Total: $${total.toFixed(2)}
                         </div>
+                           <div class="checkout-button" style="text-align: center; margin-top: 10px;">
+        <a href="checkout.php" class="btn-checkout" style="padding: 10px 20px; background-color: #ff69b4; color: white; text-decoration: none; border-radius: 5px;">
+            Proceed to Checkout
+        </a>
+    </div>
                     `;
                 } else {
                     cartHtml += '<p>Your cart is empty</p>';
