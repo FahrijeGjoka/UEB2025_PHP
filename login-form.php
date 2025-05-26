@@ -1,6 +1,7 @@
 <?php
 $error = $error ?? '';
 $success = $success ?? '';
+$message = $message ?? ''; // Marrim mesazhin nga login.php nëse ekziston
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +17,13 @@ $success = $success ?? '';
         <div class="overlay"></div>
         <div class="content">
             <h1>Login</h1>
+
+            <?php if (!empty($message)): ?>
+                <div class="info-message" style="background-color:#e0f7fa; padding:10px; margin-bottom:15px; color:#00796b;">
+                    <?= $message ?> <br>
+                    <a href="signup.php" style="color:#00796b; text-decoration:underline;">Nuk keni llogari? Regjistrohu këtu.</a>
+                </div>
+            <?php endif; ?>
 
             <?php if (!empty($error)): ?>
                 <p class="error-message"><?= $error ?></p>
