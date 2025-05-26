@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+require_once 'auth.php';
 require 'db.php';
 
 if (!isset($_SESSION['user_id'])) {

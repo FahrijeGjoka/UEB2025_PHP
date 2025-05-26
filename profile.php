@@ -56,7 +56,7 @@ if (!isset($_SESSION['user_id'])) {
             <input type="text" id="address" disabled>
         </div>
 
-        <button class="btn" id="toggle-password-fields">Change Password</button>
+        <a href="reset-password.php" class="btn">Change Password</a>
 
         <div class="password-section" id="passwordFields" style="display:none;">
             <div class="input-group">
