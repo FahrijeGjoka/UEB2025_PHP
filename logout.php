@@ -1,7 +1,5 @@
 <?php
 
-
-session_start();
 require_once 'auth.php';
 session_unset();     
 session_destroy();   

@@ -1,7 +1,9 @@
 <?php
+
+require_once 'auth.php';
+
 require_once 'db.php';
 
-session_start();
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
