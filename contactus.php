@@ -1,4 +1,4 @@
-<?php
+<?php 
 include 'db.php'; 
 
 session_start();
@@ -23,6 +23,14 @@ $perfumeInterests = [];
 $experience = '';
 
 $logfile = 'form_submissions.log'; 
+
+$bgcolor = "#e6ffe6";
+if (isset($_COOKIE['bgcolor'])) {
+    $allowedColors = ["#fff0f5", "#f0f8ff", "#e6ffe6"];
+    if (in_array($_COOKIE['bgcolor'], $allowedColors)) {
+        $bgcolor = $_COOKIE['bgcolor'];
+    }
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = isset($_POST['name']) ? trim($_POST['name']) : '';
@@ -59,11 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_stmt_num_rows($stmt) > 0) {
                 mysqli_stmt_bind_result($stmt, $userId);
                 mysqli_stmt_fetch($stmt);
-                mysqli_stmt_close($stmt);
 
                 $sql_insert = "INSERT INTO contact (userId, name, email, message, interest, experience) VALUES (?, ?, ?, ?, ?, ?)";
                 if ($stmt2 = mysqli_prepare($conn, $sql_insert)) {
-
                     $interests_str = implode(", ", $perfumeInterests);
                     mysqli_stmt_bind_param($stmt2, "isssss", $userId, $name, $email, $message, $interests_str, $experience);
 
@@ -77,6 +83,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             fclose($file);
                         }
 
+                        if (in_array("women", $perfumeInterests)) {
+                            $bgcolor = "#fff0f5";
+                        } elseif (in_array("men", $perfumeInterests)) {
+                            $bgcolor = "#f0f8ff";
+                        } else {
+                            $bgcolor = "#e6ffe6";
+                        }
+                        setcookie("bgcolor", $bgcolor, time() + 86400 * 30, "/");
+                        
                         $name = $email = $message = '';
                         $perfumeInterests = [];
                         $experience = '';
@@ -87,18 +102,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     $errors[] = "Gabim në përgatitjen e pyetjes për insert: " . mysqli_error($conn);
                 }
-
             } else {
                 $errors[] = "Email-i nuk është i regjistruar. Ju lutem krijoni një llogari para se të dërgoni formularin.";
                 $errors[] = "<a href='signup.php'>Regjistrohu këtu</a>";
-                mysqli_stmt_close($stmt);
             }
+            mysqli_stmt_close($stmt);
         } else {
             $errors[] = "Gabim në përgatitjen e pyetjes për kontroll: " . mysqli_error($conn);
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -108,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/contactus.css?v=1.1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body style="background-color: <?php echo $bgcolor; ?>;">
 <header>
     <div class="logo">Contact Us</div>
     <nav>
@@ -194,66 +209,48 @@ if (!empty($successMessages)) {
 </footer>
 
 <script>
-function setCookie(name, value, days) {
-  const d = new Date();
-  d.setTime(d.getTime() + (days*24*60*60*1000));
-  const expires = "expires="+ d.toUTCString();
-  document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-function getCookie(name) {
-  const cname = name + "=";
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const ca = decodedCookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i].trim();
-    if (c.indexOf(cname) == 0) {
-      return c.substring(cname.length, c.length);
-    }
-  }
-  return "";
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     const body = document.body;
     const womenCheckbox = document.querySelector('input[name="perfume[]"][value="women"]');
     const menCheckbox = document.querySelector('input[name="perfume[]"][value="men"]');
 
-    function updateBackgroundAndCookie() {
+    function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + (days*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    function updateBackground() {
+        let color;
         if (womenCheckbox.checked) {
-            body.style.backgroundColor = "#fff0f5";
-            setCookie('background', 'women', 7);
-            menCheckbox.checked = false; 
+            color = "#fff0f5";
         } else if (menCheckbox.checked) {
-            body.style.backgroundColor = "#f0f8ff";
-            setCookie('background', 'men', 7);
-            womenCheckbox.checked = false;
+            color = "#f0f8ff";
         } else {
-            body.style.backgroundColor = "#e6ffe6";
-            setCookie('background', 'none', 7);
+            color = "#e6ffe6";
         }
+        body.style.backgroundColor = color;
+        setCookie("bgcolor", color, 30);
     }
 
-    // Set background and checkboxes on load according to cookie
-    const savedBg = getCookie('background');
-    if (savedBg === 'women') {
-        womenCheckbox.checked = true;
-        menCheckbox.checked = false;
-        body.style.backgroundColor = "#fff0f5";
-    } else if (savedBg === 'men') {
-        menCheckbox.checked = true;
-        womenCheckbox.checked = false;
-        body.style.backgroundColor = "#f0f8ff";
-    } else {
-        menCheckbox.checked = false;
-        womenCheckbox.checked = false;
-        body.style.backgroundColor = "#e6ffe6";
-    }
+    womenCheckbox.addEventListener('change', function() {
+        if (womenCheckbox.checked) {
+            menCheckbox.checked = false;
+        }
+        updateBackground();
+    });
 
-    womenCheckbox.addEventListener('change', updateBackgroundAndCookie);
-    menCheckbox.addEventListener('change', updateBackgroundAndCookie);
+    menCheckbox.addEventListener('change', function() {
+        if (menCheckbox.checked) {
+            womenCheckbox.checked = false;
+        }
+        updateBackground();
+    });
 });
 </script>
 
 </body>
 </html>
+
+
