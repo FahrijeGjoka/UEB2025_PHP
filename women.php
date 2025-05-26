@@ -455,6 +455,11 @@ $welcome = new WelcomeMessage("Online Shop");
                                 <div class="cart-total">
                                     Total: $${total.toFixed(2)}
                                 </div>
+                                  <div class="checkout-button" style="text-align: center; margin-top: 10px;">
+        <a href="checkout.php" class="btn-checkout" style="padding: 10px 20px; background-color: #ff69b4; color: white; text-decoration: none; border-radius: 5px;">
+            Proceed to Checkout
+        </a>
+    </div>
    
                             `;
                         } else {
@@ -514,6 +519,11 @@ $(document).on('submit', '.remove-from-cart-form', function(e) {
                         <div class="cart-total">
                             Total: $${total.toFixed(2)}
                         </div>
+                           <div class="checkout-button" style="text-align: center; margin-top: 10px;">
+        <a href="checkout.php" class="btn-checkout" style="padding: 10px 20px; background-color: #ff69b4; color: white; text-decoration: none; border-radius: 5px;">
+            Proceed to Checkout
+        </a>
+    </div>
                     `;
                 } else {
                     cartHtml += '<p>Your cart is empty</p>';
