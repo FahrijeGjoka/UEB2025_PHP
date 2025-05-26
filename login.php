@@ -3,6 +3,14 @@ session_start();
 require 'db.php';
 
 $error = '';
+$message = '';
+
+// Nëse përdoruesi është dërguar këtu nga një faqe e mbrojtur
+if (isset($_SESSION['redirect_after_login'])) {
+    $page = $_SESSION['redirect_after_login'];
+    $friendlyName = ucfirst(basename($page, ".php")); // p.sh. Women
+    $message = "Për të parë faqen <strong>$friendlyName</strong>, ju lutemi kyçuni ose regjistrohuni.";
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST['email']);
@@ -20,11 +28,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($user) {
             if ($user['is_active'] == 0) {
-                $error = "Llogaria nuk është aktivizuar. Kontrollo emailin.";
+                $error = "Llogaria nuk është aktivizuar. Kontrolloni emailin.";
             } elseif (password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['username'];
-                header("Location: profile.php");
+
+                if (isset($_SESSION['redirect_after_login'])) {
+                    $redirect = $_SESSION['redirect_after_login'];
+                    unset($_SESSION['redirect_after_login']);
+                    header("Location: $redirect");
+                } else {
+                    header("Location: profile.php");
+                }
                 exit();
             } else {
                 $error = "Email ose fjalëkalim i pasaktë.";
