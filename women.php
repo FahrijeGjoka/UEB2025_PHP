@@ -1,5 +1,6 @@
 
 <?php
+
 require_once 'auth.php';
 require_once 'db.php';
 
@@ -457,7 +458,7 @@ $welcome = new WelcomeMessage("Online Shop");
                                     Total: $${total.toFixed(2)}
                                 </div>
                                   <div class="checkout-button" style="text-align: center; margin-top: 10px;">
-        <a href="checkout.php" class="btn-checkout" style="padding: 10px 20px; background-color: #ff69b4; color: white; text-decoration: none; border-radius: 5px;">
+        <a href="checkout-men.php" class="btn-checkout" style="padding: 10px 20px; background-color: #ff69b4; color: white; text-decoration: none; border-radius: 5px;">
             Proceed to Checkout
         </a>
     </div>

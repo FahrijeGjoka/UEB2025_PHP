@@ -154,12 +154,12 @@ $productOfTheDay = $products[$dayIndex % count($products)];
                 <li><a href="contactus.php">Contact</a></li>
             </ul>
         </nav>
-        <div class="cart" onclick="toggleCart()">
-            <span>Cart 🛒</span>
-            <span class="cart-items" id="cart-count">
-                <?php echo isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'], 'quantity')) : 0; ?>
-            </span>
-        </div>
+       <div class="cart" onclick="toggleCart()">
+    <span style="color: white; font-size: 18px;">Cart 🛒</span>
+    <span class="cart-items" id="cart-count" style="background-color: red; color: white; padding: 4px 8px; border-radius: 10px; margin-left: 8px;">
+        <?php echo isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'], 'quantity')) : 0; ?>
+    </span>
+</div>
     </header>
 
     <div id="side-cart" class="side-cart">
